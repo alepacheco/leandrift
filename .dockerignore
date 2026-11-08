@@ -1,0 +1,6 @@
+.git
+out/
+leandrift-out/
+leandrift-work/
+**/.lake/
+**/__pycache__/
