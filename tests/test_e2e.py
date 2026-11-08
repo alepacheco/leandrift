@@ -61,7 +61,7 @@ class TestTinyProject(unittest.TestCase):
             self.assertEqual(got, EXPECTED)
             by_name = {(e.old or e.new): e for e in r.entries}
             self.assertIn("binder info", by_name["Tiny.binfo"].detail)
-            self.assertIn("constructor mk", by_name["Tiny.Point"].detail)
+            self.assertIn("fields changed: x, y -> x, y, z", by_name["Tiny.Point"].detail)
             self.assertEqual([e.new for e in r.new_sorries()], ["Tiny.two_mul'"])
             self.assertEqual(sorted(e.new for e in r.new_nonstandard_axioms()),
                              ["Tiny.tiny_ax", "Tiny.uses_choice"])

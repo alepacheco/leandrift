@@ -36,33 +36,36 @@ def b(i):
     return ["b", i]
 
 
-def decl(name, tree, kind="theorem", axioms=(), ctors=(), deprecated=None, module="P.Basic", pp=None):
+def decl(name, tree, kind="theorem", axioms=(), ctors=(), deprecated=None, module="P.Basic", pp=None,
+         fields=None):
     d = {"type": "decl", "name": name, "kind": kind, "module": module, "levels": 0, "tree": tree,
          "pp": pp if pp is not None else trees.show(tree), "axioms": list(axioms)}
     if ctors:
         d["ctors"] = [{"name": n, "tree": t, "pp": trees.show(t)} for n, t in ctors]
+    if fields is not None:
+        d["fields"] = fields
     if deprecated:
         d["deprecated"] = deprecated
     return d
 
 
-def alias(old, new):
-    return {"type": "alias", "old": old, "new": new}
+def alias(old, new, is_alias=True):
+    return {"type": "alias", "old": old, "new": new, "alias": is_alias}
 
 
 class Exports:
     """Writes two exports to a temporary directory."""
 
-    def __init__(self, old, new):
+    def __init__(self, old, new, old_header=None):
         self.dir = tempfile.TemporaryDirectory()
-        self.old = self._write("old.jsonl", "4.25.0", old)
-        self.new = self._write("new.jsonl", "4.36.0", new)
+        self.old = self._write("old.jsonl", "4.25.0", old, old_header or {})
+        self.new = self._write("new.jsonl", "4.36.0", new, {})
 
-    def _write(self, name, lean, records):
+    def _write(self, name, lean, records, extra):
         path = os.path.join(self.dir.name, name)
         with open(path, "w", encoding="utf-8") as f:
-            f.write(json.dumps({"type": "header", "format": 1, "lean": lean, "prefixes": ["P"],
-                                "modules": ["P", "P.Basic"]}) + "\n")
+            f.write(json.dumps(dict({"type": "header", "format": 1, "lean": lean, "prefixes": ["P"],
+                                     "modules": ["P", "P.Basic"]}, **extra)) + "\n")
             for r in records:
                 f.write(json.dumps(r) + "\n")
         return path
@@ -74,8 +77,8 @@ class Exports:
         self.dir.cleanup()
 
 
-def run(old, new):
-    ex = Exports(old, new)
+def run(old, new, old_header=None):
+    ex = Exports(old, new, old_header)
     try:
         r = ex.result()
     finally:
@@ -163,6 +166,8 @@ class TestCompare(unittest.TestCase):
         _, e = run([decl("P.IntervalMorphism", fn, kind="def")],
                    [decl("P.intervalMorphism", fn, kind="def")])
         self.assertEqual(e["P.IntervalMorphism"].status, RENAMED)
+        _, e = run([decl("P.upperBound", fn, kind="def")], [decl("P.lowerBound", fn, kind="def")])
+        self.assertEqual(e["P.upperBound"].status, REMOVED)
 
     def test_renames_found_one_after_another(self):
         # a def renamed without alias, and a lemma about it renamed too: the lemma only matches
@@ -180,12 +185,12 @@ class TestCompare(unittest.TestCase):
 
     def test_constructor_change(self):
         ty = ["s", "1"]
-        old = decl("P.Point", ty, kind="structure", ctors=[("P.Point.mk", pi(NAT, const("P.Point")))])
-        new = decl("P.Point", ty, kind="structure",
-                   ctors=[("P.Point.mk", pi(NAT, pi(NAT, const("P.Point"))))])
+        old = decl("P.Point2d", ty, kind="structure", ctors=[("P.Point2d.mk", pi(NAT, const("P.Point2d")))])
+        new = decl("P.Point2d", ty, kind="structure",
+                   ctors=[("P.Point2d.mk", pi(NAT, pi(NAT, const("P.Point2d"))))])
         _, e = run([old], [new])
-        self.assertEqual(e["P.Point"].status, CHANGED)
-        self.assertIn("constructor mk", e["P.Point"].detail)
+        self.assertEqual(e["P.Point2d"].status, CHANGED)
+        self.assertIn("constructor mk", e["P.Point2d"].detail)
 
     def test_inductive_became_def(self):
         ty = pi(NAT, ["s", "1"])
@@ -194,6 +199,67 @@ class TestCompare(unittest.TestCase):
         _, e = run([old], [new])
         self.assertEqual(e["P.Gen"].status, CHANGED)
         self.assertIn("inductive", e["P.Gen"].detail)
+
+    def test_deprecated_but_not_an_alias(self):
+        # P.foo is deprecated in favour of P.foo_new but keeps its own statement
+        _, e = run([decl("P.foo", LE_SUCC)],
+                   [decl("P.foo", LE_SUCC, deprecated={"new": "P.foo_new", "alias": False}),
+                    decl("P.foo_new", LT_SUCC), alias("P.foo", "P.foo_new", is_alias=False)])
+        self.assertEqual(e["P.foo"].status, SAME)
+        self.assertEqual(e["P.foo_new"].status, ADDED)
+
+    def test_alias_of_the_old_version_only(self):
+        # Foo.old was already an alias of Foo.new in the old version; the alias is gone since
+        old_t = pi(NAT, app(const("Foo.old"), b(0)))
+        new_t = pi(NAT, app(const("Foo.new"), b(0)))
+        ex = Exports([decl("P.a", old_t), alias("Foo.old", "Foo.new")], [decl("P.a", new_t)])
+        try:
+            r = ex.result()
+        finally:
+            ex.close()
+        self.assertEqual(r.entries[0].status, RENAMED)
+
+    def test_project_deprecation_pointing_outside(self):
+        # P.myOp moved to Mathlib as Finset.myOp; P.myOp stays as a deprecated alias
+        old_t = pi(NAT, app(const("P.myOp"), b(0)))
+        new_t = pi(NAT, app(const("Finset.myOp"), b(0)))
+        _, e = run([decl("P.myOp", pi(NAT, NAT), kind="def"), decl("P.thm", old_t)],
+                   [decl("P.myOp", pi(NAT, NAT), kind="def", deprecated={"new": "Finset.myOp", "alias": True}),
+                    decl("P.thm", new_t), alias("P.myOp", "Finset.myOp")])
+        self.assertEqual(e["P.thm"].status, RENAMED)
+
+    def test_renamed_structure_and_its_members(self):
+        ty = ["s", "1"]
+        old_s = decl("P.Point2D", ty, kind="structure", fields=["x"],
+                     ctors=[("P.Point2D.mk", pi(NAT, const("P.Point2D")))])
+        new_s = decl("P.Point2d", ty, kind="structure", fields=["x"],
+                     ctors=[("P.Point2d.mk", pi(NAT, const("P.Point2d")))])
+        old_t = pi(const("P.Point2D"), eq(app(const("P.Point2D.x"), b(0)), app(const("P.Point2D.x"), b(0))))
+        new_t = pi(const("P.Point2d"), eq(app(const("P.Point2d.x"), b(0)), app(const("P.Point2d.x"), b(0))))
+        r, e = run([old_s, decl("P.x_refl", old_t)], [new_s, decl("P.x_refl", new_t)])
+        self.assertEqual(e["P.Point2D"].status, RENAMED)
+        self.assertEqual(e["P.Point2D"].new, "P.Point2d")
+        self.assertEqual(e["P.x_refl"].status, RENAMED)
+
+    def test_fields_renamed(self):
+        ty = ["s", "1"]
+        ctor = [("P.I.mk", pi(NAT, pi(NAT, const("P.I"))))]
+        _, e = run([decl("P.I", ty, kind="structure", fields=["lo", "hi"], ctors=ctor)],
+                   [decl("P.I", ty, kind="structure", fields=["hi", "lo"], ctors=ctor)])
+        self.assertEqual(e["P.I"].status, CHANGED)
+        self.assertIn("fields", e["P.I"].detail)
+
+    def test_old_alias_does_not_block_a_rename(self):
+        # old P.y with an alias P.x; new P.z (renamed without alias), P.x gone
+        _, e = run([decl("P.y", ADD_ZERO), decl("P.x", ADD_ZERO, deprecated={"new": "P.y", "alias": True})],
+                   [decl("P.z", ADD_ZERO)])
+        self.assertEqual(e["P.y"].status, RENAMED)
+        self.assertEqual(e["P.y"].new, "P.z")
+
+    def test_warning_when_an_export_has_no_axioms(self):
+        r, _ = run([decl("P.a", ADD_ZERO)], [decl("P.a", ADD_ZERO)], old_header={"axioms": False})
+        self.assertTrue(any("axioms" in w for w in r.warnings))
+        self.assertIn("Warning", markdown(r))
 
     def test_new_sorry_and_axioms(self):
         r, e = run([decl("P.a", ADD_ZERO, axioms=["propext"]), decl("P.b", LE_SUCC)],
@@ -266,6 +332,14 @@ class TestCli(unittest.TestCase):
             self.assertEqual(main(["diff", ex.old, ex.new, "--md", md, "--fail-on-change"]), 1)
             with open(js) as f:
                 self.assertEqual(json.load(f)["summary"]["changed"], 1)
+        finally:
+            ex.close()
+        # a removed declaration is drift too
+        ex = Exports([decl("P.a", LE_SUCC), decl("P.gone", ADD_ZERO)], [decl("P.a", LE_SUCC)])
+        try:
+            md = os.path.join(ex.dir.name, "r.md")
+            self.assertEqual(main(["diff", ex.old, ex.new, "--md", md, "--fail-on-change"]), 1)
+            self.assertEqual(main(["diff", ex.old, ex.new, "--md", md]), 0)
         finally:
             ex.close()
 
