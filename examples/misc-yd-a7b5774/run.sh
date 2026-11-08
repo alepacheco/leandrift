@@ -8,4 +8,5 @@ docker build -q -t leandrift -f "$root/docker/Dockerfile" "$root" >/dev/null
 mkdir -p "$here/out"
 docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
   -v leandrift-elan:/opt/elan -v leandrift-cache:/cache -v "$here/out:/out" \
-  leandrift leandrift compare https://github.com/YaelDillies/misc-yd a7b57745ba06180ae7b1e6ef43489e035c21600d^ a7b57745ba06180ae7b1e6ef43489e035c21600d --prefix MiscYD --workdir /tmp/work --out /out
+  leandrift leandrift compare https://github.com/YaelDillies/misc-yd a7b57745ba06180ae7b1e6ef43489e035c21600d^ a7b57745ba06180ae7b1e6ef43489e035c21600d --prefix MiscYD --workdir /tmp/work --out /out \
+  --title "LeanDrift report: misc-yd a7b5774^ -> a7b5774"

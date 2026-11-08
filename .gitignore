@@ -1,4 +1,8 @@
 .lake/
 __pycache__/
 *.pyc
-/out/
+out/
+leandrift-out/
+leandrift-work/
+build/
+*.egg-info/

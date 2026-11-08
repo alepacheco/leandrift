@@ -4,3 +4,5 @@ leandrift-out/
 leandrift-work/
 **/.lake/
 **/__pycache__/
+build/
+*.egg-info/

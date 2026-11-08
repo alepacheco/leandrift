@@ -21,6 +21,10 @@ def log(msg):
 def run(cmd, cwd, logfile=None):
     """Run a command in `cwd`, its output appended to `logfile` (or shown), failing loudly."""
     log(f"$ {' '.join(cmd)}   (in {cwd})")
+    if shutil.which(cmd[0]) is None:
+        hint = {"lake": "install elan (https://github.com/leanprover/elan), which provides lake",
+                "git": "install git"}.get(cmd[0], "install it")
+        raise StepFailed(f"`{cmd[0]}` is not on the PATH: {hint}")
     if logfile is None:
         r = subprocess.run(cmd, cwd=cwd)
     else:

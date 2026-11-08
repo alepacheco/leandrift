@@ -66,6 +66,7 @@ Or use the container image, which has all of them:
 
 ```sh
 docker build -t leandrift -f leandrift/docker/Dockerfile leandrift
+mkdir -p out
 docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
   -v leandrift-elan:/opt/elan -v leandrift-cache:/cache -v "$PWD/out:/out" \
   leandrift leandrift compare https://github.com/YaelDillies/cam-combi '34a573b79a^' 34a573b79a \
@@ -86,18 +87,31 @@ leandrift compare https://github.com/YaelDillies/cam-combi '34a573b79a^' 34a573b
 ```
 
 This writes `out/cam-combi/report.md` and `report.json`, the two exports (`old.jsonl`,
-`new.jsonl`) and each side's build log. `--prefix` names the module prefix whose declarations are
-compared (repeatable); `--fail-on-change` makes it exit with status 1 when a statement changed or
-was removed, or a declaration newly depends on `sorry` or another non-standard axiom. A revision
-is a branch of the repository (as fetched), a tag, a commit, or an expression such as `abc123^`.
+`new.jsonl`) and each side's build log (`old.log`, `new.log`; without `--out`, all of it goes to
+`leandrift-out/`). The clone it builds in, with the project's dependencies (Mathlib's included, a
+few GB), stays in `leandrift-work/<name>/` (or `--workdir`), so a second comparison of the same
+project reuses it.
+
+- `--prefix` names the module prefix whose declarations are compared (repeatable).
+- A revision is a branch of the repository (as fetched), a tag, a commit, or an expression such
+  as `abc123^`.
+- `--target T` builds Lake target `T` instead of the default ones; `--no-cache` skips
+  `lake exe cache get`; `--title` sets the report's title.
+- `--fail-on-change` makes it exit with status 1 when a statement changed or was removed, or a
+  declaration newly depends on `sorry` or another non-standard axiom. Errors exit with status 2.
 
 Or run the two steps yourself, in projects you have built:
 
 ```sh
-(cd my-project-before && lake build && leandrift export . --prefix MyProject -o ../old.jsonl)
-(cd my-project-after  && lake build && leandrift export . --prefix MyProject -o ../new.jsonl)
+(cd my-project-before && lake exe cache get && lake build && leandrift export . --prefix MyProject -o ../old.jsonl)
+(cd my-project-after  && lake exe cache get && lake build && leandrift export . --prefix MyProject -o ../new.jsonl)
 leandrift diff old.jsonl new.jsonl --md report.md --json report.json
 ```
+
+(`lake exe cache get` fetches Mathlib's prebuilt files; leave it out for a project without
+Mathlib.) `leandrift diff` reads exports plain or gzipped (`.jsonl.gz`); without `--md` or
+`--json` it prints the Markdown report on standard output. Its summary line goes to standard
+error.
 
 `leandrift export` runs `lake env lean --run leandrift/Export.lean --prefix MyProject -o ...` in
 the project; you can run that command directly too. By default it imports every built module
@@ -114,7 +128,10 @@ with its report and one command that reproduces it in a container. See
 
 ## Tests
 
+From the repository's root:
+
 ```sh
+cd leandrift
 python3 -m unittest discover -s tests -v
 ```
 
@@ -127,7 +144,7 @@ axiom. It runs when `lake` is on the PATH (elan downloads both toolchains on fir
 `LEANDRIFT_E2E=0` to skip it. In the container:
 
 ```sh
-docker run --rm -v leandrift-elan:/opt/elan leandrift \
+docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp -v leandrift-elan:/opt/elan leandrift \
   sh -c 'cd /opt/leandrift && python3 -m unittest discover -s tests -v'
 ```
 

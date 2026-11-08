@@ -34,7 +34,9 @@ Mathlib's prebuilt cache, a few GB):
 sh examples/cam-combi-34a573b/run.sh
 ```
 
-The report lands in `examples/cam-combi-34a573b/out/`. To check only the comparison, without Lean:
+The report lands in `examples/cam-combi-34a573b/out/`, with the two exports, which come out the
+same as the ones kept here (`out/report.json` names them `old.jsonl` and `new.jsonl` where the kept
+report names the gzipped copies). To check only the comparison, without Lean:
 
 ```sh
 bin/leandrift diff examples/cam-combi-34a573b/old.jsonl.gz examples/cam-combi-34a573b/new.jsonl.gz

@@ -74,12 +74,16 @@ def main(argv=None):
     e.add_argument("--no-axioms", action="store_true", help="skip collecting axioms")
     e.set_defaults(func=cmd_export)
 
-    d = sub.add_parser("diff", help="compare two exports")
-    d.add_argument("old")
-    d.add_argument("new")
+    d = sub.add_parser("diff", help="compare two exports",
+                       description="Compare two exports. Without --md or --json, the Markdown "
+                                   "report goes to standard output; the summary always goes to "
+                                   "standard error. Exit status: 0, 1 with --fail-on-change and "
+                                   "drift, 2 on an error.")
+    d.add_argument("old", help="the export before the upgrade (.jsonl or .jsonl.gz)")
+    d.add_argument("new", help="the export after the upgrade (.jsonl or .jsonl.gz)")
     d.add_argument("--markdown", "--md", help="write the Markdown report here")
     d.add_argument("--json", help="write the JSON report here")
-    d.add_argument("--title", default="LeanDrift report")
+    d.add_argument("--title", default="LeanDrift report", help="the report's title")
     d.add_argument("--fail-on-change", action="store_true",
                    help="exit 1 if a statement changed or was removed, or a declaration newly "
                         "depends on sorry or another non-standard axiom")
@@ -95,10 +99,11 @@ def main(argv=None):
                    help="import only this module and its imports (repeatable)")
     c.add_argument("--target", action="append", default=[],
                    help="Lake target to build instead of the default ones (repeatable)")
-    c.add_argument("--out", default="leandrift-out", help="directory for exports, logs and reports")
+    c.add_argument("--out", default="leandrift-out",
+                   help="directory for exports, logs and reports (default leandrift-out)")
     c.add_argument("--workdir", help="where the clone lives (default leandrift-work/<name>)")
     c.add_argument("--no-cache", action="store_true", help="do not run `lake exe cache get`")
-    c.add_argument("--title")
+    c.add_argument("--title", help="the report's title")
     c.add_argument("--fail-on-change", action="store_true", help="as for diff")
     c.set_defaults(func=cmd_compare)
 
