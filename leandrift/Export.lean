@@ -4,22 +4,26 @@ Lean and Lake environment elaborated it, to a JSON Lines file.
 
 Run it inside a built Lake project, so that its toolchain and its `.olean` files are the ones used:
 
-    lake env lean --run /path/to/leandrift/exporter/Export.lean --prefix MyProject -o export.jsonl
+    lake env lean --run /path/to/leandrift/leandrift/Export.lean --prefix MyProject -o export.jsonl
 
 Each line is one JSON object with a `type`:
-* `header`: the format version, the Lean version, the prefixes and the modules read;
+* `header`: the format version, the Lean version, the prefixes, the modules read, and whether
+  statements were pretty-printed (`pp`) and axioms collected (`axioms`);
 * `decl`: one declaration of those modules: `name`, `kind`, `module`, `levels` (its number of universe
   parameters), `tree` (its type as a structural tree, see below), `pp` (its type pretty-printed),
-  `axioms` (the axioms it depends on, `sorryAx` included), and for an inductive type its `ctors`;
-* `alias`: a deprecation alias of the environment (`old` -> `new`), from the `deprecated` attribute,
-  across every imported module, for the rename map.
+  `axioms` (the axioms it depends on, `sorryAx` included), for an inductive type its `ctors`, for a
+  structure or class its `fields` (in order), and `deprecated` if it is deprecated;
+* `alias`: a deprecation of the environment (`old` -> `new`), from the `deprecated` attribute,
+  across every imported module, with `alias: true` when `old` is defined as `new` itself (so a
+  statement may use either name and mean the same).
 
-The tree keeps what Lean's kernel compares and drops what it ignores: binder names and metadata.
+The tree keeps what Lean's kernel compares and drops what it ignores: binder names, metadata, and
+proofs (any subterm whose type is a proposition becomes ["proof"]; `autoParam T tac` becomes `T`).
   ["c", name, [levels]]   constant              ["b", i]               bound variable (de Bruijn index)
   ["s", level]            sort                  ["a", fn, [args]]      application
   ["p", bi, dom, body]    pi (forall)           ["l", bi, dom, body]   lambda
   ["let", type, val, body]                      ["n", "123"] / ["str", s]  literals
-  ["j", struct, idx, e]   projection
+  ["j", struct, idx, e]   projection            ["proof"]              a proof
 `bi` is "d" (default), "i" (implicit), "s" (strict implicit) or "c" (instance). Levels are strings in
 normal form, universe parameters by position ("u0", "u1"), so renaming a universe changes nothing.
 
@@ -35,33 +39,34 @@ def formatVersion : Nat := 1
 
 def nameStr (n : Name) : String := n.toString (escape := false)
 
-def indexOf (ps : List Name) (n : Name) : Option Nat :=
-  go ps 0
-where
-  go : List Name → Nat → Option Nat
-    | [], _ => none
-    | p :: ps, i => if p == n then some i else go ps (i + 1)
+/-- The constant standing for an erased proof inside a statement. -/
+def proofName : Name := `_leandrift_proof
 
-partial def levelStr (ps : List Name) : Level → String
+/-! ### Statement trees -/
+
+/-- The universe parameters `ps` renamed by position: `u0`, `u1`, ... -/
+def positional (ps : List Name) : List Level :=
+  (List.range ps.length).map fun i => Level.param (Name.mkSimple s!"u{i}")
+
+partial def levelStr : Level → String
   | .zero => "0"
   | l@(.succ _) =>
     let (b, k) := peel l 0
     match b with
     | .zero => toString k
-    | _ => s!"{levelStr ps b}+{k}"
-  | .max a b => s!"max({levelStr ps a},{levelStr ps b})"
-  | .imax a b => s!"imax({levelStr ps a},{levelStr ps b})"
-  | .param n =>
-    match indexOf ps n with
-    | some i => s!"u{i}"
-    | none => s!"?{nameStr n}"
+    | _ => s!"{levelStr b}+{k}"
+  | .max a b => s!"max({levelStr a},{levelStr b})"
+  | .imax a b => s!"imax({levelStr a},{levelStr b})"
+  | .param n => nameStr n
   | .mvar _ => "?m"
 where
   peel : Level → Nat → Level × Nat
     | .succ l, k => peel l (k + 1)
     | l, k => (l, k)
 
-def lvl (ps : List Name) (u : Level) : Json := Json.str (levelStr ps u.normalize)
+/-- A level, its parameters renamed by position before it is normalized. -/
+def lvl (ps : List Name) (u : Level) : Json :=
+  Json.str (levelStr (u.instantiateParams ps (positional ps)).normalize)
 
 def biStr : BinderInfo → String
   | .default => "d"
@@ -74,7 +79,9 @@ def tag (t : String) (xs : Array Json) : Json := Json.arr (#[Json.str t] ++ xs)
 partial def tree (ps : List Name) : Expr → Json
   | .bvar i => tag "b" #[toJson i]
   | .sort u => tag "s" #[lvl ps u]
-  | .const n us => tag "c" #[Json.str (nameStr n), Json.arr (us.toArray.map (lvl ps))]
+  | .const n us =>
+    if n == proofName then tag "proof" #[]
+    else tag "c" #[Json.str (nameStr n), Json.arr (us.toArray.map (lvl ps))]
   | e@(.app ..) =>
     let args := e.getAppArgs
     tag "a" #[tree ps e.getAppFn, Json.arr (args.map (tree ps))]
@@ -88,25 +95,42 @@ partial def tree (ps : List Name) : Expr → Json
   | .fvar id => tag "f" #[Json.str (nameStr id.name)]
   | .mvar _ => tag "m" #[]
 
+/-- The type with every proof replaced by `proofName` and `autoParam T tac` by `T`. -/
+def eraseProofs (e : Expr) : MetaM Expr :=
+  transform e (pre := fun e => do
+    if e.isAppOfArity ``autoParam 2 then
+      return .visit e.appFn!.appArg!
+    match e with
+    | .app .. | .const .. | .fvar .. | .lam .. | .proj .. | .letE .. =>
+      if ← isProof e then return .done (mkConst proofName) else return .continue
+    | _ => return .continue)
+
 /-! ### Which declarations are exported -/
 
-/-- Names Lean generates for its own use, which carry no statement of their own. -/
-def generatedSuffixes : List String :=
-  ["below", "brecOn", "binductionOn", "ibelow", "casesOn", "recOn", "rec", "noConfusion",
-   "noConfusionType", "sizeOf_spec", "inj", "injEq", "ctorIdx", "toCtorIdx", "ctorElim",
-   "ctorElimType", "eq_def", "eq_unfold", "induct", "induct_unfolding", "mutual_induct",
-   "fun_cases", "match_1", "proof_1"]
+/-- Suffixes of what Lean generates for an inductive type, a constructor, or a definition. -/
+def inductiveAux : List String :=
+  ["below", "brecOn", "binductionOn", "ibelow", "casesOn", "recOn", "noConfusion",
+   "noConfusionType", "ctorIdx", "toCtorIdx", "ctorElim", "ctorElimType"]
+def ctorAux : List String := ["inj", "injEq", "sizeOf_spec", "elim", "noConfusion", "noConfusionType"]
+def defAux : List String :=
+  ["eq_def", "eq_unfold", "induct", "induct_unfolding", "mutual_induct", "fun_cases"]
 
-def isGeneratedName (n : Name) : Bool :=
-  match n with
-  | .str _ s =>
-    generatedSuffixes.contains s || (s.startsWith "eq_" && (s.drop 3).all Char.isDigit) ||
-      (s.startsWith "match_" && (s.drop 6).all Char.isDigit) ||
-      (s.startsWith "proof_" && (s.drop 6).all Char.isDigit)
+def numbered (s pre : String) : Bool :=
+  s.startsWith pre && s.length > pre.length && (s.drop pre.length).all Char.isDigit
+
+/-- A name Lean generated for its parent declaration (judged by the parent's kind). -/
+def isGenerated (env : Environment) : Name → Bool
+  | .str p s =>
+    match env.find? p with
+    | some (.inductInfo _) => inductiveAux.contains s
+    | some (.ctorInfo _) => ctorAux.contains s
+    | some (.defnInfo _) | some (.thmInfo _) | some (.opaqueInfo _) =>
+      defAux.contains s || numbered s "eq_" || numbered s "match_" || numbered s "proof_"
+    | _ => false
   | _ => false
 
 def skip (env : Environment) (n : Name) (ci : ConstantInfo) : Bool :=
-  n.isInternal || ci.isUnsafe || isGeneratedName n || isAuxRecursor env n || isNoConfusion env n ||
+  n.isInternal || ci.isUnsafe || isGenerated env n || isAuxRecursor env n || isNoConfusion env n ||
     isMatcherCore env n || env.isProjectionFn n ||
     (match ci with
      | .ctorInfo _ | .recInfo _ | .quotInfo _ => true
@@ -124,10 +148,22 @@ def kindOf (env : Environment) (n : Name) : ConstantInfo → String
   | .defnInfo d =>
     if isInstanceCore env n then "instance" else if d.hints.isAbbrev then "abbrev" else "def"
 
+/-- The constant a declaration is defined as, if its value is just that constant (an alias). -/
+def aliasTarget? (ci : ConstantInfo) : Option Name :=
+  let v? : Option Expr := match ci with
+    | .defnInfo d => some d.value
+    | .thmInfo t => some t.value
+    | .opaqueInfo o => some o.value
+    | _ => none
+  match v?.map Expr.eta with
+  | some (.const n _) => some n
+  | _ => none
+
 /-! ### Axioms, memoized over the whole run
 
 An inductive type, its constructors and its recursors form one node (they refer to each other);
-every other constant is its own node. The dependency graph of safe constants is then acyclic. -/
+every other constant is its own node. The dependency graph of safe constants is then acyclic.
+Like `#print axioms`, an axiom counts itself and what its type uses. -/
 
 def groupKey (env : Environment) (n : Name) : Name :=
   match env.find? n with
@@ -142,7 +178,7 @@ def groupKey (env : Environment) (n : Name) : Name :=
 def usedIn (env : Environment) (k : Name) : Array Name × Array Name := Id.run do
   -- (the axioms the node itself is, the constants it uses)
   match env.find? k with
-  | some (.axiomInfo _) => (#[k], #[])
+  | some (.axiomInfo v) => (#[k], v.type.getUsedConstants)
   | some (.defnInfo v) => (#[], v.type.getUsedConstants ++ v.value.getUsedConstants)
   | some (.thmInfo v) => (#[], v.type.getUsedConstants ++ v.value.getUsedConstants)
   | some (.opaqueInfo v) => (#[], v.type.getUsedConstants ++ v.value.getUsedConstants)
@@ -200,20 +236,29 @@ def axiomsOf (env : Environment) (memo : IO.Ref (Std.HashMap Name (Array Name)))
     throw <| IO.userError s!"dependency cycle while collecting the axioms of {root}"
   return (← memo.get)[r]?.getD #[]
 
-/-! ### Pretty-printing -/
+/-! ### Running MetaM: pretty-printing and proof erasure -/
 
 def ppOptions : Options :=
   ({} : Options) |>.setBool `pp.fullNames true |>.setBool `pp.universes false
 
-def pp (env : Environment) (e : Expr) : IO String := do
+def runMeta (env : Environment) (x : MetaM α) : IO α := do
   let ctx : Core.Context := { fileName := "<leandrift>", fileMap := default, options := ppOptions,
                               maxHeartbeats := 0 }
   let st : Core.State := { env }
+  let (a, _) ← x.toIO ctx st
+  return a
+
+def pp (env : Environment) (e : Expr) : IO String := do
   try
-    let (fmt, _) ← (ppExpr e).toIO ctx st
+    let fmt ← runMeta env (ppExpr e)
     return fmt.pretty 100
   catch ex =>
     return s!"<could not pretty-print: {ex}>"
+
+/-- The statement's tree, its proofs erased (kept as they are if erasing fails). -/
+def statementTree (env : Environment) (ps : List Name) (e : Expr) : IO Json := do
+  let e' ← try runMeta env (eraseProofs e) catch _ => pure e
+  return tree ps e'
 
 /-! ### Module discovery -/
 
@@ -267,6 +312,15 @@ partial def parseArgs : List String → Args → Except String Args
 
 def jsonNames (ns : Array Name) : Json := Json.arr (ns.map (Json.str ∘ nameStr))
 
+def deprecation (env : Environment) (n : Name) (ci : ConstantInfo) (d : Linter.DeprecationEntry) :
+    List (String × Json) := Id.run do
+  let mut df : List (String × Json) := []
+  if let some nn := d.newName? then
+    df := df ++ [("new", Json.str (nameStr nn)), ("alias", Json.bool (aliasTarget? ci == some nn))]
+  if let some s := d.since? then df := df ++ [("since", Json.str s)]
+  let _ := env; let _ := n
+  return df
+
 end LeanDrift
 
 open LeanDrift in
@@ -290,7 +344,8 @@ unsafe def main (argv : List String) : IO UInt32 := do
     | none => IO.getStdout
   let header := Json.mkObj [("type", "header"), ("format", toJson formatVersion),
     ("lean", Json.str Lean.versionString), ("githash", Json.str Lean.githash),
-    ("prefixes", jsonNames args.prefixes), ("modules", jsonNames mods)]
+    ("prefixes", jsonNames args.prefixes), ("modules", jsonNames mods),
+    ("pp", Json.bool !args.noPP), ("axioms", Json.bool !args.noAxioms)]
   h.putStrLn header.compress
   let memo ← IO.mkRef ({} : Std.HashMap Name (Array Name))
   let mut count := 0
@@ -305,7 +360,7 @@ unsafe def main (argv : List String) : IO UInt32 := do
       let mut fields : List (String × Json) :=
         [("type", "decl"), ("name", Json.str (nameStr n)), ("kind", Json.str (kindOf env n ci)),
          ("module", Json.str (nameStr modName)), ("levels", toJson ps.length),
-         ("tree", tree ps ci.type)]
+         ("tree", ← statementTree env ps ci.type)]
       unless args.noPP do fields := fields ++ [("pp", Json.str (← pp env ci.type))]
       unless args.noAxioms do
         let ax ← axiomsOf env memo n
@@ -314,28 +369,28 @@ unsafe def main (argv : List String) : IO UInt32 := do
         let mut ctors : Array Json := #[]
         for c in ii.ctors do
           if let some cc := env.find? c then
-            let mut cf : List (String × Json) := [("name", Json.str (nameStr c)), ("tree", tree ps cc.type)]
+            let mut cf : List (String × Json) :=
+              [("name", Json.str (nameStr c)), ("tree", ← statementTree env ps cc.type)]
             unless args.noPP do cf := cf ++ [("pp", Json.str (← pp env cc.type))]
             ctors := ctors.push (Json.mkObj cf)
         fields := fields ++ [("ctors", Json.arr ctors)]
+        if isStructure env n then
+          fields := fields ++ [("fields", jsonNames (getStructureFields env n))]
       if let some d := Linter.deprecatedAttr.getParam? env n then
-        let mut df : List (String × Json) := []
-        if let some nn := d.newName? then df := df ++ [("new", Json.str (nameStr nn))]
-        if let some s := d.since? then df := df ++ [("since", Json.str s)]
-        fields := fields ++ [("deprecated", Json.mkObj df)]
+        fields := fields ++ [("deprecated", Json.mkObj (deprecation env n ci d))]
       h.putStrLn (Json.mkObj fields).compress
       count := count + 1
-  -- the deprecation aliases of the whole environment: the rename map for the comparison
+  -- the deprecations of the whole environment: the rename map for the comparison
   let mut aliases := 0
   for idx in [0:env.header.moduleNames.size] do
     for n in env.header.moduleData[idx]!.constNames do
       if let some d := Linter.deprecatedAttr.getParam? env n then
-        if let some nn := d.newName? then
-          let mut af : List (String × Json) := [("type", "alias"), ("old", Json.str (nameStr n)),
-            ("new", Json.str (nameStr nn))]
-          if let some s := d.since? then af := af ++ [("since", Json.str s)]
+        if d.newName?.isSome then
+          let some ci := env.find? n | continue
+          let af : List (String × Json) :=
+            [("type", Json.str "alias"), ("old", Json.str (nameStr n))] ++ deprecation env n ci d
           h.putStrLn (Json.mkObj af).compress
           aliases := aliases + 1
   h.flush
-  IO.eprintln s!"leandrift: {count} declarations, {aliases} deprecation aliases"
+  IO.eprintln s!"leandrift: {count} declarations, {aliases} deprecations with a replacement"
   return 0
