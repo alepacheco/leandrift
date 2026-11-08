@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 from . import __version__, exports, project
-from .diff import CHANGED, compare
+from .diff import compare
 from .report import markdown
 
 
@@ -19,6 +19,8 @@ def write_reports(result, md_path=None, json_path=None, title="LeanDrift report"
 
 
 def summary_line(result):
+    for w in result.warnings:
+        print(f"leandrift: warning: {w}", file=sys.stderr)
     c = result.counts()
     return (", ".join(f"{v} {k}" for k, v in c.items()) +
             f"; {len(result.new_sorries())} newly using sorry, "
@@ -38,7 +40,7 @@ def cmd_diff(a):
     else:
         sys.stdout.write(markdown(result, title=a.title))
     print(summary_line(result), file=sys.stderr)
-    return 1 if a.fail_on_change and (result.by_status(CHANGED) or result.new_sorries()) else 0
+    return 1 if a.fail_on_change and result.has_drift() else 0
 
 
 def cmd_compare(a):
@@ -53,7 +55,7 @@ def cmd_compare(a):
     write_reports(result, out / "report.md", out / "report.json", title=title)
     print(summary_line(result), file=sys.stderr)
     print(f"report: {out / 'report.md'}", file=sys.stderr)
-    return 1 if a.fail_on_change and (result.by_status(CHANGED) or result.new_sorries()) else 0
+    return 1 if a.fail_on_change and result.has_drift() else 0
 
 
 def main(argv=None):
@@ -79,7 +81,8 @@ def main(argv=None):
     d.add_argument("--json", help="write the JSON report here")
     d.add_argument("--title", default="LeanDrift report")
     d.add_argument("--fail-on-change", action="store_true",
-                   help="exit 1 if a statement changed or a declaration newly uses sorry")
+                   help="exit 1 if a statement changed or was removed, or a declaration newly "
+                        "depends on sorry or another non-standard axiom")
     d.set_defaults(func=cmd_diff)
 
     c = sub.add_parser("compare", help="build, export and compare a project at two revisions")
@@ -96,7 +99,7 @@ def main(argv=None):
     c.add_argument("--workdir", help="where the clone lives (default leandrift-work/<name>)")
     c.add_argument("--no-cache", action="store_true", help="do not run `lake exe cache get`")
     c.add_argument("--title")
-    c.add_argument("--fail-on-change", action="store_true")
+    c.add_argument("--fail-on-change", action="store_true", help="as for diff")
     c.set_defaults(func=cmd_compare)
 
     a = p.parse_args(argv)

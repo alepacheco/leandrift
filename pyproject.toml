@@ -18,4 +18,4 @@ leandrift = "leandrift.cli:main"
 packages = ["leandrift"]
 
 [tool.setuptools.package-data]
-leandrift = []
+leandrift = ["Export.lean"]

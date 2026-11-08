@@ -7,7 +7,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-EXPORTER = Path(__file__).resolve().parent.parent / "exporter" / "Export.lean"
+EXPORTER = Path(__file__).resolve().parent / "Export.lean"
 
 
 class StepFailed(RuntimeError):
@@ -67,13 +67,34 @@ def build(project, logfile=None, cache=True, targets=()):
 
 
 def checkout(src, rev, logfile=None):
+    src = Path(src)
     run(["git", "checkout", "--quiet", "--force", "--detach", rev], cwd=src, logfile=logfile)
     # untracked files of the other revision go, the dependencies Lake fetched stay
     run(["git", "clean", "-ffdq", "-e", ".lake"], cwd=src, logfile=logfile)
     # the project's own build outputs go: a module the other revision had must not be read
-    build_dir = Path(src) / ".lake" / "build"
+    lake = src / ".lake"
+    if lake.is_symlink() or (lake.exists() and not lake.is_dir()):
+        raise StepFailed(f"{lake} is not a plain directory; refusing to clean it")
+    build_dir = lake / "build"
+    if build_dir.is_symlink():
+        raise StepFailed(f"{build_dir} is a symbolic link; refusing to remove it")
     if build_dir.exists():
         shutil.rmtree(build_dir)
+
+
+def git_out(args, cwd):
+    r = subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True)
+    return r.stdout.strip() if r.returncode == 0 else None
+
+
+def resolve_rev(src, rev):
+    """The commit a revision names: a branch of origin as fetched, else as given (a hash, a tag,
+    `abc^`)."""
+    for cand in (f"origin/{rev}", rev):
+        sha = git_out(["rev-parse", "--verify", "--quiet", f"{cand}^{{commit}}"], src)
+        if sha:
+            return sha
+    raise StepFailed(f"no commit {rev} in {src}")
 
 
 def compare_revisions(repo, old_rev, new_rev, prefixes, workdir, outdir, modules=(), cache=True,
@@ -84,20 +105,23 @@ def compare_revisions(repo, old_rev, new_rev, prefixes, workdir, outdir, modules
     workdir.mkdir(parents=True, exist_ok=True)
     outdir.mkdir(parents=True, exist_ok=True)
     src = workdir / "src"
+    repo_str = str(repo) if "://" in str(repo) or str(repo).startswith("git@") \
+        else str(Path(repo).resolve())
+    if (src / ".git").exists() and git_out(["remote", "get-url", "origin"], src) != repo_str:
+        raise StepFailed(f"{src} is a clone of another repository; give another --workdir")
     if not (src / ".git").exists():
-        run(["git", "clone", "--quiet", "--filter=blob:none", str(repo), str(src)], cwd=workdir)
+        run(["git", "clone", "--quiet", "--filter=blob:none", "--", repo_str, str(src)], cwd=workdir)
     else:
-        run(["git", "fetch", "--quiet", "origin"], cwd=src)
+        run(["git", "fetch", "--quiet", "--tags", "--force", "origin",
+             "+refs/heads/*:refs/remotes/origin/*"], cwd=src)
+    # both revisions are resolved before either is checked out (`HEAD~1` must not move)
+    shas = {"old": resolve_rev(src, old_rev), "new": resolve_rev(src, new_rev)}
     paths = []
     for side, rev in (("old", old_rev), ("new", new_rev)):
         logfile = outdir / f"{side}.log"
         logfile.write_text("", encoding="utf-8")
-        sha = subprocess.run(["git", "rev-parse", "--verify", f"{rev}^{{commit}}"], cwd=src,
-                             capture_output=True, text=True)
-        if sha.returncode != 0:
-            raise StepFailed(f"no commit {rev} in {repo}")
-        log(f"{side}: {rev} = {sha.stdout.strip()}")
-        checkout(src, sha.stdout.strip(), logfile)
+        log(f"{side}: {rev} = {shas[side]}")
+        checkout(src, shas[side], logfile)
         toolchain = (src / "lean-toolchain").read_text(encoding="utf-8").strip() \
             if (src / "lean-toolchain").exists() else "(none)"
         log(f"{side}: toolchain {toolchain}; building (log: {logfile})")
