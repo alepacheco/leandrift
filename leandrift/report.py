@@ -93,8 +93,11 @@ def markdown(result, title="LeanDrift report", max_items=200):
             shown = ", ".join(f"{_code(a)} -> {_code(b)}" for a, b in inner[:4])
             if len(inner) > 4:
                 shown += f" (+{len(inner) - 4})"
+            via = e.via or "name"
+            if e.old_kind and e.old_kind != e.kind:
+                via += f" ({e.old_kind} -> {e.kind})"
             lines.append(f"| {_code(e.old)} | {_code(e.new) if e.new != e.old else 'same name'} | "
-                         f"{e.via or 'name'} | {shown} |")
+                         f"{via} | {shown} |")
         lines.append("")
     else:
         lines += ["None.", ""]
