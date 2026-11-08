@@ -19,6 +19,8 @@ def markdown(result, title="LeanDrift report", max_items=200):
     c = result.counts()
     old_sorry, new_sorry = result.sorry_counts()
     lines = [f"# {title}", ""]
+    for w in result.warnings:
+        lines += [f"**Warning:** {w}.", ""]
     lines += [
         "| | old | new |",
         "|---|---|---|",
@@ -40,6 +42,14 @@ def markdown(result, title="LeanDrift report", max_items=200):
     lines += [f"## Changed statements ({len(changed)})", ""]
     if not changed:
         lines += ["None.", ""]
+    common = result.common_changes()
+    if common:
+        lines += ["Where several changed statements first differ in the same way (often one change "
+                  "upstream, such as a definition or instance that statements elaborate to):", "",
+                  "| old | new | statements |", "|---|---|---|"]
+        for (a, b), names in common[:10]:
+            lines.append(f"| {_code(a)} | {_code(b)} | {len(names)} |")
+        lines.append("")
     for e in changed[:max_items]:
         name = e.new if e.new == e.old else f"{e.old} -> {e.new}"
         kind = e.kind if e.old_kind in ("", e.kind) else f"{e.old_kind} -> {e.kind}"

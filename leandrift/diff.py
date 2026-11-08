@@ -30,6 +30,7 @@ class Entry:
     via: str = ""  # how a renamed declaration was matched: "deprecation alias" or "identical statement"
     renames: list = field(default_factory=list)  # [(old constant, new constant)] used to match
     detail: str = ""  # for a changed statement: where it first differs
+    first_change: tuple = None  # (old subterm, new subterm) where a changed statement first differs
     old_pp: str = ""
     new_pp: str = ""
     new_axioms: list = field(default_factory=list)  # axioms the new version depends on, the old not
@@ -60,6 +61,7 @@ class Result:
     new: object
     entries: list
     inferred_renames: dict  # renames found by identical statements (no deprecation alias)
+    warnings: list = field(default_factory=list)
 
     def by_status(self, status):
         return [e for e in self.entries if e.status == status]
@@ -79,6 +81,20 @@ class Result:
             return sum(1 for d in exp.decls.values() if SORRY in d.axioms and not d.alias_of)
         return n(self.old), n(self.new)
 
+    def common_changes(self, least=2):
+        """The first differences shared by several changed statements, most frequent first."""
+        groups = {}
+        for e in self.by_status(CHANGED):
+            if e.first_change:
+                groups.setdefault(e.first_change, []).append(e.new)
+        return sorted(((k, v) for k, v in groups.items() if len(v) >= least),
+                      key=lambda kv: (-len(kv[1]), kv[0]))
+
+    def has_drift(self):
+        """A statement changed or went, or a declaration newly depends on sorry or another axiom."""
+        return bool(self.by_status(CHANGED) or self.by_status(REMOVED) or self.new_sorries()
+                    or self.new_nonstandard_axioms())
+
     def to_json(self):
         old_sorry, new_sorry = self.sorry_counts()
         return {
@@ -87,7 +103,10 @@ class Result:
             "summary": dict(self.counts(), new_sorry=len(self.new_sorries()),
                             new_nonstandard_axioms=len(self.new_nonstandard_axioms()),
                             sorry_old=old_sorry, sorry_new=new_sorry),
+            "warnings": self.warnings,
             "inferred_renames": self.inferred_renames,
+            "common_changes": [{"old": k[0], "new": k[1], "declarations": v}
+                               for k, v in self.common_changes()],
             "declarations": [e.to_json() for e in self.entries],
         }
 
@@ -100,40 +119,67 @@ def _side(exp):
 
 
 class Resolver:
-    """Maps an old constant name to its name in the new version: deprecation aliases of the new
-    environment, then renames inferred from identical statements; chains are followed."""
+    """Maps an old constant name to its name in the new version: renames inferred from identical
+    statements, then deprecation aliases (of either version, the new one's first), then members of
+    a renamed type (`Old.mk`, `Old.field` -> `New.mk`, `New.field`); chains are followed."""
 
-    def __init__(self, aliases, new_names):
+    def __init__(self, aliases):
         self.aliases = aliases
-        self.new_names = new_names
         self.inferred = {}
+        self.types = {}  # old type name -> new type name
+
+    def _step(self, name):
+        if name in self.inferred:
+            return self.inferred[name]
+        if name in self.aliases:
+            return self.aliases[name]
+        parent, dot, last = name.rpartition(".")
+        if dot and parent in self.types:
+            return self.types[parent] + "." + last
+        return name
 
     def __call__(self, name):
-        seen = set()
+        seen = {name}
         cur = name
-        while cur not in seen:
-            seen.add(cur)
-            if cur in self.inferred:
-                cur = self.inferred[cur]
-            elif cur in self.aliases and (cur not in self.new_names or self.aliases[cur] in self.new_names):
-                cur = self.aliases[cur]
-            else:
-                break
-        return cur
+        while True:
+            nxt = self._step(cur)
+            if nxt == cur or nxt in seen:
+                return cur
+            seen.add(nxt)
+            cur = nxt
 
 
 def _statement(decl, resolve=None):
     """The comparable statement of a declaration: its type, and for an inductive type its
-    constructors (last name component and type), with names resolved if asked."""
-    def r(t):
-        return trees.rename(t, resolve) if resolve else t
-    ctors = [[c["name"].rsplit(".", 1)[-1], r(c["tree"])] for c in decl.ctors]
-    return trees.key([r(decl.tree), ctors])
+    constructors (last name component and type) and a structure's field names, with names resolved
+    if asked. The type's own name and its constructors' become placeholders, so a renamed type can
+    match its old self."""
+    ty, rest = _parts(decl, resolve)
+    return trees.key([ty, rest])
+
+
+def _parts(decl, resolve=None):
+    """(the type's tree, [the constructors, the fields]) with names resolved and placeholders."""
+    own = {decl.name: "§self"}
+    for i, c in enumerate(decl.ctors):
+        own[c["name"]] = f"§ctor{i}"
+
+    def r(n):
+        if n in own:
+            return own[n]
+        return resolve(n) if resolve else n
+    ctors = [[c["name"].rsplit(".", 1)[-1], trees.rename(c["tree"], r)] for c in decl.ctors]
+    return trees.rename(decl.tree, r), [ctors, decl.fields]
+
+
+def _norm(name):
+    return name.rsplit(".", 1)[-1].lower().replace("_", "")
 
 
 def _similar(a, b):
-    a, b = a.rsplit(".", 1)[-1].lower(), b.rsplit(".", 1)[-1].lower()
-    return difflib.SequenceMatcher(None, a, b).ratio() >= 0.6
+    """Names close enough that a non-theorem with an identical statement is taken as renamed."""
+    a, b = _norm(a), _norm(b)
+    return a == b or difflib.SequenceMatcher(None, a, b).ratio() >= 0.9
 
 
 def _renames_used(decl, resolve):
@@ -145,28 +191,45 @@ def _renames_used(decl, resolve):
 
 def compare(old, new):
     """Compare two exports (exports.Export) and return a Result."""
+    warnings = []
+    for flag, what in (("axioms", "axioms"), ("pp", "pretty-printed statements")):
+        if old.header.get(flag, True) is False or new.header.get(flag, True) is False:
+            warnings.append(f"an export was made without {what}: "
+                            + ("new sorry and axioms are not reported" if flag == "axioms"
+                               else "statements are not shown"))
     new_real = {n for n, d in new.decls.items() if not d.alias_of}
-    resolve = Resolver(new.aliases, set(new.decls))
+    aliases = dict(old.aliases)
+    aliases.update(new.aliases)
+    resolve = Resolver(aliases)
 
     def counterpart(name):
-        """The new declaration an old one corresponds to, by name or deprecation alias."""
-        d = new.decls.get(name)
-        if d is not None and not d.alias_of:
+        """The new declaration an old one corresponds to, by name or by renames known so far."""
+        if name in new_real:
             return name, ""
         target = resolve(name)
         if target != name and target in new_real:
             return target, ("identical statement" if name in resolve.inferred else "deprecation alias")
-        if d is not None:
+        if name in new.decls:
             return name, ""
         return None, ""
 
+    def note_type_renames():
+        for name, od in old.decls.items():
+            if od.ctors and not od.alias_of:
+                target, _ = counterpart(name)
+                if target is not None and target != name:
+                    resolve.types[name] = target
+
+    note_type_renames()
     # Old declarations with no counterpart by name or alias may have been renamed without an alias.
     # Match them to unclaimed new declarations by identical statement (after the renames known so
     # far), one to one; repeat, since each rename can make more statements match.
     while True:
         claimed = set()
         unmatched = []
-        for name in old.decls:
+        for name, od in old.decls.items():
+            if od.alias_of:
+                continue
             c, _ = counterpart(name)
             if c is None:
                 unmatched.append(name)
@@ -198,6 +261,7 @@ def compare(old, new):
                 for a, b in zip(oc, nc):
                     if a["name"] != b["name"]:
                         resolve.inferred.setdefault(a["name"], b["name"])
+        note_type_renames()
 
     entries = []
     claimed = set()
@@ -224,6 +288,9 @@ def compare(old, new):
             e.status = CHANGED
             e.detail = _describe(od, nd, resolve)
             e.renames = _renames_used(od, resolve)
+            d = trees.first_difference(trees.rename(od.tree, resolve), trees.rename(nd.tree, resolve))
+            if d is not None:
+                e.first_change = (trees.show(d[1], 80), trees.show(d[2], 80))
         gained = sorted(set(nd.axioms) - set(od.axioms))
         e.new_axioms = gained
         e.sorry = SORRY in gained
@@ -237,7 +304,7 @@ def compare(old, new):
         entries.append(Entry(ADDED, new=name, kind=nd.kind, module=nd.module, new_pp=nd.full_pp,
                              new_axioms=extra, sorry=SORRY in extra))
     return Result(old=old, new=new, entries=entries,
-                  inferred_renames=dict(sorted(resolve.inferred.items())))
+                  inferred_renames=dict(sorted(resolve.inferred.items())), warnings=warnings)
 
 
 def _describe(od, nd, resolve):
@@ -245,26 +312,28 @@ def _describe(od, nd, resolve):
         return (f"was {_article(od.kind)} with {len(od.ctors)} constructors, "
                 f"now {_article(nd.kind)} with {len(nd.ctors)}")
     a, b = trees.rename(od.tree, resolve), trees.rename(nd.tree, resolve)
-    if a == b:
-        # the type is the same: a constructor differs
-        oc = {c["name"].rsplit(".", 1)[-1]: c for c in od.ctors}
-        nc = {c["name"].rsplit(".", 1)[-1]: c for c in nd.ctors}
-        if set(oc) != set(nc):
-            gone, came = sorted(set(oc) - set(nc)), sorted(set(nc) - set(oc))
-            parts = []
-            if gone:
-                parts.append("constructors removed: " + ", ".join(gone))
-            if came:
-                parts.append("constructors added: " + ", ".join(came))
-            return "; ".join(parts)
-        for k in oc:
-            ta, tb = trees.rename(oc[k]["tree"], resolve), trees.rename(nc[k]["tree"], resolve)
-            if ta != tb:
-                return f"constructor {k} changed: " + _where(ta, tb)
-        return "constructors reordered"
-    if trees.erase_binder_info(a) == trees.erase_binder_info(b):
-        return "only binder info changed (explicit, implicit or instance arguments)"
-    return _where(a, b)
+    if a != b:
+        if trees.erase_binder_info(a) == trees.erase_binder_info(b) and \
+                _parts(od, resolve)[1] == _parts(nd, resolve)[1]:
+            return "only binder info changed (explicit, implicit or instance arguments)"
+        return _where(a, b)
+    if od.fields != nd.fields:
+        return f"fields changed: {', '.join(od.fields)} -> {', '.join(nd.fields)}"
+    oc = {c["name"].rsplit(".", 1)[-1]: c for c in od.ctors}
+    nc = {c["name"].rsplit(".", 1)[-1]: c for c in nd.ctors}
+    if set(oc) != set(nc):
+        gone, came = sorted(set(oc) - set(nc)), sorted(set(nc) - set(oc))
+        parts = []
+        if gone:
+            parts.append("constructors removed: " + ", ".join(gone))
+        if came:
+            parts.append("constructors added: " + ", ".join(came))
+        return "; ".join(parts)
+    for k in oc:
+        ta, tb = trees.rename(oc[k]["tree"], resolve), trees.rename(nc[k]["tree"], resolve)
+        if ta != tb:
+            return f"constructor {k} changed: " + _where(ta, tb)
+    return "constructors reordered"
 
 
 def _where(a, b):

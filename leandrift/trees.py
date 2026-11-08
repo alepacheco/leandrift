@@ -1,4 +1,4 @@
-"""Operations on the exporter's statement trees (see exporter/Export.lean for their shape)."""
+"""Operations on the exporter's statement trees (see leandrift/Export.lean for their shape)."""
 
 import json
 

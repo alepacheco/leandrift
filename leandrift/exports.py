@@ -18,7 +18,8 @@ class Decl:
     pp: str = ""
     axioms: list = field(default_factory=list)
     ctors: list = field(default_factory=list)  # [{"name", "tree", "pp"}] for inductive types
-    deprecated: dict = None  # {"new": ..., "since": ...} when the declaration is itself deprecated
+    deprecated: dict = None  # {"new", "alias", "since"} when the declaration is itself deprecated
+    fields: list = field(default_factory=list)  # a structure's field names, in order
 
     @property
     def full_pp(self):
@@ -30,8 +31,9 @@ class Decl:
 
     @property
     def alias_of(self):
-        """The declaration this one is a deprecated alias of, if any."""
-        return (self.deprecated or {}).get("new")
+        """The declaration this one is a deprecated alias of (defined as that declaration), if any."""
+        d = self.deprecated or {}
+        return d.get("new") if d.get("alias", True) else None
 
 
 @dataclass
@@ -61,18 +63,23 @@ def load(path):
                 continue
             try:
                 rec = json.loads(line)
+                t = rec.get("type")
+                if t == "header":
+                    header = rec
+                elif t == "decl":
+                    d = Decl(name=rec["name"], kind=rec["kind"], module=rec.get("module", ""),
+                             tree=rec["tree"], pp=rec.get("pp", ""), axioms=rec.get("axioms", []),
+                             ctors=rec.get("ctors", []), deprecated=rec.get("deprecated"),
+                             fields=rec.get("fields", []))
+                    decls[d.name] = d
+                elif t == "alias":
+                    # only a true alias (defined as its replacement) renames inside statements
+                    if rec.get("alias", True):
+                        aliases[rec["old"]] = rec["new"]
             except json.JSONDecodeError as e:
                 raise ValueError(f"{path}:{lineno}: not JSON: {e}") from None
-            t = rec.get("type")
-            if t == "header":
-                header = rec
-            elif t == "decl":
-                d = Decl(name=rec["name"], kind=rec["kind"], module=rec.get("module", ""),
-                         tree=rec["tree"], pp=rec.get("pp", ""), axioms=rec.get("axioms", []),
-                         ctors=rec.get("ctors", []), deprecated=rec.get("deprecated"))
-                decls[d.name] = d
-            elif t == "alias":
-                aliases[rec["old"]] = rec["new"]
+            except (KeyError, AttributeError, TypeError) as e:
+                raise ValueError(f"{path}:{lineno}: not a LeanDrift export record ({e!r})") from None
     if header is None:
         raise ValueError(f"{path}: no header line; is this a LeanDrift export?")
     if header.get("format") != 1:
