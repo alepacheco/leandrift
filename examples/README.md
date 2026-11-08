@@ -6,7 +6,7 @@ against new Mathlib, a year apart in Lean versions. Each folder holds the commit
 the report LeanDrift made (`report.md`, `report.json`), the two exports it compared
 (`old.jsonl.gz`, `new.jsonl.gz`), and `run.sh`, one command that reproduces it all in a container.
 
-| example | upgrade | declarations | same | same after renames | changed | removed | added |
+| example | upgrade | declarations (old) | same | same after renames | changed | removed | added |
 |---|---|---|---|---|---|---|---|
 | [cam-combi-34a573b](cam-combi-34a573b/) | Lean v4.24.0 -> v4.25.0 (Nov 2025) | 169 | 141 | 0 | 28 | 0 | 0 |
 | [persistentdecomp-7cfd07c](persistentdecomp-7cfd07c/) | Lean v4.31.0 -> v4.32.0 (Jul 2026) | 160 | 151 | 3 | 6 | 0 | 0 |
@@ -24,7 +24,8 @@ What they show, in short (each folder's README has the details):
 - **misc-yd** (October 2026): a clean upgrade for 259 of 260 statements; the one change is a
   definition the commit replaced (an inductive type turned into a definition over a new one).
 
-In both changes that come from Mathlib, the new statements are very likely definitionally equal to
+In the two examples whose changes come from Mathlib (cam-combi and PersistentDecomp), the new
+statements are very likely definitionally equal to
 the old ones; release 0.0 shows them, and a later release checks them.
 
 To reproduce one (needs Docker; the first run downloads two Lean toolchains and two versions of
@@ -37,7 +38,8 @@ sh examples/cam-combi-34a573b/run.sh
 
 The report lands in `examples/cam-combi-34a573b/out/`, with the two exports, which come out the
 same as the ones kept here (`out/report.json` names them `old.jsonl` and `new.jsonl` where the kept
-report names the gzipped copies). To check only the comparison, without Lean:
+report names the gzipped copies). To check only the comparison, without Lean (the report then has
+a generic title; add the `--title` from `run.sh` to match the kept one exactly):
 
 ```sh
 bin/leandrift diff examples/cam-combi-34a573b/old.jsonl.gz examples/cam-combi-34a573b/new.jsonl.gz

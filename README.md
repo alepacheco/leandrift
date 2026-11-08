@@ -53,9 +53,12 @@ library.
 
 ```sh
 git clone https://github.com/alepacheco/leandrift
-export PATH="$PWD/leandrift/bin:$PATH"     # or: pip install ./leandrift
+export PATH="$PWD/leandrift/bin:$PATH"
 leandrift --help
 ```
+
+(Or install it as a package, in a virtual environment or with pipx:
+`python3 -m venv .venv && .venv/bin/pip install ./leandrift`.)
 
 `leandrift compare` builds the projects it compares, which runs their code (their Lake
 configuration, the toolchain their `lean-toolchain` names, and what their build elaborates), as
@@ -68,14 +71,16 @@ Or use the container image, which has all of them:
 docker build -t leandrift -f leandrift/docker/Dockerfile leandrift
 mkdir -p out
 docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
-  -v leandrift-elan:/opt/elan -v leandrift-cache:/cache -v "$PWD/out:/out" \
+  -v leandrift-elan:/opt/elan -v leandrift-cache:/cache -v leandrift-work:/work -v "$PWD/out:/out" \
   leandrift leandrift compare https://github.com/YaelDillies/cam-combi '34a573b79a^' 34a573b79a \
   --prefix LeanCamCombi --out /out/cam-combi
 ```
 
-The two volumes keep Lean toolchains and Mathlib's cache between runs (a toolchain a compared
-project fetched stays in the first one: give each project you do not trust volumes of its own);
-`out/` receives the reports, owned by you.
+The volumes keep Lean toolchains (`/opt/elan`), Mathlib's prebuilt files (`/cache`, about 1 GB
+per Mathlib version) and the clones `compare` builds in (`/work`) between runs; a toolchain a
+compared project fetched stays in the first one, so give each project you do not trust volumes of
+its own. `out/` receives the reports, owned by you. A project the size of the examples takes
+about five minutes on three cores the first time.
 
 ## Use
 
@@ -92,11 +97,13 @@ This writes `out/cam-combi/report.md` and `report.json`, the two exports (`old.j
 few GB), stays in `leandrift-work/<name>/` (or `--workdir`), so a second comparison of the same
 project reuses it.
 
-- `--prefix` names the module prefix whose declarations are compared (repeatable).
+- `--prefix` names the module prefix whose declarations are compared; `--module M` imports only
+  `M` and what it imports instead of every module under the prefixes (both repeatable).
 - A revision is a branch of the repository (as fetched), a tag, a commit, or an expression such
   as `abc123^`.
-- `--target T` builds Lake target `T` instead of the default ones; `--no-cache` skips
-  `lake exe cache get`; `--title` sets the report's title.
+- `--target T` builds Lake target `T` instead of the default ones (repeatable); `--no-cache`
+  skips `lake exe cache get` (Mathlib is then built from source); `--title` sets the report's
+  title.
 - `--fail-on-change` makes it exit with status 1 when a statement changed or was removed, or a
   declaration newly depends on `sorry` or another non-standard axiom. Errors exit with status 2.
 
@@ -109,12 +116,15 @@ leandrift diff old.jsonl new.jsonl --md report.md --json report.json
 ```
 
 (`lake exe cache get` fetches Mathlib's prebuilt files; leave it out for a project without
-Mathlib.) `leandrift diff` reads exports plain or gzipped (`.jsonl.gz`); without `--md` or
-`--json` it prints the Markdown report on standard output. Its summary line goes to standard
+Mathlib.) `leandrift diff` reads exports plain or gzipped (`.jsonl.gz`); `--md` (or `--markdown`)
+and `--json` write the reports to files, and without either it prints the Markdown report on
+standard output. Its summary line goes to standard
 error.
 
-`leandrift export` runs `lake env lean --run leandrift/Export.lean --prefix MyProject -o ...` in
-the project; you can run that command directly too. By default it imports every built module
+`leandrift export` runs `lake env lean --run <LeanDrift's checkout>/leandrift/Export.lean --prefix
+MyProject -o ...` in the project; you can run that command directly too, with the full path to
+`Export.lean`. `--no-pp` and `--no-axioms` skip pretty-printing and collecting axioms (faster,
+but the diff then shows no statements or no new axioms). By default it imports every built module
 under the prefixes, so build each version in a clean checkout (or delete `.lake/build` first):
 the `.olean` of a module that no longer exists would otherwise still be read. `--module M`
 imports only `M` and what it imports.

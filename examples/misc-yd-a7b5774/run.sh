@@ -4,7 +4,9 @@
 set -e
 here=$(cd "$(dirname "$0")" && pwd)
 root=$(cd "$here/../.." && pwd)
+echo "building the leandrift image..."
 docker build -q -t leandrift -f "$root/docker/Dockerfile" "$root" >/dev/null
+echo "comparing (the first run downloads two toolchains and Mathlib's cache)..."
 mkdir -p "$here/out"
 docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
   -v leandrift-elan:/opt/elan -v leandrift-cache:/cache -v "$here/out:/out" \

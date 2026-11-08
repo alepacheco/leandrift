@@ -89,7 +89,11 @@ def main(argv=None):
                         "depends on sorry or another non-standard axiom")
     d.set_defaults(func=cmd_diff)
 
-    c = sub.add_parser("compare", help="build, export and compare a project at two revisions")
+    c = sub.add_parser("compare", help="build, export and compare a project at two revisions",
+                       description="Clone a Lake project, and at each of two revisions fetch "
+                                   "Mathlib's cache, build, and export; then compare the exports. "
+                                   "Writes old.jsonl, new.jsonl, old.log, new.log, report.md and "
+                                   "report.json to --out.")
     c.add_argument("repo", help="a git URL or path of the Lake project")
     c.add_argument("old", help="the revision before the upgrade (e.g. abc123^)")
     c.add_argument("new", help="the revision after the upgrade")
@@ -106,7 +110,9 @@ def main(argv=None):
                    help="do not run `lake exe cache get` (the dependencies, Mathlib included, are "
                         "then built from source, for each revision)")
     c.add_argument("--title", help="the report's title")
-    c.add_argument("--fail-on-change", action="store_true", help="as for diff")
+    c.add_argument("--fail-on-change", action="store_true",
+                   help="exit 1 if a statement changed or was removed, or a declaration newly "
+                        "depends on sorry or another non-standard axiom")
     c.set_defaults(func=cmd_compare)
 
     a = p.parse_args(argv)

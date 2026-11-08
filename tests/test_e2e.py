@@ -41,7 +41,7 @@ EXPECTED = {
 
 
 @unittest.skipUnless(shutil.which("lake") and os.environ.get("LEANDRIFT_E2E", "1") != "0",
-                     "needs elan's lake on the PATH (set LEANDRIFT_E2E=0 to skip)")
+                     "needs elan's lake on the PATH (LEANDRIFT_E2E=0 skips it on purpose)")
 class TestTinyProject(unittest.TestCase):
     def test_two_toolchains(self):
         with tempfile.TemporaryDirectory() as d:

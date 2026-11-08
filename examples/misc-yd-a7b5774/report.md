@@ -21,7 +21,7 @@
 
 ### `GenerateLine` (inductive -> def, `MiscYD.Book.SylvesterChvatal`)
 
-was an inductive with 3 constructors, now a def with 0
+was an inductive with 3 constructors, now a def
 
 Old:
 

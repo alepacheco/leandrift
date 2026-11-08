@@ -329,8 +329,8 @@ def compare(old, new):
 
 def _describe(od, nd, resolve):
     if od.kind != nd.kind and (od.ctors or nd.ctors) and len(od.ctors) != len(nd.ctors):
-        return (f"was {_article(od.kind)} with {len(od.ctors)} constructors, "
-                f"now {_article(nd.kind)} with {len(nd.ctors)}")
+        now = f"now {_article(nd.kind)}" + (f" with {len(nd.ctors)}" if nd.ctors else "")
+        return f"was {_article(od.kind)} with {len(od.ctors)} constructors, {now}"
     a, b = trees.rename(od.tree, resolve.old), trees.rename(nd.tree, resolve.new)
     if a != b:
         if trees.erase_binder_info(a) == trees.erase_binder_info(b) and \

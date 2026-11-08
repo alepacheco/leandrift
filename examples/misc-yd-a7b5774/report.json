@@ -1232,7 +1232,7 @@
    "kind": "def",
    "module": "MiscYD.Book.SylvesterChvatal",
    "old_kind": "inductive",
-   "detail": "was an inductive with 3 constructors, now a def with 0",
+   "detail": "was an inductive with 3 constructors, now a def",
    "old_pp": "{V : Type u_1} → [MetricSpace V] → Set V → Set V\n| basic : ∀ {V : Type u_1} [inst : MetricSpace V] {s : Set V} {x : V}, x ∈ s → GenerateLine s x\n| extend_out : ∀ {V : Type u_1} [inst : MetricSpace V] {s : Set V} (u v w : V),\n  GenerateLine s u → GenerateLine s v → SBtw.sbtw u v w → GenerateLine s w\n| extend_in : ∀ {V : Type u_1} [inst : MetricSpace V] {s : Set V} (u v w : V),\n  GenerateLine s u → GenerateLine s v → SBtw.sbtw u w v → GenerateLine s w",
    "new_pp": "{V : Type u_1} → [MetricSpace V] → Set V → Set V"
   },
