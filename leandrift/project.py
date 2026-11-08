@@ -71,15 +71,21 @@ def checkout(src, rev, logfile=None):
     run(["git", "checkout", "--quiet", "--force", "--detach", rev], cwd=src, logfile=logfile)
     # untracked files of the other revision go, the dependencies Lake fetched stay
     run(["git", "clean", "-ffdq", "-e", ".lake"], cwd=src, logfile=logfile)
-    # the project's own build outputs go: a module the other revision had must not be read
+    # build outputs go, the project's and its dependencies' (Mathlib's cache brings them back): a
+    # module or an .olean file of the other revision must not be read
     lake = src / ".lake"
     if lake.is_symlink() or (lake.exists() and not lake.is_dir()):
         raise StepFailed(f"{lake} is not a plain directory; refusing to clean it")
-    build_dir = lake / "build"
-    if build_dir.is_symlink():
-        raise StepFailed(f"{build_dir} is a symbolic link; refusing to remove it")
-    if build_dir.exists():
-        shutil.rmtree(build_dir)
+    build_dirs = [lake / "build"]
+    packages = lake / "packages"
+    if packages.is_dir() and not packages.is_symlink():
+        build_dirs += [p / ".lake" / "build" for p in sorted(packages.iterdir())
+                       if p.is_dir() and not p.is_symlink() and not (p / ".lake").is_symlink()]
+    for build_dir in build_dirs:
+        if build_dir.is_symlink():
+            raise StepFailed(f"{build_dir} is a symbolic link; refusing to remove it")
+        if build_dir.exists():
+            shutil.rmtree(build_dir)
 
 
 def git_out(args, cwd):
