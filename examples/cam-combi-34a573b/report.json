@@ -1,0 +1,1365 @@
+{
+ "leandrift": 1,
+ "old": {
+  "file": "old.jsonl.gz",
+  "lean": "4.24.0",
+  "prefixes": [
+   "LeanCamCombi"
+  ],
+  "modules": 25,
+  "declarations": 169,
+  "deprecation_aliases": 2927
+ },
+ "new": {
+  "file": "new.jsonl.gz",
+  "lean": "4.25.0",
+  "prefixes": [
+   "LeanCamCombi"
+  ],
+  "modules": 25,
+  "declarations": 169,
+  "deprecation_aliases": 2217
+ },
+ "summary": {
+  "same": 141,
+  "same after renames": 0,
+  "changed": 28,
+  "removed": 0,
+  "added": 0,
+  "new_sorry": 0,
+  "new_nonstandard_axioms": 0,
+  "sorry_old": 41,
+  "sorry_new": 41
+ },
+ "warnings": [],
+ "inferred_renames": {},
+ "common_changes": [
+  {
+   "old": "Finset.toSet.{u0}",
+   "new": "SetLike.coe.{u0,u0}",
+   "declarations": [
+    "ProbabilityTheory.IsBernoulliSeq.meas",
+    "GraphTheory.ES1.q14_part2",
+    "GraphTheory.ES1.q14_part3",
+    "GrowthInGroups.Lecture1.conjecture_1_4",
+    "GrowthInGroups.Lecture1.fact_1_10",
+    "GrowthInGroups.Lecture1.fact_1_1_1",
+    "GrowthInGroups.Lecture1.lemma_1_11",
+    "GrowthInGroups.Lecture1.theorem_1_8",
+    "GrowthInGroups.Lecture1.theorem_1_9",
+    "exists_isApproximateAddSubgroup_of_small_doubling",
+    "exists_isApproximateSubgroup_of_small_doubling",
+    "GrowthInGroups.Lecture2.lemma_2_7",
+    "GrowthInGroups.Lecture3.lemma_3_1",
+    "GrowthInGroups.Lecture3.proposition_3_3",
+    "GrowthInGroups.Lecture3.proposition_3_6_1",
+    "GrowthInGroups.Lecture3.lemma_4_2",
+    "GrowthInGroups.Lecture3.theorem_4_4",
+    "GrowthInGroups.Lecture3.theorem_4_5",
+    "Finset.exists_littlewood_offord_partition",
+    "LYM_inequality",
+    "Finset.IsLowerSet.certificator_eq_inter",
+    "Finset.IsUpperSet.certificator_eq_disjSups",
+    "Finset.IsUpperSet.certificator_eq_inter"
+   ]
+  },
+  {
+   "old": "Finset.toSet.{0}",
+   "new": "SetLike.coe.{0,0}",
+   "declarations": [
+    "GraphTheory.ES1.q14_part1",
+    "GrowthInGroups.Lecture1.proposition_1_7",
+    "GrowthInGroups.Lecture3.corollary_4_3"
+   ]
+  },
+  {
+   "old": "Finset.instMembership.{u0}",
+   "new": "SetLike.instMembership.{u0,u0}",
+   "declarations": [
+    "GraphTheory.ES1.q12",
+    "Numbering.prefixedEquiv"
+   ]
+  }
+ ],
+ "declarations": [
+  {
+   "status": "same",
+   "old": "PMF.bernoulli'",
+   "new": "PMF.bernoulli'",
+   "kind": "def",
+   "module": "LeanCamCombi.Mathlib.Probability.ProbabilityMassFunction.Constructions"
+  },
+  {
+   "status": "same",
+   "old": "PMF.bernoulli'_apply",
+   "new": "PMF.bernoulli'_apply",
+   "kind": "theorem",
+   "module": "LeanCamCombi.Mathlib.Probability.ProbabilityMassFunction.Constructions"
+  },
+  {
+   "status": "same",
+   "old": "PMF.map_not_bernoulli'",
+   "new": "PMF.map_not_bernoulli'",
+   "kind": "theorem",
+   "module": "LeanCamCombi.Mathlib.Probability.ProbabilityMassFunction.Constructions"
+  },
+  {
+   "status": "same",
+   "old": "PMF.mem_support_bernoulli'_iff",
+   "new": "PMF.mem_support_bernoulli'_iff",
+   "kind": "theorem",
+   "module": "LeanCamCombi.Mathlib.Probability.ProbabilityMassFunction.Constructions"
+  },
+  {
+   "status": "same",
+   "old": "PMF.support_bernoulli'",
+   "new": "PMF.support_bernoulli'",
+   "kind": "theorem",
+   "module": "LeanCamCombi.Mathlib.Probability.ProbabilityMassFunction.Constructions"
+  },
+  {
+   "status": "same",
+   "old": "PMF.toMeasure_ne_zero",
+   "new": "PMF.toMeasure_ne_zero",
+   "kind": "theorem",
+   "module": "LeanCamCombi.Mathlib.Probability.ProbabilityMassFunction.Constructions"
+  },
+  {
+   "status": "same",
+   "old": "ProbabilityTheory.IsBernoulliSeq",
+   "new": "ProbabilityTheory.IsBernoulliSeq",
+   "kind": "structure",
+   "module": "LeanCamCombi.ExtrProbCombi.BernoulliSeq"
+  },
+  {
+   "status": "same",
+   "old": "ProbabilityTheory.IsBernoulliSeq.aemeasurable",
+   "new": "ProbabilityTheory.IsBernoulliSeq.aemeasurable",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BernoulliSeq"
+  },
+  {
+   "status": "same",
+   "old": "ProbabilityTheory.IsBernoulliSeq.compl",
+   "new": "ProbabilityTheory.IsBernoulliSeq.compl",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BernoulliSeq"
+  },
+  {
+   "status": "same",
+   "old": "ProbabilityTheory.IsBernoulliSeq.identDistrib",
+   "new": "ProbabilityTheory.IsBernoulliSeq.identDistrib",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BernoulliSeq"
+  },
+  {
+   "status": "same",
+   "old": "ProbabilityTheory.IsBernoulliSeq.inter",
+   "new": "ProbabilityTheory.IsBernoulliSeq.inter",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BernoulliSeq"
+  },
+  {
+   "status": "changed",
+   "old": "ProbabilityTheory.IsBernoulliSeq.meas",
+   "new": "ProbabilityTheory.IsBernoulliSeq.meas",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BernoulliSeq",
+   "detail": "first difference at body/body/body/body/body/body/body/body/body/body/arg1/arg5/arg1/body/arg2/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {α : Type u_1} {Ω : Type u_2} [inst : MeasurableSpace Ω] {X : Ω → Set α}\n  {μ : MeasureTheory.Measure Ω} {p : NNReal},\n  ProbabilityTheory.IsBernoulliSeq X p μ →\n    ∀ [MeasureTheory.IsProbabilityMeasure μ] [inst_2 : Fintype α] (s : Finset α),\n      μ {ω | {a | a ∈ X ω} = ↑s} = ↑p ^ s.card * (1 - ↑p) ^ (Fintype.card α - s.card)",
+   "new_pp": "∀ {α : Type u_1} {Ω : Type u_2} [inst : MeasurableSpace Ω] {X : Ω → Set α}\n  {μ : MeasureTheory.Measure Ω} {p : NNReal},\n  ProbabilityTheory.IsBernoulliSeq X p μ →\n    ∀ [MeasureTheory.IsProbabilityMeasure μ] [inst_2 : Fintype α] (s : Finset α),\n      μ {ω | {a | a ∈ X ω} = ↑s} = ↑p ^ s.card * (1 - ↑p) ^ (Fintype.card α - s.card)"
+  },
+  {
+   "status": "same",
+   "old": "ProbabilityTheory.IsBernoulliSeq.meas_apply",
+   "new": "ProbabilityTheory.IsBernoulliSeq.meas_apply",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BernoulliSeq"
+  },
+  {
+   "status": "same",
+   "old": "ProbabilityTheory.IsBernoulliSeq.ne_zero",
+   "new": "ProbabilityTheory.IsBernoulliSeq.ne_zero",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BernoulliSeq"
+  },
+  {
+   "status": "same",
+   "old": "ProbabilityTheory.IsBernoulliSeq.nullMeasurableSet",
+   "new": "ProbabilityTheory.IsBernoulliSeq.nullMeasurableSet",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BernoulliSeq"
+  },
+  {
+   "status": "same",
+   "old": "ProbabilityTheory.IsBernoulliSeq.union",
+   "new": "ProbabilityTheory.IsBernoulliSeq.union",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BernoulliSeq"
+  },
+  {
+   "status": "same",
+   "old": "IsBinomialRandomGraph",
+   "new": "IsBinomialRandomGraph",
+   "kind": "abbrev",
+   "module": "LeanCamCombi.ExtrProbCombi.BinomialRandomGraph"
+  },
+  {
+   "status": "same",
+   "old": "IsBinomialRandomGraph.aemeasurable_mem_edgeSet",
+   "new": "IsBinomialRandomGraph.aemeasurable_mem_edgeSet",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BinomialRandomGraph"
+  },
+  {
+   "status": "same",
+   "old": "IsBinomialRandomGraph.iIndepFun_mem_edgeSet",
+   "new": "IsBinomialRandomGraph.iIndepFun_mem_edgeSet",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BinomialRandomGraph"
+  },
+  {
+   "status": "same",
+   "old": "IsBinomialRandomGraph.iIndepFun_mem_edgeSet_not_isDiag",
+   "new": "IsBinomialRandomGraph.iIndepFun_mem_edgeSet_not_isDiag",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BinomialRandomGraph"
+  },
+  {
+   "status": "same",
+   "old": "IsBinomialRandomGraph.identDistrib_mem_edgeSet_mem_edgeSet",
+   "new": "IsBinomialRandomGraph.identDistrib_mem_edgeSet_mem_edgeSet",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BinomialRandomGraph"
+  },
+  {
+   "status": "same",
+   "old": "IsBinomialRandomGraph.le_one",
+   "new": "IsBinomialRandomGraph.le_one",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BinomialRandomGraph"
+  },
+  {
+   "status": "same",
+   "old": "IsBinomialRandomGraph.map_mem_edgeSet",
+   "new": "IsBinomialRandomGraph.map_mem_edgeSet",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BinomialRandomGraph"
+  },
+  {
+   "status": "same",
+   "old": "IsBinomialRandomGraph.meas",
+   "new": "IsBinomialRandomGraph.meas",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BinomialRandomGraph"
+  },
+  {
+   "status": "same",
+   "old": "IsBinomialRandomGraph.meas_mem_edgeSet",
+   "new": "IsBinomialRandomGraph.meas_mem_edgeSet",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BinomialRandomGraph"
+  },
+  {
+   "status": "same",
+   "old": "IsBinomialRandomGraph.nullMeasurableSet_mem_edgeSet",
+   "new": "IsBinomialRandomGraph.nullMeasurableSet_mem_edgeSet",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BinomialRandomGraph"
+  },
+  {
+   "status": "same",
+   "old": "SimpleGraph.edgeDensity'",
+   "new": "SimpleGraph.edgeDensity'",
+   "kind": "def",
+   "module": "LeanCamCombi.Mathlib.Combinatorics.SimpleGraph.Density"
+  },
+  {
+   "status": "same",
+   "old": "SimpleGraph.maxEdgeSubdensity",
+   "new": "SimpleGraph.maxEdgeSubdensity",
+   "kind": "def",
+   "module": "LeanCamCombi.Mathlib.Combinatorics.SimpleGraph.Density"
+  },
+  {
+   "status": "same",
+   "old": "SimpleGraph.one_statement",
+   "new": "SimpleGraph.one_statement",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BollobasContainment"
+  },
+  {
+   "status": "same",
+   "old": "SimpleGraph.zero_statement",
+   "new": "SimpleGraph.zero_statement",
+   "kind": "theorem",
+   "module": "LeanCamCombi.ExtrProbCombi.BollobasContainment"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.IsLatin",
+   "new": "GraphTheory.ES1.IsLatin",
+   "kind": "def",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.averageDegree",
+   "new": "GraphTheory.ES1.averageDegree",
+   "kind": "def",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.degreeSequence",
+   "new": "GraphTheory.ES1.degreeSequence",
+   "kind": "def",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1",
+   "new_axioms": [
+    "Classical.choice"
+   ]
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.distortion",
+   "new": "GraphTheory.ES1.distortion",
+   "kind": "def",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.q1",
+   "new": "GraphTheory.ES1.q1",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.q10",
+   "new": "GraphTheory.ES1.q10",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1"
+  },
+  {
+   "status": "changed",
+   "old": "GraphTheory.ES1.q12",
+   "new": "GraphTheory.ES1.q12",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1",
+   "detail": "first difference at body/body/body/body/body/arg1/body/arg1/body/arg1/arg1/arg0/body/body/arg2/arg0/arg1/body/arg2/fn: Finset.instMembership.{u0}  ->  SetLike.instMembership.{u0,u0}",
+   "old_pp": "∀ {α : Type u_2} [inst : DecidableEq α] (G : SimpleGraph α) [inst_1 : DecidableRel G.Adj]\n  (s : Finset α),\n  ∃ u v,\n    Disjoint u v ∧\n      u ∪ v = s ∧\n        (∀ a ∈ u, Even (Cardinal.mk { x // x ∈ {b ∈ u | G.Adj a b} })) ∧\n          ∀ a ∈ v, Even (Cardinal.mk { x // x ∈ {b ∈ v | G.Adj a b} })",
+   "new_pp": "∀ {α : Type u_2} [inst : DecidableEq α] (G : SimpleGraph α) [inst_1 : DecidableRel G.Adj]\n  (s : Finset α),\n  ∃ u v,\n    Disjoint u v ∧\n      u ∪ v = s ∧\n        (∀ a ∈ u, Even (Cardinal.mk ↥({b ∈ u | G.Adj a b}))) ∧\n          ∀ a ∈ v, Even (Cardinal.mk ↥({b ∈ v | G.Adj a b}))"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.q13",
+   "new": "GraphTheory.ES1.q13",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1"
+  },
+  {
+   "status": "changed",
+   "old": "GraphTheory.ES1.q14_part1",
+   "new": "GraphTheory.ES1.q14_part1",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1",
+   "detail": "first difference at arg1/body/arg0/body/arg3/arg0/arg1/arg3/fn: Finset.toSet.{0}  ->  SetLike.coe.{0,0}",
+   "old_pp": "∃ r,\n  (∀ (A : Finset ℕ), ↑A.card ≤ Cardinal.mk ↑(r.image ↑A)) ∧\n    ∀ (f : ℕ → ℕ), Function.Injective f → ∃ n, (n, f n) ∉ r",
+   "new_pp": "∃ r,\n  (∀ (A : Finset ℕ), ↑A.card ≤ Cardinal.mk ↑(r.image ↑A)) ∧\n    ∀ (f : ℕ → ℕ), Function.Injective f → ∃ n, (n, f n) ∉ r"
+  },
+  {
+   "status": "changed",
+   "old": "GraphTheory.ES1.q14_part2",
+   "new": "GraphTheory.ES1.q14_part2",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1",
+   "detail": "first difference at body/body/body/body/body/body/body/binder/body/arg3/arg0/arg1/arg3/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {α : Type u_2} {β : Type u_3} [inst : DecidableEq β] [Countable α] [Countable β] (r : SetRel α β)\n  [inst_3 : (a : α) → Fintype ↑(r.image {a})],\n  (∀ (A : Finset α), A.card ≤ Fintype.card ↑(r.image ↑A)) →\n    ∃ f, Function.Injective f ∧ ∀ (a : α), (a, f a) ∈ r",
+   "new_pp": "∀ {α : Type u_2} {β : Type u_3} [inst : DecidableEq β] [Countable α] [Countable β] (r : SetRel α β)\n  [inst_3 : (a : α) → Fintype ↑(r.image {a})],\n  (∀ (A : Finset α), A.card ≤ Fintype.card ↑(r.image ↑A)) →\n    ∃ f, Function.Injective f ∧ ∀ (a : α), (a, f a) ∈ r"
+  },
+  {
+   "status": "changed",
+   "old": "GraphTheory.ES1.q14_part3",
+   "new": "GraphTheory.ES1.q14_part3",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1",
+   "detail": "first difference at body/body/body/body/body/binder/body/arg3/arg0/arg1/arg3/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {α : Type u_2} {β : Type u_3} [inst : DecidableEq β] (r : SetRel α β)\n  [inst_1 : (a : α) → Fintype ↑(r.image {a})],\n  (∀ (A : Finset α), A.card ≤ Fintype.card ↑(r.image ↑A)) →\n    ∃ f, Function.Injective f ∧ ∀ (a : α), (a, f a) ∈ r",
+   "new_pp": "∀ {α : Type u_2} {β : Type u_3} [inst : DecidableEq β] (r : SetRel α β)\n  [inst_1 : (a : α) → Fintype ↑(r.image {a})],\n  (∀ (A : Finset α), A.card ≤ Fintype.card ↑(r.image ↑A)) →\n    ∃ f, Function.Injective f ∧ ∀ (a : α), (a, f a) ∈ r"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.q15_part1",
+   "new": "GraphTheory.ES1.q15_part1",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.q15_part2",
+   "new": "GraphTheory.ES1.q15_part2",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.q3",
+   "new": "GraphTheory.ES1.q3",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1",
+   "new_axioms": [
+    "Classical.choice"
+   ]
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.q4",
+   "new": "GraphTheory.ES1.q4",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.q5",
+   "new": "GraphTheory.ES1.q5",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.q6",
+   "new": "GraphTheory.ES1.q6",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1",
+   "new_axioms": [
+    "Classical.choice"
+   ]
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.q7",
+   "new": "GraphTheory.ES1.q7",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.q8",
+   "new": "GraphTheory.ES1.q8",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1"
+  },
+  {
+   "status": "same",
+   "old": "GraphTheory.ES1.q9",
+   "new": "GraphTheory.ES1.q9",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GraphTheory.ExampleSheet1",
+   "new_axioms": [
+    "Classical.choice"
+   ]
+  },
+  {
+   "status": "same",
+   "old": "blackboxed",
+   "new": "blackboxed",
+   "kind": "axiom",
+   "module": "LeanCamCombi.Util"
+  },
+  {
+   "status": "same",
+   "old": "proved_later",
+   "new": "proved_later",
+   "kind": "axiom",
+   "module": "LeanCamCombi.Util"
+  },
+  {
+   "status": "same",
+   "old": "showcased",
+   "new": "showcased",
+   "kind": "axiom",
+   "module": "LeanCamCombi.Util"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture1.HasPolynomialGrowth",
+   "new": "GrowthInGroups.Lecture1.HasPolynomialGrowth",
+   "kind": "def",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture1"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture1.conjecture_1_4",
+   "new": "GrowthInGroups.Lecture1.conjecture_1_4",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture1",
+   "detail": "first difference at arg1/body/arg1/arg1/body/arg1/body/body/body/body/body/body/body/body/binder/arg1/arg2/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∃ Cᵤ ≥ 0,\n  ∃ dᵤ ≥ 0,\n    ∀ {G : Type u_2} [inst : Group G] [IsSimpleGroup G] [inst_2 : Fintype G]\n      [inst_3 : DecidableEq G] (X : Finset G),\n      1 ∈ X →\n        X⁻¹ = X →\n          Subgroup.closure ↑X = ⊤ →\n            ∃ m, ↑m ≤ Cᵤ * Real.log ↑(Fintype.card G) ^ dᵤ ∧ X ^ m = Finset.univ",
+   "new_pp": "∃ Cᵤ ≥ 0,\n  ∃ dᵤ ≥ 0,\n    ∀ {G : Type u_2} [inst : Group G] [IsSimpleGroup G] [inst_2 : Fintype G]\n      [inst_3 : DecidableEq G] (X : Finset G),\n      1 ∈ X →\n        X⁻¹ = X →\n          Subgroup.closure ↑X = ⊤ →\n            ∃ m, ↑m ≤ Cᵤ * Real.log ↑(Fintype.card G) ^ dᵤ ∧ X ^ m = Finset.univ"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture1.fact_1_10",
+   "new": "GrowthInGroups.Lecture1.fact_1_10",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture1",
+   "detail": "first difference at body/body/body/body/body/arg1/body/body/body/arg0/arg2/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {G : Type u_1} [inst : Group G] [inst_1 : DecidableEq G] {A : Finset G},\n  (A * A).card ≤ A.card → ∃ H, ∀ a ∈ A, a • ↑H = ↑A ∧ MulOpposite.op a • ↑H = ↑A",
+   "new_pp": "∀ {G : Type u_1} [inst : Group G] [inst_1 : DecidableEq G] {A : Finset G},\n  (A * A).card ≤ A.card → ∃ H, ∀ a ∈ A, a • ↑H = ↑A ∧ MulOpposite.op a • ↑H = ↑A"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture1.fact_1_1_1",
+   "new": "GrowthInGroups.Lecture1.fact_1_1_1",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture1",
+   "detail": "first difference at body/body/body/body/body/body/binder/arg1/arg2/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {G : Type u_1} [inst : Group G] [inst_1 : DecidableEq G] {X : Finset G} [Infinite G],\n  1 ∈ X → Subgroup.closure ↑X = ⊤ → ∀ (n : ℕ), n + 1 ≤ (X ^ n).card",
+   "new_pp": "∀ {G : Type u_1} [inst : Group G] [inst_1 : DecidableEq G] {X : Finset G} [Infinite G],\n  1 ∈ X → Subgroup.closure ↑X = ⊤ → ∀ (n : ℕ), n + 1 ≤ (X ^ n).card"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture1.fact_1_1_2",
+   "new": "GrowthInGroups.Lecture1.fact_1_1_2",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture1"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture1.fact_1_3",
+   "new": "GrowthInGroups.Lecture1.fact_1_3",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture1"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture1.lemma_1_11",
+   "new": "GrowthInGroups.Lecture1.lemma_1_11",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture1",
+   "detail": "first difference at body/body/body/body/body/arg1/body/arg1/body/arg1/body/body/arg0/arg2/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {G : Type u_1} [inst : Group G] [inst_1 : DecidableEq G] {A : Finset G},\n  ↑(A * A).card < 3 / 2 * ↑A.card →\n    ∃ H x,\n      ↑(Fintype.card ↥H) < 3 / 2 * ↑A.card ∧ ∀ a ∈ A, ↑A ⊆ a • ↑H ∧ a • ↑H = MulOpposite.op a • ↑H",
+   "new_pp": "∀ {G : Type u_1} [inst : Group G] [inst_1 : DecidableEq G] {A : Finset G},\n  ↑(A * A).card < 3 / 2 * ↑A.card →\n    ∃ H x,\n      ↑(Fintype.card ↥H) < 3 / 2 * ↑A.card ∧ ∀ a ∈ A, ↑A ⊆ a • ↑H ∧ a • ↑H = MulOpposite.op a • ↑H"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture1.proposition_1_7",
+   "new": "GrowthInGroups.Lecture1.proposition_1_7",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture1",
+   "detail": "first difference at arg1/body/arg1/body/body/body/arg1/body/arg1/arg1/body/arg2/fn: Finset.toSet.{0}  ->  SetLike.coe.{0,0}",
+   "old_pp": "∃ ε > 0,\n  ∀ (X : Finset (Matrix.SpecialLinearGroup (Fin 2) ℝ)),\n    (X ^ 2).card ≤ 1000 * X.card →\n      (∀ M ∈ X, ∀ (i j : Fin 2), |↑M i j| ≤ ε) → ∃ A, IsMulCommutative ↥A ∧ ∃ a, ↑X ⊆ ⋃ i, a i • ↑A",
+   "new_pp": "∃ ε > 0,\n  ∀ (X : Finset (Matrix.SpecialLinearGroup (Fin 2) ℝ)),\n    (X ^ 2).card ≤ 1000 * X.card →\n      (∀ M ∈ X, ∀ (i j : Fin 2), |↑M i j| ≤ ε) → ∃ A, IsMulCommutative ↥A ∧ ∃ a, ↑X ⊆ ⋃ i, a i • ↑A"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture1.theorem_1_2",
+   "new": "GrowthInGroups.Lecture1.theorem_1_2",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture1"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture1.theorem_1_8",
+   "new": "GrowthInGroups.Lecture1.theorem_1_8",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture1",
+   "detail": "first difference at body/body/arg1/body/arg1/body/body/body/body/body/arg1/body/arg1/body/arg1/body/arg1/arg0/arg3/arg4/arg4/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {K : ℝ},\n  0 ≤ K →\n    ∃ C > 0,\n      ∀ {G : Type u_2} [inst : Group G] [inst_1 : DecidableEq G] (A : Finset G),\n        ↑(A.mulConst A) ≤ K →\n          ∃ N D,\n            ∃ (_hD : D.Normal),\n              upperCentralSeries (↥N ⧸ D) C = ⊤ ∧\n                Subtype.val '' ↑D ⊆ (↑A / ↑A) ^ 4 ∧ ∃ a, ↑A ⊆ ⋃ i, a i • ↑N",
+   "new_pp": "∀ {K : ℝ},\n  0 ≤ K →\n    ∃ C > 0,\n      ∀ {G : Type u_2} [inst : Group G] [inst_1 : DecidableEq G] (A : Finset G),\n        ↑(A.mulConst A) ≤ K →\n          ∃ N D,\n            ∃ (_hD : D.Normal),\n              upperCentralSeries (↥N ⧸ D) C = ⊤ ∧\n                Subtype.val '' ↑D ⊆ (↑A / ↑A) ^ 4 ∧ ∃ a, ↑A ⊆ ⋃ i, a i • ↑N"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture1.theorem_1_9",
+   "new": "GrowthInGroups.Lecture1.theorem_1_9",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture1",
+   "detail": "first difference at body/arg1/body/arg1/arg1/body/arg1/body/body/body/body/body/binder/arg1/arg2/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {n : ℕ},\n  ∃ δ > 0,\n    ∃ ε > 0,\n      ∀ (k : Type u_2) [inst : Field k] [inst_1 : Fintype k] [inst_2 : DecidableEq k]\n        (A : Finset (Matrix.SpecialLinearGroup (Fin n) k)),\n        Subgroup.closure ↑A = ⊤ →\n          A.card ^ (1 + δ) ≤ (A ^ 3).card ∨\n            Fintype.card (Matrix.SpecialLinearGroup (Fin n) k) ^ (1 - ε) ≤ A.card",
+   "new_pp": "∀ {n : ℕ},\n  ∃ δ > 0,\n    ∃ ε > 0,\n      ∀ (k : Type u_2) [inst : Field k] [inst_1 : Fintype k] [inst_2 : DecidableEq k]\n        (A : Finset (Matrix.SpecialLinearGroup (Fin n) k)),\n        Subgroup.closure ↑A = ⊤ →\n          A.card ^ (1 + δ) ≤ (A ^ 3).card ∨\n            Fintype.card (Matrix.SpecialLinearGroup (Fin n) k) ^ (1 - ε) ≤ A.card"
+  },
+  {
+   "status": "same",
+   "old": "IsApproximateAddSubgroup.pi",
+   "new": "IsApproximateAddSubgroup.pi",
+   "kind": "theorem",
+   "module": "LeanCamCombi.Mathlib.Combinatorics.Additive.ApproximateSubgroup"
+  },
+  {
+   "status": "same",
+   "old": "IsApproximateSubgroup.pi",
+   "new": "IsApproximateSubgroup.pi",
+   "kind": "theorem",
+   "module": "LeanCamCombi.Mathlib.Combinatorics.Additive.ApproximateSubgroup"
+  },
+  {
+   "status": "changed",
+   "old": "exists_isApproximateAddSubgroup_of_small_doubling",
+   "new": "exists_isApproximateAddSubgroup_of_small_doubling",
+   "kind": "theorem",
+   "module": "LeanCamCombi.Mathlib.Combinatorics.Additive.ApproximateSubgroup",
+   "detail": "first difference at body/body/body/body/body/body/body/arg1/body/arg1/arg0/arg3/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {G : Type u_1} [inst : AddGroup G] {K : ℝ} [inst_1 : DecidableEq G] {A : Finset G},\n  A.Nonempty →\n    ↑(2 • A).card ≤ K * ↑A.card →\n      ∃ S ⊆ 2 • (-A + A),\n        IsApproximateAddSubgroup (2 ^ 12 * K ^ 36) ↑S ∧\n          ↑S.card ≤ 16 * K ^ 12 * ↑A.card ∧\n            ∃ a ∈ A, ↑A.card / (2 * K) ≤ ↑(A ∩ (AddOpposite.op a +ᵥ S)).card",
+   "new_pp": "∀ {G : Type u_1} [inst : AddGroup G] {K : ℝ} [inst_1 : DecidableEq G] {A : Finset G},\n  A.Nonempty →\n    ↑(2 • A).card ≤ K * ↑A.card →\n      ∃ S ⊆ 2 • (-A + A),\n        IsApproximateAddSubgroup (2 ^ 12 * K ^ 36) ↑S ∧\n          ↑S.card ≤ 16 * K ^ 12 * ↑A.card ∧\n            ∃ a ∈ A, ↑A.card / (2 * K) ≤ ↑(A ∩ (AddOpposite.op a +ᵥ S)).card"
+  },
+  {
+   "status": "changed",
+   "old": "exists_isApproximateSubgroup_of_small_doubling",
+   "new": "exists_isApproximateSubgroup_of_small_doubling",
+   "kind": "theorem",
+   "module": "LeanCamCombi.Mathlib.Combinatorics.Additive.ApproximateSubgroup",
+   "detail": "first difference at body/body/body/body/body/body/body/arg1/body/arg1/arg0/arg3/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {G : Type u_1} [inst : Group G] {K : ℝ} [inst_1 : DecidableEq G] {A : Finset G},\n  A.Nonempty →\n    ↑(A ^ 2).card ≤ K * ↑A.card →\n      ∃ S ⊆ (A⁻¹ * A) ^ 2,\n        IsApproximateSubgroup (2 ^ 12 * K ^ 36) ↑S ∧\n          ↑S.card ≤ 16 * K ^ 12 * ↑A.card ∧\n            ∃ a ∈ A, ↑A.card / (2 * K) ≤ ↑(A ∩ MulOpposite.op a • S).card",
+   "new_pp": "∀ {G : Type u_1} [inst : Group G] {K : ℝ} [inst_1 : DecidableEq G] {A : Finset G},\n  A.Nonempty →\n    ↑(A ^ 2).card ≤ K * ↑A.card →\n      ∃ S ⊆ (A⁻¹ * A) ^ 2,\n        IsApproximateSubgroup (2 ^ 12 * K ^ 36) ↑S ∧\n          ↑S.card ≤ 16 * K ^ 12 * ↑A.card ∧\n            ∃ a ∈ A, ↑A.card / (2 * K) ≤ ↑(A ∩ MulOpposite.op a • S).card"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture2.def_2_5",
+   "new": "GrowthInGroups.Lecture2.def_2_5",
+   "kind": "def",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture2"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture2.lemma_2_2",
+   "new": "GrowthInGroups.Lecture2.lemma_2_2",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture2"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture2.lemma_2_3_1",
+   "new": "GrowthInGroups.Lecture2.lemma_2_3_1",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture2"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture2.lemma_2_3_2",
+   "new": "GrowthInGroups.Lecture2.lemma_2_3_2",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture2"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture2.lemma_2_4_1",
+   "new": "GrowthInGroups.Lecture2.lemma_2_4_1",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture2"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture2.lemma_2_4_2",
+   "new": "GrowthInGroups.Lecture2.lemma_2_4_2",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture2"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture2.lemma_2_7",
+   "new": "GrowthInGroups.Lecture2.lemma_2_7",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture2",
+   "detail": "first difference at body/body/body/body/body/body/body/body/arg3/arg4/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {G : Type u_1} [inst : DecidableEq G] [inst_1 : Group G] {K : ℝ} {A : Finset G},\n  1 ∈ A → A⁻¹ = A → ↑(A ^ 3).card ≤ K * ↑A.card → IsApproximateSubgroup (K ^ 3) (↑A ^ 2)",
+   "new_pp": "∀ {G : Type u_1} [inst : DecidableEq G] [inst_1 : Group G] {K : ℝ} {A : Finset G},\n  1 ∈ A → A⁻¹ = A → ↑(A ^ 3).card ≤ K * ↑A.card → IsApproximateSubgroup (K ^ 3) (↑A ^ 2)"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture2.lemma_2_8",
+   "new": "GrowthInGroups.Lecture2.lemma_2_8",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture2"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture2.remark_2_6_1",
+   "new": "GrowthInGroups.Lecture2.remark_2_6_1",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture2"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture2.remark_2_6_2",
+   "new": "GrowthInGroups.Lecture2.remark_2_6_2",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture2"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture2.remark_2_6_3",
+   "new": "GrowthInGroups.Lecture2.remark_2_6_3",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture2"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture3.fact_3_5",
+   "new": "GrowthInGroups.Lecture3.fact_3_5",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture3"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture3.lemma_3_1",
+   "new": "GrowthInGroups.Lecture3.lemma_3_1",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture3",
+   "detail": "first difference at body/body/body/body/body/body/body/body/arg3/arg4/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {G : Type u_1} [inst : Group G] {K : ℝ} [inst_1 : DecidableEq G] {A : Finset G},\n  1 ∈ A → A⁻¹ = A → ↑(A ^ 3).card ≤ K * ↑A.card → IsApproximateSubgroup (K ^ 3) (↑A ^ 2)",
+   "new_pp": "∀ {G : Type u_1} [inst : Group G] {K : ℝ} [inst_1 : DecidableEq G] {A : Finset G},\n  1 ∈ A → A⁻¹ = A → ↑(A ^ 3).card ≤ K * ↑A.card → IsApproximateSubgroup (K ^ 3) (↑A ^ 2)"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture3.lemma_3_2",
+   "new": "GrowthInGroups.Lecture3.lemma_3_2",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture3"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture3.lemma_3_7",
+   "new": "GrowthInGroups.Lecture3.lemma_3_7",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture3"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture3.lemma_3_8_1",
+   "new": "GrowthInGroups.Lecture3.lemma_3_8_1",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture3"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture3.lemma_3_8_2",
+   "new": "GrowthInGroups.Lecture3.lemma_3_8_2",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture3"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture3.proposition_3_3",
+   "new": "GrowthInGroups.Lecture3.proposition_3_3",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture3",
+   "detail": "first difference at body/body/body/body/body/body/body/arg1/body/arg1/arg0/arg3/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {G : Type u_1} [inst : Group G] {K : ℝ} [inst_1 : DecidableEq G] {A : Finset G},\n  A.Nonempty →\n    ↑(A ^ 2).card ≤ K * ↑A.card →\n      ∃ S ⊆ (A⁻¹ * A) ^ 2,\n        IsApproximateSubgroup (2 ^ 12 * K ^ 36) ↑S ∧\n          ↑S.card ≤ 16 * K ^ 12 * ↑A.card ∧\n            ∃ a ∈ A, ↑A.card / (2 * K) ≤ ↑(A ∩ MulOpposite.op a • S).card",
+   "new_pp": "∀ {G : Type u_1} [inst : Group G] {K : ℝ} [inst_1 : DecidableEq G] {A : Finset G},\n  A.Nonempty →\n    ↑(A ^ 2).card ≤ K * ↑A.card →\n      ∃ S ⊆ (A⁻¹ * A) ^ 2,\n        IsApproximateSubgroup (2 ^ 12 * K ^ 36) ↑S ∧\n          ↑S.card ≤ 16 * K ^ 12 * ↑A.card ∧\n            ∃ a ∈ A, ↑A.card / (2 * K) ≤ ↑(A ∩ MulOpposite.op a • S).card"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture3.proposition_3_6_1",
+   "new": "GrowthInGroups.Lecture3.proposition_3_6_1",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture3",
+   "detail": "first difference at body/body/body/body/body/body/body/body/body/body/body/body/arg1/body/arg1/arg3/arg4/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {G : Type u_1} [inst : Group G] {A B : Set G} {K L : ℝ} {m n : ℕ},\n  IsApproximateSubgroup K A →\n    IsApproximateSubgroup L B →\n      2 ≤ m →\n        2 ≤ n → ∃ F, ↑F.card ≤ K ^ (m - 1) * L ^ (n - 1) ∧ A ^ m ∩ B ^ n ⊆ ↑F * (A ^ 2 ∩ B ^ 2)",
+   "new_pp": "∀ {G : Type u_1} [inst : Group G] {A B : Set G} {K L : ℝ} {m n : ℕ},\n  IsApproximateSubgroup K A →\n    IsApproximateSubgroup L B →\n      2 ≤ m →\n        2 ≤ n → ∃ F, ↑F.card ≤ K ^ (m - 1) * L ^ (n - 1) ∧ A ^ m ∩ B ^ n ⊆ ↑F * (A ^ 2 ∩ B ^ 2)"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture3.proposition_3_6_2",
+   "new": "GrowthInGroups.Lecture3.proposition_3_6_2",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture3"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture3.corollary_4_3",
+   "new": "GrowthInGroups.Lecture3.corollary_4_3",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture4",
+   "detail": "first difference at body/body/arg1/body/arg1/body/body/arg1/body/arg1/body/arg1/body/arg1/arg3/arg4/fn: Finset.toSet.{0}  ->  SetLike.coe.{0,0}",
+   "old_pp": "∀ (K C₀ : ℝ),\n  ∃ C > 0,\n    ∀ (A : Set (Matrix.SpecialLinearGroup (Fin 2) ℂ)),\n      IsApproximateSubgroup K A →\n        ∃ Z, ∃ (_ : ∀ x ∈ Z, ∀ y ∈ Z, Commute x y), ∃ F, F.card ≤ C ∧ A ⊆ ↑F * ↑Z",
+   "new_pp": "∀ (K C₀ : ℝ),\n  ∃ C > 0,\n    ∀ (A : Set (Matrix.SpecialLinearGroup (Fin 2) ℂ)),\n      IsApproximateSubgroup K A →\n        ∃ Z, ∃ (_ : ∀ x ∈ Z, ∀ y ∈ Z, Commute x y), ∃ F, F.card ≤ C ∧ A ⊆ ↑F * ↑Z"
+  },
+  {
+   "status": "same",
+   "old": "GrowthInGroups.Lecture3.fact_4_1",
+   "new": "GrowthInGroups.Lecture3.fact_4_1",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture4"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture3.lemma_4_2",
+   "new": "GrowthInGroups.Lecture3.lemma_4_2",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture4",
+   "detail": "first difference at body/body/body/body/body/body/arg1/body/body/binder/arg3/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {n : Type u_1} [inst : Fintype n] [inst_1 : DecidableEq n] {C₀ : ℝ},\n  ↑(Fintype.card n) < C₀ →\n    ∀ (K : ℝ),\n      ∃ δ,\n        ∀ (A : Finset (GL n ℂ)),\n          IsApproximateSubgroup K ↑A →\n            (∀ a ∈ A, ‖↑a‖ ≤ C₀) → ∃ γ ∈ A ^ 2, δ * ↑A.card ≤ ↑{x ∈ A ^ 4 | Commute γ x}.card",
+   "new_pp": "∀ {n : Type u_1} [inst : Fintype n] [inst_1 : DecidableEq n] {C₀ : ℝ},\n  ↑(Fintype.card n) < C₀ →\n    ∀ (K : ℝ),\n      ∃ δ,\n        ∀ (A : Finset (GL n ℂ)),\n          IsApproximateSubgroup K ↑A →\n            (∀ a ∈ A, ‖↑a‖ ≤ C₀) → ∃ γ ∈ A ^ 2, δ * ↑A.card ≤ ↑{x ∈ A ^ 4 | Commute γ x}.card"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture3.theorem_4_4",
+   "new": "GrowthInGroups.Lecture3.theorem_4_4",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture4",
+   "detail": "first difference at body/body/arg1/body/arg1/body/body/body/body/body/arg1/body/arg1/body/arg1/body/arg1/body/arg1/arg1/arg3/arg4/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {K : ℝ},\n  0 ≤ K →\n    ∃ C > 0,\n      ∀ {G : Type u_2} [inst : Group G] [DecidableEq G] (A : Set G),\n        IsApproximateSubgroup K A →\n          ∃ H N,\n            ∃ (_hD : N.Normal),\n              ∃ F, upperCentralSeries (↥H ⧸ N) C = ⊤ ∧ Subtype.val '' ↑N ⊆ (A / A) ^ 4 ∧ A ⊆ ↑F * ↑H",
+   "new_pp": "∀ {K : ℝ},\n  0 ≤ K →\n    ∃ C > 0,\n      ∀ {G : Type u_2} [inst : Group G] [DecidableEq G] (A : Set G),\n        IsApproximateSubgroup K A →\n          ∃ H N,\n            ∃ (_hD : N.Normal),\n              ∃ F, upperCentralSeries (↥H ⧸ N) C = ⊤ ∧ Subtype.val '' ↑N ⊆ (A / A) ^ 4 ∧ A ⊆ ↑F * ↑H"
+  },
+  {
+   "status": "changed",
+   "old": "GrowthInGroups.Lecture3.theorem_4_5",
+   "new": "GrowthInGroups.Lecture3.theorem_4_5",
+   "kind": "theorem",
+   "module": "LeanCamCombi.GrowthInGroups.Lecture4",
+   "detail": "first difference at body/body/body/body/body/body/binder/arg1/arg3/arg2/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {C : ℝ} {G : Type u_2} [inst : Group G] [inst_1 : DecidableEq G] {S : Finset G},\n  S⁻¹ = S →\n    ↑(Subgroup.closure ↑S) = Set.univ →\n      ∀ {d : ℕ}, (∀ (n : ℕ), ↑(S ^ n).card ≤ C * ↑n ^ d) → Group.IsVirtuallyNilpotent G",
+   "new_pp": "∀ {C : ℝ} {G : Type u_2} [inst : Group G] [inst_1 : DecidableEq G] {S : Finset G},\n  S⁻¹ = S →\n    ↑(Subgroup.closure ↑S) = Set.univ →\n      ∀ {d : ℕ}, (∀ (n : ℕ), ↑(S ^ n).card ≤ C * ↑n ^ d) → Group.IsVirtuallyNilpotent G"
+  },
+  {
+   "status": "same",
+   "old": "Fintype.card_numbering",
+   "new": "Fintype.card_numbering",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.KatonaCircle"
+  },
+  {
+   "status": "same",
+   "old": "Numbering",
+   "new": "Numbering",
+   "kind": "abbrev",
+   "module": "LeanCamCombi.PlainCombi.KatonaCircle"
+  },
+  {
+   "status": "same",
+   "old": "Numbering.IsPrefix",
+   "new": "Numbering.IsPrefix",
+   "kind": "def",
+   "module": "LeanCamCombi.PlainCombi.KatonaCircle"
+  },
+  {
+   "status": "same",
+   "old": "Numbering.IsPrefix.subset_of_card_le_card",
+   "new": "Numbering.IsPrefix.subset_of_card_le_card",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.KatonaCircle"
+  },
+  {
+   "status": "same",
+   "old": "Numbering.card_prefixed",
+   "new": "Numbering.card_prefixed",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.KatonaCircle"
+  },
+  {
+   "status": "same",
+   "old": "Numbering.dens_prefixed",
+   "new": "Numbering.dens_prefixed",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.KatonaCircle"
+  },
+  {
+   "status": "same",
+   "old": "Numbering.disjoint_prefixed_prefixed",
+   "new": "Numbering.disjoint_prefixed_prefixed",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.KatonaCircle"
+  },
+  {
+   "status": "same",
+   "old": "Numbering.instDecidableIsPrefix",
+   "new": "Numbering.instDecidableIsPrefix",
+   "kind": "instance",
+   "module": "LeanCamCombi.PlainCombi.KatonaCircle"
+  },
+  {
+   "status": "same",
+   "old": "Numbering.mem_prefixed",
+   "new": "Numbering.mem_prefixed",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.KatonaCircle"
+  },
+  {
+   "status": "same",
+   "old": "Numbering.prefixed",
+   "new": "Numbering.prefixed",
+   "kind": "def",
+   "module": "LeanCamCombi.PlainCombi.KatonaCircle"
+  },
+  {
+   "status": "changed",
+   "old": "Numbering.prefixedEquiv",
+   "new": "Numbering.prefixedEquiv",
+   "kind": "def",
+   "module": "LeanCamCombi.PlainCombi.KatonaCircle",
+   "detail": "first difference at body/body/body/body/arg0/arg1/body/arg2/fn: Finset.instMembership.{u0}  ->  SetLike.instMembership.{u0,u0}",
+   "old_pp": "{α : Type u_1} →\n  [inst : Fintype α] →\n    [inst_1 : DecidableEq α] →\n      (s : Finset α) →\n        { x // x ∈ Numbering.prefixed s } ≃ Numbering { x // x ∈ s } × Numbering { x // x ∈ sᶜ }",
+   "new_pp": "{α : Type u_1} →\n  [inst : Fintype α] →\n    [inst_1 : DecidableEq α] →\n      (s : Finset α) → ↥(Numbering.prefixed s) ≃ Numbering ↥s × Numbering ↥sᶜ"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_le_of_forall_dist_sum_le",
+   "new": "Finset.card_le_of_forall_dist_sum_le",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.LittlewoodOfford"
+  },
+  {
+   "status": "changed",
+   "old": "Finset.exists_littlewood_offord_partition",
+   "new": "Finset.exists_littlewood_offord_partition",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.LittlewoodOfford",
+   "detail": "first difference at body/body/body/body/body/body/body/body/body/body/arg1/body/arg1/arg1/body/body/arg1/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {ι : Type u_1} {E : Type u_2} [inst : NormedAddCommGroup E] [NormedSpace ℝ E] {s : Finset ι}\n  {f : ι → E} {r : ℝ} [inst_2 : DecidableEq ι],\n  0 < r →\n    (∀ i ∈ s, r ≤ ‖f i‖) →\n      ∃ P,\n        P.parts.card = s.card.choose (s.card / 2) ∧\n          (∀ 𝒜 ∈ P.parts, ∀ t ∈ 𝒜, t ⊆ s) ∧\n            ∀ 𝒜 ∈ P.parts, (↑𝒜).Pairwise fun u v => r ≤ Dist.dist (∑ i ∈ u, f i) (∑ i ∈ v, f i)",
+   "new_pp": "∀ {ι : Type u_1} {E : Type u_2} [inst : NormedAddCommGroup E] [NormedSpace ℝ E] {s : Finset ι}\n  {f : ι → E} {r : ℝ} [inst_2 : DecidableEq ι],\n  0 < r →\n    (∀ i ∈ s, r ≤ ‖f i‖) →\n      ∃ P,\n        P.parts.card = s.card.choose (s.card / 2) ∧\n          (∀ 𝒜 ∈ P.parts, ∀ t ∈ 𝒜, t ⊆ s) ∧\n            ∀ 𝒜 ∈ P.parts, (↑𝒜).Pairwise fun u v => r ≤ Dist.dist (∑ i ∈ u, f i) (∑ i ∈ v, f i)"
+  },
+  {
+   "status": "same",
+   "old": "Finset.OrderShatters",
+   "new": "Finset.OrderShatters",
+   "kind": "def",
+   "module": "LeanCamCombi.PlainCombi.OrderShatter"
+  },
+  {
+   "status": "same",
+   "old": "Finset.StronglyShatters",
+   "new": "Finset.StronglyShatters",
+   "kind": "def",
+   "module": "LeanCamCombi.PlainCombi.OrderShatter"
+  },
+  {
+   "status": "same",
+   "old": "Finset.instDecidableRel",
+   "new": "Finset.instDecidableRel",
+   "kind": "instance",
+   "module": "LeanCamCombi.PlainCombi.OrderShatter"
+  },
+  {
+   "status": "same",
+   "old": "Finset.orderShatterser",
+   "new": "Finset.orderShatterser",
+   "kind": "def",
+   "module": "LeanCamCombi.PlainCombi.OrderShatter"
+  },
+  {
+   "status": "changed",
+   "old": "LYM_inequality",
+   "new": "LYM_inequality",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.ProbLYM",
+   "detail": "first difference at body/body/body/binder/arg2/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {α : Type u_1} [inst : Fintype α] {𝒜 : Finset (Finset α)},\n  IsAntichain (fun x1 x2 => x1 ⊆ x2) ↑𝒜 → ∑ s ∈ 𝒜, (↑((Fintype.card α).choose s.card))⁻¹ ≤ 1",
+   "new_pp": "∀ {α : Type u_1} [inst : Fintype α] {𝒜 : Finset (Finset α)},\n  IsAntichain (fun x1 x2 => x1 ⊆ x2) ↑𝒜 → ∑ s ∈ 𝒜, (↑((Fintype.card α).choose s.card))⁻¹ ≤ 1"
+  },
+  {
+   "status": "changed",
+   "old": "Finset.IsLowerSet.certificator_eq_inter",
+   "new": "Finset.IsLowerSet.certificator_eq_inter",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.VanDenBergKesten",
+   "detail": "first difference at body/body/body/body/binder/arg2/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {α : Type u_1} [inst : BooleanAlgebra α] (s t : Finset α),\n  IsLowerSet ↑s → IsUpperSet ↑t → s.certificator t = s ∩ t",
+   "new_pp": "∀ {α : Type u_1} [inst : BooleanAlgebra α] (s t : Finset α),\n  IsLowerSet ↑s → IsUpperSet ↑t → s.certificator t = s ∩ t"
+  },
+  {
+   "status": "changed",
+   "old": "Finset.IsUpperSet.certificator_eq_disjSups",
+   "new": "Finset.IsUpperSet.certificator_eq_disjSups",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.VanDenBergKesten",
+   "detail": "first difference at body/body/body/body/binder/arg2/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {α : Type u_1} [inst : BooleanAlgebra α] (s t : Finset α),\n  IsUpperSet ↑s → IsUpperSet ↑t → s.certificator t = s.disjSups t",
+   "new_pp": "∀ {α : Type u_1} [inst : BooleanAlgebra α] (s t : Finset α),\n  IsUpperSet ↑s → IsUpperSet ↑t → s.certificator t = s.disjSups t"
+  },
+  {
+   "status": "changed",
+   "old": "Finset.IsUpperSet.certificator_eq_inter",
+   "new": "Finset.IsUpperSet.certificator_eq_inter",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.VanDenBergKesten",
+   "detail": "first difference at body/body/body/body/binder/arg2/fn: Finset.toSet.{u0}  ->  SetLike.coe.{u0,u0}",
+   "old_pp": "∀ {α : Type u_1} [inst : BooleanAlgebra α] (s t : Finset α),\n  IsUpperSet ↑s → IsLowerSet ↑t → s.certificator t = s ∩ t",
+   "new_pp": "∀ {α : Type u_1} [inst : BooleanAlgebra α] (s t : Finset α),\n  IsUpperSet ↑s → IsLowerSet ↑t → s.certificator t = s ∩ t"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_certificator_le",
+   "new": "Finset.card_certificator_le",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.VanDenBergKesten"
+  },
+  {
+   "status": "same",
+   "old": "Finset.certificator",
+   "new": "Finset.certificator",
+   "kind": "def",
+   "module": "LeanCamCombi.PlainCombi.VanDenBergKesten"
+  },
+  {
+   "status": "same",
+   "old": "Finset.certificator_comm",
+   "new": "Finset.certificator_comm",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.VanDenBergKesten"
+  },
+  {
+   "status": "same",
+   "old": "Finset.certificator_subset_disjSups",
+   "new": "Finset.certificator_subset_disjSups",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.VanDenBergKesten"
+  },
+  {
+   "status": "same",
+   "old": "Finset.certificator_subset_inter",
+   "new": "Finset.certificator_subset_inter",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.VanDenBergKesten"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mem_certificator",
+   "new": "Finset.mem_certificator",
+   "kind": "theorem",
+   "module": "LeanCamCombi.PlainCombi.VanDenBergKesten"
+  },
+  {
+   "status": "same",
+   "old": "FinsetFamily.term_□_",
+   "new": "FinsetFamily.term_□_",
+   "kind": "def",
+   "module": "LeanCamCombi.PlainCombi.VanDenBergKesten"
+  },
+  {
+   "status": "same",
+   "old": "IsOrderPropRel",
+   "new": "IsOrderPropRel",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.Rel"
+  },
+  {
+   "status": "same",
+   "old": "IsOrderPropRelWith",
+   "new": "IsOrderPropRelWith",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.Rel"
+  },
+  {
+   "status": "same",
+   "old": "IsStableRel",
+   "new": "IsStableRel",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.Rel"
+  },
+  {
+   "status": "same",
+   "old": "IsStableRelWith",
+   "new": "IsStableRelWith",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.Rel"
+  },
+  {
+   "status": "same",
+   "old": "IsStableRelWith.isTreeBoundedRelWith",
+   "new": "IsStableRelWith.isTreeBoundedRelWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Rel"
+  },
+  {
+   "status": "same",
+   "old": "IsTreeBoundedRelWith",
+   "new": "IsTreeBoundedRelWith",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.Rel"
+  },
+  {
+   "status": "same",
+   "old": "IsTreeBoundedRelWith.isStableRelWith",
+   "new": "IsTreeBoundedRelWith.isStableRelWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Rel"
+  },
+  {
+   "status": "same",
+   "old": "not_isOrderPropRel",
+   "new": "not_isOrderPropRel",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Rel"
+  },
+  {
+   "status": "same",
+   "old": "not_isOrderPropRelWith",
+   "new": "not_isOrderPropRelWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Rel"
+  },
+  {
+   "status": "same",
+   "old": "not_isStableRel",
+   "new": "not_isStableRel",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Rel"
+  },
+  {
+   "status": "same",
+   "old": "not_isStableRelWith",
+   "new": "not_isStableRelWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Rel"
+  },
+  {
+   "status": "same",
+   "old": "IsAddOrderProp",
+   "new": "IsAddOrderProp",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsAddOrderPropWith",
+   "new": "IsAddOrderPropWith",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsAddStable",
+   "new": "IsAddStable",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsAddStableWith",
+   "new": "IsAddStableWith",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsAddStableWith.isAddTreeBoundedWith",
+   "new": "IsAddStableWith.isAddTreeBoundedWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsAddTreeBoundedWith",
+   "new": "IsAddTreeBoundedWith",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsAddTreeBoundedWith.isAddStableWith",
+   "new": "IsAddTreeBoundedWith.isAddStableWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsMulOrderProp",
+   "new": "IsMulOrderProp",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsMulOrderPropWith",
+   "new": "IsMulOrderPropWith",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsMulStable",
+   "new": "IsMulStable",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsMulStableWith",
+   "new": "IsMulStableWith",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsMulStableWith.isMulTreeBoundedWith",
+   "new": "IsMulStableWith.isMulTreeBoundedWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsMulTreeBoundedWith",
+   "new": "IsMulTreeBoundedWith",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "IsMulTreeBoundedWith.isMulStableWith",
+   "new": "IsMulTreeBoundedWith.isMulStableWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "not_isAddOrderProp",
+   "new": "not_isAddOrderProp",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "not_isAddOrderPropWith",
+   "new": "not_isAddOrderPropWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "not_isAddStable",
+   "new": "not_isAddStable",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "not_isAddStableWith",
+   "new": "not_isAddStableWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "not_isMulOrderProp",
+   "new": "not_isMulOrderProp",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "not_isMulOrderPropWith",
+   "new": "not_isMulOrderPropWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "not_isMulStable",
+   "new": "not_isMulStable",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "not_isMulStableWith",
+   "new": "not_isMulStableWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.AddSet"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Formula.IsOrderProp",
+   "new": "FirstOrder.Language.Formula.IsOrderProp",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Formula.IsOrderPropWith",
+   "new": "FirstOrder.Language.Formula.IsOrderPropWith",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Formula.IsStable",
+   "new": "FirstOrder.Language.Formula.IsStable",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Formula.IsStableWith",
+   "new": "FirstOrder.Language.Formula.IsStableWith",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Formula.IsStableWith.isTreeBoundedWith",
+   "new": "FirstOrder.Language.Formula.IsStableWith.isTreeBoundedWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Formula.IsTreeBoundedWith",
+   "new": "FirstOrder.Language.Formula.IsTreeBoundedWith",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Formula.IsTreeBoundedWith.isStableWith",
+   "new": "FirstOrder.Language.Formula.IsTreeBoundedWith.isStableWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Formula.not_isOrderProp",
+   "new": "FirstOrder.Language.Formula.not_isOrderProp",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Formula.not_isOrderPropWith",
+   "new": "FirstOrder.Language.Formula.not_isOrderPropWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Formula.not_isStable",
+   "new": "FirstOrder.Language.Formula.not_isStable",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Formula.not_isStableWith",
+   "new": "FirstOrder.Language.Formula.not_isStableWith",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Theory.IsOrderProp",
+   "new": "FirstOrder.Language.Theory.IsOrderProp",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Theory.IsStable",
+   "new": "FirstOrder.Language.Theory.IsStable",
+   "kind": "def",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Theory.not_isOrderProp",
+   "new": "FirstOrder.Language.Theory.not_isOrderProp",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  },
+  {
+   "status": "same",
+   "old": "FirstOrder.Language.Theory.not_isStable",
+   "new": "FirstOrder.Language.Theory.not_isStable",
+   "kind": "theorem",
+   "module": "LeanCamCombi.StableCombi.Formula"
+  }
+ ]
+}

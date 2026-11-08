@@ -1,0 +1,1230 @@
+{
+ "leandrift": 1,
+ "old": {
+  "file": "old.jsonl.gz",
+  "lean": "4.31.0",
+  "prefixes": [
+   "PersistentDecomp"
+  ],
+  "modules": 14,
+  "declarations": 160,
+  "deprecation_aliases": 1487
+ },
+ "new": {
+  "file": "new.jsonl.gz",
+  "lean": "4.32.0",
+  "prefixes": [
+   "PersistentDecomp"
+  ],
+  "modules": 14,
+  "declarations": 160,
+  "deprecation_aliases": 1498
+ },
+ "summary": {
+  "same": 151,
+  "same after renames": 3,
+  "changed": 6,
+  "removed": 0,
+  "added": 0,
+  "new_sorry": 0,
+  "new_nonstandard_axioms": 0,
+  "sorry_old": 75,
+  "sorry_new": 75
+ },
+ "warnings": [],
+ "inferred_renames": {
+  "IntervalModuleMorphism": "intervalModuleMorphism",
+  "IntervalModuleMorphism_comp": "intervalModuleMorphism_comp",
+  "IntervalModuleMorphism_identity": "intervalModuleMorphism_identity"
+ },
+ "common_changes": [
+  {
+   "old": "Monoid.toPow.{0}",
+   "new": "NPow.toPow.{0}",
+   "declarations": [
+    "ExistsFittingn",
+    "Step2_2",
+    "Step3_1",
+    "Step3_2"
+   ]
+  },
+  {
+   "old": "Monoid.toPow.{u1}",
+   "new": "NPow.toPow.{u1}",
+   "declarations": [
+    "PowEqCompLeft",
+    "PowEqCompRight"
+   ]
+  }
+ ],
+ "declarations": [
+  {
+   "status": "same",
+   "old": "Interval.ordConnected",
+   "new": "Interval.ordConnected",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Mathlib.Order.Interval.Basic"
+  },
+  {
+   "status": "same",
+   "old": "NonemptyInterval.ordConnected",
+   "new": "NonemptyInterval.ordConnected",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Mathlib.Order.Interval.Basic"
+  },
+  {
+   "status": "same",
+   "old": "Bump",
+   "new": "Bump",
+   "kind": "def",
+   "module": "PersistentDecomp.BumpFunctor"
+  },
+  {
+   "status": "same",
+   "old": "Bump_apply_of_mem",
+   "new": "Bump_apply_of_mem",
+   "kind": "theorem",
+   "module": "PersistentDecomp.BumpFunctor"
+  },
+  {
+   "status": "same",
+   "old": "Bump_apply_of_not_mem",
+   "new": "Bump_apply_of_not_mem",
+   "kind": "theorem",
+   "module": "PersistentDecomp.BumpFunctor"
+  },
+  {
+   "status": "same",
+   "old": "Bump_map",
+   "new": "Bump_map",
+   "kind": "theorem",
+   "module": "PersistentDecomp.BumpFunctor"
+  },
+  {
+   "status": "same",
+   "old": "Bump_obj",
+   "new": "Bump_obj",
+   "kind": "theorem",
+   "module": "PersistentDecomp.BumpFunctor"
+  },
+  {
+   "status": "same",
+   "old": "Interval.isGood",
+   "new": "Interval.isGood",
+   "kind": "theorem",
+   "module": "PersistentDecomp.BumpFunctor"
+  },
+  {
+   "status": "same after renames",
+   "old": "IntervalModuleMorphism",
+   "new": "intervalModuleMorphism",
+   "kind": "def",
+   "module": "PersistentDecomp.BumpFunctor",
+   "via": "identical statement",
+   "renames": [
+    [
+     "IntervalModuleMorphism",
+     "intervalModuleMorphism"
+    ]
+   ]
+  },
+  {
+   "status": "same after renames",
+   "old": "IntervalModuleMorphism_comp",
+   "new": "intervalModuleMorphism_comp",
+   "kind": "theorem",
+   "module": "PersistentDecomp.BumpFunctor",
+   "old_kind": "def",
+   "via": "identical statement",
+   "renames": [
+    [
+     "IntervalModuleMorphism_comp",
+     "intervalModuleMorphism_comp"
+    ],
+    [
+     "IntervalModuleMorphism",
+     "intervalModuleMorphism"
+    ]
+   ]
+  },
+  {
+   "status": "same after renames",
+   "old": "IntervalModuleMorphism_identity",
+   "new": "intervalModuleMorphism_identity",
+   "kind": "theorem",
+   "module": "PersistentDecomp.BumpFunctor",
+   "via": "identical statement",
+   "renames": [
+    [
+     "IntervalModuleMorphism_identity",
+     "intervalModuleMorphism_identity"
+    ],
+    [
+     "IntervalModuleMorphism",
+     "intervalModuleMorphism"
+    ]
+   ]
+  },
+  {
+   "status": "same",
+   "old": "IntervalModuleObject",
+   "new": "IntervalModuleObject",
+   "kind": "def",
+   "module": "PersistentDecomp.BumpFunctor"
+  },
+  {
+   "status": "same",
+   "old": "IsZero_Bump_apply_of_not_mem",
+   "new": "IsZero_Bump_apply_of_not_mem",
+   "kind": "theorem",
+   "module": "PersistentDecomp.BumpFunctor"
+  },
+  {
+   "status": "same",
+   "old": "IsZero_IntervalModuleObject'_zero",
+   "new": "IsZero_IntervalModuleObject'_zero",
+   "kind": "theorem",
+   "module": "PersistentDecomp.BumpFunctor"
+  },
+  {
+   "status": "same",
+   "old": "good",
+   "new": "good",
+   "kind": "def",
+   "module": "PersistentDecomp.BumpFunctor"
+  },
+  {
+   "status": "same",
+   "old": "term_[_]",
+   "new": "term_[_]",
+   "kind": "def",
+   "module": "PersistentDecomp.BumpFunctor"
+  },
+  {
+   "status": "same",
+   "old": "right_lt_sup_of_left_ne_bot",
+   "new": "right_lt_sup_of_left_ne_bot",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Mathlib.Order.Disjoint"
+  },
+  {
+   "status": "same",
+   "old": "Indecomposable",
+   "new": "Indecomposable",
+   "kind": "def",
+   "module": "PersistentDecomp.Prereqs.Indecomposable"
+  },
+  {
+   "status": "same",
+   "old": "Indecomposable.bot",
+   "new": "Indecomposable.bot",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.Indecomposable"
+  },
+  {
+   "status": "same",
+   "old": "Submodule.map_sInf_le",
+   "new": "Submodule.map_sInf_le",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Mathlib.Algebra.Module.Submodule.Map"
+  },
+  {
+   "status": "same",
+   "old": "Submodule.map_sSup",
+   "new": "Submodule.map_sSup",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Mathlib.Algebra.Module.Submodule.Map"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule",
+   "new": "PersistenceSubmodule",
+   "kind": "structure",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.bot_apply",
+   "new": "PersistenceSubmodule.bot_apply",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.coe_bot",
+   "new": "PersistenceSubmodule.coe_bot",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.coe_iInf",
+   "new": "PersistenceSubmodule.coe_iInf",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.coe_iSup",
+   "new": "PersistenceSubmodule.coe_iSup",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.coe_inf",
+   "new": "PersistenceSubmodule.coe_inf",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.coe_sInf",
+   "new": "PersistenceSubmodule.coe_sInf",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.coe_sSup",
+   "new": "PersistenceSubmodule.coe_sSup",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.coe_sup",
+   "new": "PersistenceSubmodule.coe_sup",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.coe_top",
+   "new": "PersistenceSubmodule.coe_top",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.ext",
+   "new": "PersistenceSubmodule.ext",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.ext_iff",
+   "new": "PersistenceSubmodule.ext_iff",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.iInf_apply",
+   "new": "PersistenceSubmodule.iInf_apply",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.iSup_apply",
+   "new": "PersistenceSubmodule.iSup_apply",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.inf_apply",
+   "new": "PersistenceSubmodule.inf_apply",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.instCompleteLattice",
+   "new": "PersistenceSubmodule.instCompleteLattice",
+   "kind": "instance",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.instDFunLikeSubmoduleCarrierObjModuleCat",
+   "new": "PersistenceSubmodule.instDFunLikeSubmoduleCarrierObjModuleCat",
+   "kind": "instance",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.instInfSet",
+   "new": "PersistenceSubmodule.instInfSet",
+   "kind": "instance",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.instLattice",
+   "new": "PersistenceSubmodule.instLattice",
+   "kind": "instance",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.instMax",
+   "new": "PersistenceSubmodule.instMax",
+   "kind": "instance",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.instMin",
+   "new": "PersistenceSubmodule.instMin",
+   "kind": "instance",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.instOrderBot",
+   "new": "PersistenceSubmodule.instOrderBot",
+   "kind": "instance",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.instOrderTop",
+   "new": "PersistenceSubmodule.instOrderTop",
+   "kind": "instance",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.instPartialOrder",
+   "new": "PersistenceSubmodule.instPartialOrder",
+   "kind": "instance",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.instSupSet",
+   "new": "PersistenceSubmodule.instSupSet",
+   "kind": "instance",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.map_le",
+   "new": "PersistenceSubmodule.map_le",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.sInf_apply",
+   "new": "PersistenceSubmodule.sInf_apply",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.sSup_apply",
+   "new": "PersistenceSubmodule.sSup_apply",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.sup_apply",
+   "new": "PersistenceSubmodule.sup_apply",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "PersistenceSubmodule.top_apply",
+   "new": "PersistenceSubmodule.top_apply",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Prereqs.PersistenceSubmodule"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition",
+   "new": "DirectSumDecomposition",
+   "kind": "structure",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.DirectSumDecompLE",
+   "new": "DirectSumDecomposition.DirectSumDecompLE",
+   "kind": "instance",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.Indecomposable_of_mem_Min_Direct_sum_decomposition",
+   "new": "DirectSumDecomposition.Indecomposable_of_mem_Min_Direct_sum_decomposition",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.IsRefinement",
+   "new": "DirectSumDecomposition.IsRefinement",
+   "kind": "def",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.RefinementMapSurj'",
+   "new": "DirectSumDecomposition.RefinementMapSurj'",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.ext",
+   "new": "DirectSumDecomposition.ext",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.ext_iff",
+   "new": "DirectSumDecomposition.ext_iff",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.instPreorder",
+   "new": "DirectSumDecomposition.instPreorder",
+   "kind": "instance",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.instSetLikePersistenceSubmodule",
+   "new": "DirectSumDecomposition.instSetLikePersistenceSubmodule",
+   "kind": "instance",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.isInternal",
+   "new": "DirectSumDecomposition.isInternal",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.not_bot_mem",
+   "new": "DirectSumDecomposition.not_bot_mem",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.pointwise_iSup_eq_top",
+   "new": "DirectSumDecomposition.pointwise_iSup_eq_top",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.pointwise_sSup_eq_top",
+   "new": "DirectSumDecomposition.pointwise_sSup_eq_top",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.refinement",
+   "new": "DirectSumDecomposition.refinement",
+   "kind": "def",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.refinement_le",
+   "new": "DirectSumDecomposition.refinement_le",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.refinement_lt_of_exists_ne_singleton",
+   "new": "DirectSumDecomposition.refinement_lt_of_exists_ne_singleton",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.sSupIndep",
+   "new": "DirectSumDecomposition.sSupIndep",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition.sSup_eq_top",
+   "new": "DirectSumDecomposition.sSup_eq_top",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecomposition"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition",
+   "new": "Dual.DirectSumDecomposition",
+   "kind": "structure",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.DirectSumDecompLE",
+   "new": "Dual.DirectSumDecomposition.DirectSumDecompLE",
+   "kind": "instance",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.Indecomposable_of_mem_Min_Direct_sum_decomposition",
+   "new": "Dual.DirectSumDecomposition.Indecomposable_of_mem_Min_Direct_sum_decomposition",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.IsRefinement",
+   "new": "Dual.DirectSumDecomposition.IsRefinement",
+   "kind": "def",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.RefinementMap",
+   "new": "Dual.DirectSumDecomposition.RefinementMap",
+   "kind": "def",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.RefinementMapId",
+   "new": "Dual.DirectSumDecomposition.RefinementMapId",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.RefinementMapLE",
+   "new": "Dual.DirectSumDecomposition.RefinementMapLE",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.RefinementMapSameImage",
+   "new": "Dual.DirectSumDecomposition.RefinementMapSameImage",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.RefinementMapSurj'",
+   "new": "Dual.DirectSumDecomposition.RefinementMapSurj'",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.RefinmentMapFunctorial",
+   "new": "Dual.DirectSumDecomposition.RefinmentMapFunctorial",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.SendsToUniqueGE",
+   "new": "Dual.DirectSumDecomposition.SendsToUniqueGE",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.UniqueGE",
+   "new": "Dual.DirectSumDecomposition.UniqueGE",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.ext",
+   "new": "Dual.DirectSumDecomposition.ext",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.ext_iff",
+   "new": "Dual.DirectSumDecomposition.ext_iff",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.instPreorder",
+   "new": "Dual.DirectSumDecomposition.instPreorder",
+   "kind": "instance",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.instSetLikePersistenceSubmodule",
+   "new": "Dual.DirectSumDecomposition.instSetLikePersistenceSubmodule",
+   "kind": "instance",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.isInternal",
+   "new": "Dual.DirectSumDecomposition.isInternal",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.not_bot_mem",
+   "new": "Dual.DirectSumDecomposition.not_bot_mem",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.pointwise_iSup_eq_top",
+   "new": "Dual.DirectSumDecomposition.pointwise_iSup_eq_top",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.pointwise_sSup_eq_top",
+   "new": "Dual.DirectSumDecomposition.pointwise_sSup_eq_top",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.refinement",
+   "new": "Dual.DirectSumDecomposition.refinement",
+   "kind": "def",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.refinement_le",
+   "new": "Dual.DirectSumDecomposition.refinement_le",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.refinement_lt_of_exists_ne_singleton",
+   "new": "Dual.DirectSumDecomposition.refinement_lt_of_exists_ne_singleton",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.sSupIndep",
+   "new": "Dual.DirectSumDecomposition.sSupIndep",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "Dual.DirectSumDecomposition.sSup_eq_top",
+   "new": "Dual.DirectSumDecomposition.sSup_eq_top",
+   "kind": "theorem",
+   "module": "PersistentDecomp.DirectSumDecompositionDual"
+  },
+  {
+   "status": "same",
+   "old": "CompIsComp",
+   "new": "CompIsComp",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "DecImpliesTrivial",
+   "new": "DecImpliesTrivial",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "DirSumIsCoprod",
+   "new": "DirSumIsCoprod",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "EndRing",
+   "new": "EndRing",
+   "kind": "abbrev",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "EndRingIsRing",
+   "new": "EndRingIsRing",
+   "kind": "instance",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "changed",
+   "old": "ExistsFittingn",
+   "new": "ExistsFittingn",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal",
+   "detail": "first difference at body/body/body/body/body/arg1/body/arg3/arg11/arg3/arg2/fn: Monoid.toPow.{0}  ->  NPow.toPow.{0}",
+   "old_pp": "∀ (R : Type) [inst : DivisionRing R] (M : ModuleCat R) [Module.Finite R ↑M] (f : ↑M →ₗ[R] ↑M),\n  ∃ n, IsCompl (f ^ n).ker (f ^ n).range",
+   "new_pp": "∀ (R : Type) [inst : DivisionRing R] (M : ModuleCat R) [Module.Finite R ↑M] (f : ↑M →ₗ[R] ↑M),\n  ∃ n, IsCompl (f ^ n).ker (f ^ n).range"
+  },
+  {
+   "status": "same",
+   "old": "FunctorDirSum",
+   "new": "FunctorDirSum",
+   "kind": "def",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "IndecAndDecImpliesEq",
+   "new": "IndecAndDecImpliesEq",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "IsIndecomposable",
+   "new": "IsIndecomposable",
+   "kind": "def",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "MulDef",
+   "new": "MulDef",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "NegApp",
+   "new": "NegApp",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "NegAppModule",
+   "new": "NegAppModule",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "NegDef",
+   "new": "NegDef",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "OneDef",
+   "new": "OneDef",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "OppEndo",
+   "new": "OppEndo",
+   "kind": "def",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "changed",
+   "old": "PowEqCompLeft",
+   "new": "PowEqCompLeft",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal",
+   "detail": "first difference at body/body/body/body/body/body/body/arg1/arg3/arg2/fn: Monoid.toPow.{u1}  ->  NPow.toPow.{u1}",
+   "old_pp": "∀ (C : Type) [inst : CategoryTheory.Category C] (R : Type) [inst_1 : DivisionRing R]\n  (F : CategoryTheory.Functor C (ModuleCat R)) (θ : EndRing C R F) (n : ℕ),\n  θ ^ (n + 1) = CategoryTheory.CategoryStruct.comp θ (θ ^ n)",
+   "new_pp": "∀ (C : Type) [inst : CategoryTheory.Category C] (R : Type) [inst_1 : DivisionRing R]\n  (F : CategoryTheory.Functor C (ModuleCat R)) (θ : EndRing C R F) (n : ℕ),\n  θ ^ (n + 1) = CategoryTheory.CategoryStruct.comp θ (θ ^ n)"
+  },
+  {
+   "status": "changed",
+   "old": "PowEqCompRight",
+   "new": "PowEqCompRight",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal",
+   "detail": "first difference at body/body/body/body/body/body/body/arg1/arg6/arg3/arg2/fn: Monoid.toPow.{u1}  ->  NPow.toPow.{u1}",
+   "old_pp": "∀ (C : Type) [inst : CategoryTheory.Category C] (R : Type) [inst_1 : DivisionRing R]\n  (F : CategoryTheory.Functor C (ModuleCat R)) (θ : EndRing C R F) (n : ℕ),\n  CategoryTheory.CategoryStruct.comp θ (θ ^ n) = CategoryTheory.CategoryStruct.comp (θ ^ n) θ",
+   "new_pp": "∀ (C : Type) [inst : CategoryTheory.Category C] (R : Type) [inst_1 : DivisionRing R]\n  (F : CategoryTheory.Functor C (ModuleCat R)) (θ : EndRing C R F) (n : ℕ),\n  CategoryTheory.CategoryStruct.comp θ (θ ^ n) = CategoryTheory.CategoryStruct.comp (θ ^ n) θ"
+  },
+  {
+   "status": "same",
+   "old": "ProductMapFunc",
+   "new": "ProductMapFunc",
+   "kind": "def",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "ProductModule",
+   "new": "ProductModule",
+   "kind": "def",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "ProductModuleMap",
+   "new": "ProductModuleMap",
+   "kind": "def",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "PtwiseFinitePersMod",
+   "new": "PtwiseFinitePersMod",
+   "kind": "structure",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "Step2",
+   "new": "Step2",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "changed",
+   "old": "Step2_2",
+   "new": "Step2_2",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal",
+   "detail": "first difference at body/body/body/body/body/body/body/body/body/body/arg1/arg6/arg6/arg3/arg2/fn: Monoid.toPow.{0}  ->  NPow.toPow.{0}",
+   "old_pp": "∀ (C : Type) [inst : CategoryTheory.Category C] (R : Type) [inst_1 : DivisionRing R] (X : C) (n : ℕ)\n  (Y : C) (α : X ⟶ Y) (M : PtwiseFinitePersMod C R) (η : EndRing C R M.toFunctor),\n  CategoryTheory.CategoryStruct.comp (M.map α) ((η ^ n).app Y) =\n    CategoryTheory.CategoryStruct.comp ((η ^ n).app X) (M.map α)",
+   "new_pp": "∀ (C : Type) [inst : CategoryTheory.Category C] (R : Type) [inst_1 : DivisionRing R] (X : C) (n : ℕ)\n  (Y : C) (α : X ⟶ Y) (M : PtwiseFinitePersMod C R) (η : EndRing C R M.toFunctor),\n  CategoryTheory.CategoryStruct.comp (M.map α) ((η ^ n).app Y) =\n    CategoryTheory.CategoryStruct.comp ((η ^ n).app X) (M.map α)"
+  },
+  {
+   "status": "changed",
+   "old": "Step3_1",
+   "new": "Step3_1",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal",
+   "detail": "first difference at body/body/body/body/body/body/body/body/body/body/body/binder/arg1/arg6/arg8/arg3/arg2/fn: Monoid.toPow.{0}  ->  NPow.toPow.{0}",
+   "old_pp": "∀ (C : Type) [inst : CategoryTheory.Category C] (R : Type) [inst_1 : DivisionRing R] (X Y : C)\n  (M : PtwiseFinitePersMod C R) (α : X ⟶ Y) (n : ℕ) (ηx : ↑(M.obj X) →ₗ[R] ↑(M.obj X))\n  (ηy : ↑(M.obj Y) →ₗ[R] ↑(M.obj Y)),\n  CategoryTheory.CategoryStruct.comp (M.map α) (ModuleCat.ofHom (ηy ^ n)) =\n      CategoryTheory.CategoryStruct.comp (ModuleCat.ofHom (ηx ^ n)) (M.map α) →\n    ∀ (x : ↥(ηx ^ n).ker),\n      (CategoryTheory.ConcreteCategory.hom\n            (CategoryTheory.CategoryStruct.comp (M.map α) (ModuleCat.ofHom (ηy ^ n))))\n          ↑x =\n        0",
+   "new_pp": "∀ (C : Type) [inst : CategoryTheory.Category C] (R : Type) [inst_1 : DivisionRing R] (X Y : C)\n  (M : PtwiseFinitePersMod C R) (α : X ⟶ Y) (n : ℕ) (ηx : ↑(M.obj X) →ₗ[R] ↑(M.obj X))\n  (ηy : ↑(M.obj Y) →ₗ[R] ↑(M.obj Y)),\n  CategoryTheory.CategoryStruct.comp (M.map α) (ModuleCat.ofHom (ηy ^ n)) =\n      CategoryTheory.CategoryStruct.comp (ModuleCat.ofHom (ηx ^ n)) (M.map α) →\n    ∀ (x : ↥(ηx ^ n).ker),\n      (CategoryTheory.ConcreteCategory.hom\n            (CategoryTheory.CategoryStruct.comp (M.map α) (ModuleCat.ofHom (ηy ^ n))))\n          ↑x =\n        0"
+  },
+  {
+   "status": "changed",
+   "old": "Step3_2",
+   "new": "Step3_2",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal",
+   "detail": "first difference at body/body/body/body/body/body/body/body/body/body/body/binder/arg1/arg6/arg8/arg3/arg2/fn: Monoid.toPow.{0}  ->  NPow.toPow.{0}",
+   "old_pp": "∀ (C : Type) [inst : CategoryTheory.Category C] (R : Type) [inst_1 : DivisionRing R] (X Y : C)\n  (M : PtwiseFinitePersMod C R) (α : X ⟶ Y) (n : ℕ) (ηx : ↑(M.obj X) →ₗ[R] ↑(M.obj X))\n  (ηy : ↑(M.obj Y) →ₗ[R] ↑(M.obj Y)),\n  CategoryTheory.CategoryStruct.comp (M.map α) (ModuleCat.ofHom (ηy ^ n)) =\n      CategoryTheory.CategoryStruct.comp (ModuleCat.ofHom (ηx ^ n)) (M.map α) →\n    ∀ x ∈ (ηx ^ n).range,\n      ∃ y, (CategoryTheory.ConcreteCategory.hom (M.map α)) x = y ∧ y ∈ (ηy ^ n).range",
+   "new_pp": "∀ (C : Type) [inst : CategoryTheory.Category C] (R : Type) [inst_1 : DivisionRing R] (X Y : C)\n  (M : PtwiseFinitePersMod C R) (α : X ⟶ Y) (n : ℕ) (ηx : ↑(M.obj X) →ₗ[R] ↑(M.obj X))\n  (ηy : ↑(M.obj Y) →ₗ[R] ↑(M.obj Y)),\n  CategoryTheory.CategoryStruct.comp (M.map α) (ModuleCat.ofHom (ηy ^ n)) =\n      CategoryTheory.CategoryStruct.comp (ModuleCat.ofHom (ηx ^ n)) (M.map α) →\n    ∀ x ∈ (ηx ^ n).range,\n      ∃ y, (CategoryTheory.ConcreteCategory.hom (M.map α)) x = y ∧ y ∈ (ηy ^ n).range"
+  },
+  {
+   "status": "same",
+   "old": "Subfunctor",
+   "new": "Subfunctor",
+   "kind": "structure",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "SubmodDecomp",
+   "new": "SubmodDecomp",
+   "kind": "def",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "SumIsSum",
+   "new": "SumIsSum",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "SumIsSumModule",
+   "new": "SumIsSumModule",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "ZeroDef",
+   "new": "ZeroDef",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "ZeroEndAppIsZeroAtX",
+   "new": "ZeroEndAppIsZeroAtX",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "ZeroEndAppIsZeroAtXatx",
+   "new": "ZeroEndAppIsZeroAtXatx",
+   "kind": "theorem",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "ZeroEndomorphism",
+   "new": "ZeroEndomorphism",
+   "kind": "def",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "ZeroModule",
+   "new": "ZeroModule",
+   "kind": "def",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "ZeroSubmod",
+   "new": "ZeroSubmod",
+   "kind": "def",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "instAddEndRing",
+   "new": "instAddEndRing",
+   "kind": "instance",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "instMulEndRing",
+   "new": "instMulEndRing",
+   "kind": "instance",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "instNegEndRing",
+   "new": "instNegEndRing",
+   "kind": "instance",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "instOneEndRing",
+   "new": "instOneEndRing",
+   "kind": "instance",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "instZeroEndRing",
+   "new": "instZeroEndRing",
+   "kind": "instance",
+   "module": "PersistentDecomp.EndoRingIsLocal"
+  },
+  {
+   "status": "same",
+   "old": "DirectSum.IsInternal.eq_zero_of_subsingleton_preimage",
+   "new": "DirectSum.IsInternal.eq_zero_of_subsingleton_preimage",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Mathlib.Algebra.DirectSum.Basic"
+  },
+  {
+   "status": "same",
+   "old": "DirectSum.isInternal_iff",
+   "new": "DirectSum.isInternal_iff",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Mathlib.Algebra.DirectSum.Basic"
+  },
+  {
+   "status": "same",
+   "old": "AddSubmonoidClass.coe_dfinsuppSum",
+   "new": "AddSubmonoidClass.coe_dfinsuppSum",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Mathlib.Data.DFinsupp.BigOperators"
+  },
+  {
+   "status": "same",
+   "old": "SubmonoidClass.coe_dfinsuppProd",
+   "new": "SubmonoidClass.coe_dfinsuppProd",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Mathlib.Data.DFinsupp.BigOperators"
+  },
+  {
+   "status": "same",
+   "old": "Pi.iSupIndep_iff",
+   "new": "Pi.iSupIndep_iff",
+   "kind": "theorem",
+   "module": "PersistentDecomp.Mathlib.Order.SupIndep"
+  },
+  {
+   "status": "same",
+   "old": "DirectSumDecomposition_of_chain",
+   "new": "DirectSumDecomposition_of_chain",
+   "kind": "def",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "Indecomposable'",
+   "new": "Indecomposable'",
+   "kind": "def",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "Pone",
+   "new": "Pone",
+   "kind": "def",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "ToTypeCat",
+   "new": "ToTypeCat",
+   "kind": "def",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "bot_not_mem",
+   "new": "bot_not_mem",
+   "kind": "theorem",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "chainBound",
+   "new": "chainBound",
+   "kind": "def",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "chainBound_le",
+   "new": "chainBound_le",
+   "kind": "theorem",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "decomposition_of_refinement",
+   "new": "decomposition_of_refinement",
+   "kind": "def",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "every_chain_has_an_upper_bound",
+   "new": "every_chain_has_an_upper_bound",
+   "kind": "theorem",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "forall_indep",
+   "new": "forall_indep",
+   "kind": "theorem",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "instSetLikeRefinementSet",
+   "new": "instSetLikeRefinementSet",
+   "kind": "instance",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "isInternal_chainBound",
+   "new": "isInternal_chainBound",
+   "kind": "theorem",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "lambdas_indep",
+   "new": "lambdas_indep",
+   "kind": "theorem",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "limit_elt_mk",
+   "new": "limit_elt_mk",
+   "kind": "def",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "refinement",
+   "new": "refinement",
+   "kind": "structure",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "sSup_eq_top'",
+   "new": "sSup_eq_top'",
+   "kind": "theorem",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "sSup_lambdas_eq_top",
+   "new": "sSup_lambdas_eq_top",
+   "kind": "theorem",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "zorny_lemma",
+   "new": "zorny_lemma",
+   "kind": "theorem",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "termM[_]_[_]",
+   "new": "termM[_]_[_]",
+   "kind": "def",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "termM[_]",
+   "new": "termM[_]",
+   "kind": "def",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  },
+  {
+   "status": "same",
+   "old": "Λ",
+   "new": "Λ",
+   "kind": "abbrev",
+   "module": "PersistentDecomp.MaximalDecompExists"
+  }
+ ]
+}

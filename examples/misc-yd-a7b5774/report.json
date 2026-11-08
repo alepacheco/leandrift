@@ -1,0 +1,1870 @@
+{
+ "leandrift": 1,
+ "old": {
+  "file": "old.jsonl.gz",
+  "lean": "4.35.0",
+  "prefixes": [
+   "MiscYD"
+  ],
+  "modules": 17,
+  "declarations": 260,
+  "deprecation_aliases": 2050
+ },
+ "new": {
+  "file": "new.jsonl.gz",
+  "lean": "4.36.0-rc1",
+  "prefixes": [
+   "MiscYD"
+  ],
+  "modules": 17,
+  "declarations": 261,
+  "deprecation_aliases": 1955
+ },
+ "summary": {
+  "same": 259,
+  "same after renames": 0,
+  "changed": 1,
+  "removed": 0,
+  "added": 1,
+  "new_sorry": 0,
+  "new_nonstandard_axioms": 0,
+  "sorry_old": 28,
+  "sorry_new": 28
+ },
+ "warnings": [],
+ "inferred_renames": {},
+ "common_changes": [],
+ "declarations": [
+  {
+   "status": "same",
+   "old": "Finset.CombiDegen",
+   "new": "Finset.CombiDegen",
+   "kind": "structure",
+   "module": "MiscYD.AddCombi.Corner.CombiDegen"
+  },
+  {
+   "status": "same",
+   "old": "Finset.F2.combiDegen",
+   "new": "Finset.F2.combiDegen",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Corner.CombiDegen"
+  },
+  {
+   "status": "same",
+   "old": "Finset.F2.index",
+   "new": "Finset.F2.index",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Corner.CombiDegen"
+  },
+  {
+   "status": "same",
+   "old": "Finset.F2.u",
+   "new": "Finset.F2.u",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Corner.CombiDegen"
+  },
+  {
+   "status": "same",
+   "old": "Finset.F2.φ",
+   "new": "Finset.F2.φ",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Corner.CombiDegen"
+  },
+  {
+   "status": "same",
+   "old": "Finset.F2.ψ",
+   "new": "Finset.F2.ψ",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Corner.CombiDegen"
+  },
+  {
+   "status": "same",
+   "old": "Finset.F3.combiDegen",
+   "new": "Finset.F3.combiDegen",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Corner.CombiDegen"
+  },
+  {
+   "status": "same",
+   "old": "Finset.F3.u",
+   "new": "Finset.F3.u",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Corner.CombiDegen"
+  },
+  {
+   "status": "same",
+   "old": "Finset.F3.φ",
+   "new": "Finset.F3.φ",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Corner.CombiDegen"
+  },
+  {
+   "status": "same",
+   "old": "Finset.F3.ψ",
+   "new": "Finset.F3.ψ",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Corner.CombiDegen"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addImpact",
+   "new": "Finset.addImpact",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Impact"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addImpact_empty",
+   "new": "Finset.addImpact_empty",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Impact"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addImpact_map_of_fintype",
+   "new": "Finset.addImpact_map_of_fintype",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Impact"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addImpact_map_of_infinite",
+   "new": "Finset.addImpact_map_of_infinite",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Impact"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addImpact_singleton",
+   "new": "Finset.addImpact_singleton",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Impact"
+  },
+  {
+   "status": "same",
+   "old": "Finset.exists_addImpact_add_addImpact",
+   "new": "Finset.exists_addImpact_add_addImpact",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Impact"
+  },
+  {
+   "status": "same",
+   "old": "Finset.exists_mulImpact_add_mulImpact",
+   "new": "Finset.exists_mulImpact_add_mulImpact",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Impact"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulImpact",
+   "new": "Finset.mulImpact",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Impact"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulImpact_empty",
+   "new": "Finset.mulImpact_empty",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Impact"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulImpact_map_of_fintype",
+   "new": "Finset.mulImpact_map_of_fintype",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Impact"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulImpact_map_of_infinite",
+   "new": "Finset.mulImpact_map_of_infinite",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Impact"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulImpact_singleton",
+   "new": "Finset.mulImpact_singleton",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Impact"
+  },
+  {
+   "status": "same",
+   "old": "Finset.Nonempty.addStab",
+   "new": "Finset.Nonempty.addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.Nonempty.addStab_nontrivial",
+   "new": "Finset.Nonempty.addStab_nontrivial",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.Nonempty.mulStab",
+   "new": "Finset.Nonempty.mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.Nonempty.mulStab_nontrivial",
+   "new": "Finset.Nonempty.mulStab_nontrivial",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.Nonempty.of_addStab",
+   "new": "Finset.Nonempty.of_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.Nonempty.of_mulStab",
+   "new": "Finset.Nonempty.of_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.Nonempty.one_mem_mulStab",
+   "new": "Finset.Nonempty.one_mem_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.Nonempty.zero_mem_addStab",
+   "new": "Finset.Nonempty.zero_mem_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab",
+   "new": "Finset.addStab",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_add",
+   "new": "Finset.addStab_add",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_add_addStab",
+   "new": "Finset.addStab_add_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_empty",
+   "new": "Finset.addStab_empty",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_idem",
+   "new": "Finset.addStab_idem",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_image_coe_quotient",
+   "new": "Finset.addStab_image_coe_quotient",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_nonempty",
+   "new": "Finset.addStab_nonempty",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_quotient_addCommute_addSubgroup",
+   "new": "Finset.addStab_quotient_addCommute_addSubgroup",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_singleton",
+   "new": "Finset.addStab_singleton",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_subset_sub",
+   "new": "Finset.addStab_subset_sub",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_subset_sub_left",
+   "new": "Finset.addStab_subset_sub_left",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_subset_sub_right",
+   "new": "Finset.addStab_subset_sub_right",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_vadd",
+   "new": "Finset.addStab_vadd",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addSubgroup_add_card_eq_add_of_add_stab_subset",
+   "new": "Finset.addSubgroup_add_card_eq_add_of_add_stab_subset",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.add_addStab",
+   "new": "Finset.add_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.add_addStab_add_add_add_addStab_add",
+   "new": "Finset.add_addStab_add_add_add_addStab_add",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.add_subset_left",
+   "new": "Finset.add_subset_left",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.add_subset_left_iff",
+   "new": "Finset.add_subset_left_iff",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.add_subset_right",
+   "new": "Finset.add_subset_right",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.add_subset_right_iff",
+   "new": "Finset.add_subset_right_iff",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_addStab_add_card_image_coe",
+   "new": "Finset.card_addStab_add_card_image_coe",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_addStab_add_card_image_coe'",
+   "new": "Finset.card_addStab_add_card_image_coe'",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_addStab_dvd_card",
+   "new": "Finset.card_addStab_dvd_card",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_addStab_dvd_card_addStab",
+   "new": "Finset.card_addStab_dvd_card_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_addStab_dvd_card_add_addStab",
+   "new": "Finset.card_addStab_dvd_card_add_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_addStab_eq_zero",
+   "new": "Finset.card_addStab_eq_zero",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_addStab_le_card",
+   "new": "Finset.card_addStab_le_card",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_add_card_eq_addStab_card_add_coe",
+   "new": "Finset.card_add_card_eq_addStab_card_add_coe",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_mulStab_dvd_card",
+   "new": "Finset.card_mulStab_dvd_card",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_mulStab_dvd_card_mulStab",
+   "new": "Finset.card_mulStab_dvd_card_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_mulStab_dvd_card_mul_mulStab",
+   "new": "Finset.card_mulStab_dvd_card_mul_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_mulStab_eq_one",
+   "new": "Finset.card_mulStab_eq_one",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_mulStab_le_card",
+   "new": "Finset.card_mulStab_le_card",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_mulStab_mul_card_image_coe",
+   "new": "Finset.card_mulStab_mul_card_image_coe",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_mulStab_mul_card_image_coe'",
+   "new": "Finset.card_mulStab_mul_card_image_coe'",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_mul_card_eq_mulStab_card_mul_coe",
+   "new": "Finset.card_mul_card_eq_mulStab_card_mul_coe",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.coe_addStab",
+   "new": "Finset.coe_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.coe_mulStab",
+   "new": "Finset.coe_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.disjoint_smul_finset_mulStab_mul_mulStab",
+   "new": "Finset.disjoint_smul_finset_mulStab_mul_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.disjoint_vadd_finset_addStab_add_addStab",
+   "new": "Finset.disjoint_vadd_finset_addStab_add_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.instDecidablePredMemAddSubgroupStabilizerSetCoe_miscYD",
+   "new": "Finset.instDecidablePredMemAddSubgroupStabilizerSetCoe_miscYD",
+   "kind": "instance",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.instDecidablePredMemSubgroupStabilizerSetCoe_miscYD",
+   "new": "Finset.instDecidablePredMemSubgroupStabilizerSetCoe_miscYD",
+   "kind": "instance",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.inter_addStab_subset_addStab_union",
+   "new": "Finset.inter_addStab_subset_addStab_union",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.inter_mulStab_subset_mulStab_union",
+   "new": "Finset.inter_mulStab_subset_mulStab_union",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mem_addStab",
+   "new": "Finset.mem_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mem_addStab'",
+   "new": "Finset.mem_addStab'",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mem_addStab_iff_subset_vadd_finset",
+   "new": "Finset.mem_addStab_iff_subset_vadd_finset",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mem_addStab_iff_vadd_finset_subset",
+   "new": "Finset.mem_addStab_iff_vadd_finset_subset",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mem_mulStab",
+   "new": "Finset.mem_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mem_mulStab'",
+   "new": "Finset.mem_mulStab'",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mem_mulStab_iff_smul_finset_subset",
+   "new": "Finset.mem_mulStab_iff_smul_finset_subset",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mem_mulStab_iff_subset_smul_finset",
+   "new": "Finset.mem_mulStab_iff_subset_smul_finset",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab",
+   "new": "Finset.mulStab",
+   "kind": "def",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_empty",
+   "new": "Finset.mulStab_empty",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_idem",
+   "new": "Finset.mulStab_idem",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_image_coe_quotient",
+   "new": "Finset.mulStab_image_coe_quotient",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_mul",
+   "new": "Finset.mulStab_mul",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_mul_mulStab",
+   "new": "Finset.mulStab_mul_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_nonempty",
+   "new": "Finset.mulStab_nonempty",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_quotient_commute_subgroup",
+   "new": "Finset.mulStab_quotient_commute_subgroup",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_singleton",
+   "new": "Finset.mulStab_singleton",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_smul",
+   "new": "Finset.mulStab_smul",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_subset_div",
+   "new": "Finset.mulStab_subset_div",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_subset_div_left",
+   "new": "Finset.mulStab_subset_div_left",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_subset_div_right",
+   "new": "Finset.mulStab_subset_div_right",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mul_mulStab",
+   "new": "Finset.mul_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mul_mulStab_mul_mul_mul_mulStab_mul",
+   "new": "Finset.mul_mulStab_mul_mul_mul_mulStab_mul",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mul_subset_left",
+   "new": "Finset.mul_subset_left",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mul_subset_left_iff",
+   "new": "Finset.mul_subset_left_iff",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mul_subset_right",
+   "new": "Finset.mul_subset_right",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mul_subset_right_iff",
+   "new": "Finset.mul_subset_right_iff",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.one_mem_mulStab",
+   "new": "Finset.one_mem_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.pairwiseDisjoint_smul_finset_mulStab",
+   "new": "Finset.pairwiseDisjoint_smul_finset_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.pairwiseDisjoint_vadd_finset_addStab",
+   "new": "Finset.pairwiseDisjoint_vadd_finset_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.preimage_image_quotientMk_addStabilizer",
+   "new": "Finset.preimage_image_quotientMk_addStabilizer",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.preimage_image_quotientMk_mulStabilizer",
+   "new": "Finset.preimage_image_quotientMk_mulStabilizer",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.preimage_image_quotientMk_stabilizer_eq_add_addStab",
+   "new": "Finset.preimage_image_quotientMk_stabilizer_eq_add_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.preimage_image_quotientMk_stabilizer_eq_mul_mulStab",
+   "new": "Finset.preimage_image_quotientMk_stabilizer_eq_mul_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.smul_finset_mulStab_subset",
+   "new": "Finset.smul_finset_mulStab_subset",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.smul_mulStab",
+   "new": "Finset.smul_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.subgroup_mul_card_eq_mul_of_mul_stab_subset",
+   "new": "Finset.subgroup_mul_card_eq_mul_of_mul_stab_subset",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.subset_addStab_add_left",
+   "new": "Finset.subset_addStab_add_left",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.subset_addStab_add_right",
+   "new": "Finset.subset_addStab_add_right",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.subset_mulStab_mul_left",
+   "new": "Finset.subset_mulStab_mul_left",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.subset_mulStab_mul_right",
+   "new": "Finset.subset_mulStab_mul_right",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.vadd_addStab",
+   "new": "Finset.vadd_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.vadd_finset_addStab_subset",
+   "new": "Finset.vadd_finset_addStab_subset",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.zero_mem_addStab",
+   "new": "Finset.zero_mem_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.MulStab"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_add_ssubset_addStab",
+   "new": "Finset.addStab_add_ssubset_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.addStab_union",
+   "new": "Finset.addStab_union",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.add_aux1",
+   "new": "Finset.add_aux1",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.add_kneser",
+   "new": "Finset.add_kneser",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.add_strict_kneser",
+   "new": "Finset.add_strict_kneser",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.disjoint_add_sub_card_le",
+   "new": "Finset.disjoint_add_sub_card_le",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.disjoint_mul_sub_card_le",
+   "new": "Finset.disjoint_mul_sub_card_le",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.disjoint_smul_mulStab",
+   "new": "Finset.disjoint_smul_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.disjoint_vadd_addStab",
+   "new": "Finset.disjoint_vadd_addStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.inter_add_sub_card_le",
+   "new": "Finset.inter_add_sub_card_le",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.inter_mul_sub_card_le",
+   "new": "Finset.inter_mul_sub_card_le",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_mul_ssubset_mulStab",
+   "new": "Finset.mulStab_mul_ssubset_mulStab",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mulStab_union",
+   "new": "Finset.mulStab_union",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mul_aux1",
+   "new": "Finset.mul_aux1",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mul_kneser",
+   "new": "Finset.mul_kneser",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mul_strict_kneser",
+   "new": "Finset.mul_strict_kneser",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.Kneser"
+  },
+  {
+   "status": "same",
+   "old": "ZMod.cauchy_davenport'",
+   "new": "ZMod.cauchy_davenport'",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.CauchyDavenportFromKneser"
+  },
+  {
+   "status": "same",
+   "old": "Finset.add_kneser'",
+   "new": "Finset.add_kneser'",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.KneserRuzsa"
+  },
+  {
+   "status": "same",
+   "old": "Finset.add_strict_kneser'",
+   "new": "Finset.add_strict_kneser'",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.KneserRuzsa"
+  },
+  {
+   "status": "same",
+   "old": "Finset.le_card_add_add_card_addStab_add",
+   "new": "Finset.le_card_add_add_card_addStab_add",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.KneserRuzsa"
+  },
+  {
+   "status": "same",
+   "old": "Finset.le_card_mul_add_card_mulStab_mul",
+   "new": "Finset.le_card_mul_add_card_mulStab_mul",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.KneserRuzsa"
+  },
+  {
+   "status": "same",
+   "old": "Finset.le_card_sup_add_card_addStab_sup",
+   "new": "Finset.le_card_sup_add_card_addStab_sup",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.KneserRuzsa"
+  },
+  {
+   "status": "same",
+   "old": "Finset.le_card_sup_add_card_mulStab_sup",
+   "new": "Finset.le_card_sup_add_card_mulStab_sup",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.KneserRuzsa"
+  },
+  {
+   "status": "same",
+   "old": "Finset.le_card_union_add_card_addStab_union",
+   "new": "Finset.le_card_union_add_card_addStab_union",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.KneserRuzsa"
+  },
+  {
+   "status": "same",
+   "old": "Finset.le_card_union_add_card_mulStab_union",
+   "new": "Finset.le_card_union_add_card_mulStab_union",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.KneserRuzsa"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mul_kneser'",
+   "new": "Finset.mul_kneser'",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.KneserRuzsa"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mul_strict_kneser'",
+   "new": "Finset.mul_strict_kneser'",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.Kneser.KneserRuzsa"
+  },
+  {
+   "status": "same",
+   "old": "HasSliceRankLE",
+   "new": "HasSliceRankLE",
+   "kind": "inductive",
+   "module": "MiscYD.AddCombi.SliceRank"
+  },
+  {
+   "status": "same",
+   "old": "HasSliceRankLE.add",
+   "new": "HasSliceRankLE.add",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.SliceRank"
+  },
+  {
+   "status": "same",
+   "old": "exists_hasSliceRankLE",
+   "new": "exists_hasSliceRankLE",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.SliceRank"
+  },
+  {
+   "status": "same",
+   "old": "hasSliceRankLE_card",
+   "new": "hasSliceRankLE_card",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.SliceRank"
+  },
+  {
+   "status": "same",
+   "old": "hasSliceRankLE_iff",
+   "new": "hasSliceRankLE_iff",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.SliceRank"
+  },
+  {
+   "status": "same",
+   "old": "hasSliceRankLE_iff_exists_sum",
+   "new": "hasSliceRankLE_iff_exists_sum",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.SliceRank"
+  },
+  {
+   "status": "same",
+   "old": "hasSliceRankLE_one",
+   "new": "hasSliceRankLE_one",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.SliceRank"
+  },
+  {
+   "status": "same",
+   "old": "hasSliceRankLE_succ",
+   "new": "hasSliceRankLE_succ",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.SliceRank"
+  },
+  {
+   "status": "same",
+   "old": "hasSliceRankLE_zero",
+   "new": "hasSliceRankLE_zero",
+   "kind": "theorem",
+   "module": "MiscYD.AddCombi.SliceRank"
+  },
+  {
+   "status": "same",
+   "old": "MetricSBtw",
+   "new": "MetricSBtw",
+   "kind": "def",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "MetricSpace.sbtw_iff",
+   "new": "MetricSpace.sbtw_iff",
+   "kind": "theorem",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "SBtw.comm",
+   "new": "SBtw.comm",
+   "kind": "theorem",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "SBtw.sbtw.asymm_right",
+   "new": "SBtw.sbtw.asymm_right",
+   "kind": "theorem",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "SBtw.sbtw.dist",
+   "new": "SBtw.sbtw.dist",
+   "kind": "theorem",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "SBtw.sbtw.ne12",
+   "new": "SBtw.sbtw.ne12",
+   "kind": "theorem",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "SBtw.sbtw.ne13",
+   "new": "SBtw.sbtw.ne13",
+   "kind": "theorem",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "SBtw.sbtw.ne23",
+   "new": "SBtw.sbtw.ne23",
+   "kind": "theorem",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "SBtw.sbtw.right_cancel",
+   "new": "SBtw.sbtw.right_cancel",
+   "kind": "theorem",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "SBtw.sbtw.symm",
+   "new": "SBtw.sbtw.symm",
+   "kind": "theorem",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "SBtw.sbtw.trans_right'",
+   "new": "SBtw.sbtw.trans_right'",
+   "kind": "theorem",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "sbtw_iff_of_ne",
+   "new": "sbtw_iff_of_ne",
+   "kind": "theorem",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "sbtw_mk",
+   "new": "sbtw_mk",
+   "kind": "theorem",
+   "module": "MiscYD.Book.MetricBetween"
+  },
+  {
+   "status": "same",
+   "old": "Delta",
+   "new": "Delta",
+   "kind": "def",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "Delta_comm",
+   "new": "Delta_comm",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "Delta_pos_of",
+   "new": "Delta_pos_of",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "changed",
+   "old": "GenerateLine",
+   "new": "GenerateLine",
+   "kind": "def",
+   "module": "MiscYD.Book.SylvesterChvatal",
+   "old_kind": "inductive",
+   "detail": "was an inductive with 3 constructors, now a def with 0",
+   "old_pp": "{V : Type u_1} → [MetricSpace V] → Set V → Set V\n| basic : ∀ {V : Type u_1} [inst : MetricSpace V] {s : Set V} {x : V}, x ∈ s → GenerateLine s x\n| extend_out : ∀ {V : Type u_1} [inst : MetricSpace V] {s : Set V} (u v w : V),\n  GenerateLine s u → GenerateLine s v → SBtw.sbtw u v w → GenerateLine s w\n| extend_in : ∀ {V : Type u_1} [inst : MetricSpace V] {s : Set V} (u v w : V),\n  GenerateLine s u → GenerateLine s v → SBtw.sbtw u w v → GenerateLine s w",
+   "new_pp": "{V : Type u_1} → [MetricSpace V] → Set V → Set V"
+  },
+  {
+   "status": "same",
+   "old": "IsSimpleTriangle",
+   "new": "IsSimpleTriangle",
+   "kind": "def",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "IsSimpleTriangle.swap",
+   "new": "IsSimpleTriangle.swap",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "Line",
+   "new": "Line",
+   "kind": "def",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "Line_comm",
+   "new": "Line_comm",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "Line_isLine",
+   "new": "Line_isLine",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "List.Special",
+   "new": "List.Special",
+   "kind": "def",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "List.Special.chain_ne",
+   "new": "List.Special.chain_ne",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "List.Special.pathLength_le",
+   "new": "List.Special.pathLength_le",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "List.Sublist.pathLength_sublist",
+   "new": "List.Sublist.pathLength_sublist",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "List.pathLength",
+   "new": "List.pathLength",
+   "kind": "def",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "List.pathLength_cons_le",
+   "new": "List.pathLength_cons_le",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "List.pathLength_nonneg",
+   "new": "List.pathLength_nonneg",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "List.pathLength_triangle_left",
+   "new": "List.pathLength_triangle_left",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "NotCollinear",
+   "new": "NotCollinear",
+   "kind": "def",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "NotCollinear.mk",
+   "new": "NotCollinear.mk",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "NotCollinear.rotate",
+   "new": "NotCollinear.rotate",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "NotCollinear.swap",
+   "new": "NotCollinear.swap",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "Set.IsLine",
+   "new": "Set.IsLine",
+   "kind": "def",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "Set.IsLine.close_left",
+   "new": "Set.IsLine.close_left",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "Set.IsLine.close_middle",
+   "new": "Set.IsLine.close_middle",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "Set.IsLine.close_right",
+   "new": "Set.IsLine.close_right",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "Set.IsLine.generateLine_subset",
+   "new": "Set.IsLine.generateLine_subset",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "Set.collinearTriple",
+   "new": "Set.collinearTriple",
+   "kind": "inductive",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "Set.collinearTriple_iff",
+   "new": "Set.collinearTriple_iff",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "abd_special",
+   "new": "abd_special",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "case1",
+   "new": "case1",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "case2",
+   "new": "case2",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "case3",
+   "new": "case3",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "eqn_7",
+   "new": "eqn_7",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "eqn_8",
+   "new": "eqn_8",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "eqn_9",
+   "new": "eqn_9",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "exists_isLine",
+   "new": "exists_isLine",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "exists_min_dist",
+   "new": "exists_min_dist",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "exists_simple_split_left",
+   "new": "exists_simple_split_left",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "exists_simple_split_right",
+   "new": "exists_simple_split_right",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "exists_third",
+   "new": "exists_third",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "generateLine_close_left",
+   "new": "generateLine_close_left",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "generateLine_close_middle",
+   "new": "generateLine_close_middle",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "generateLine_close_right",
+   "new": "generateLine_close_right",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "generateLine_minimal",
+   "new": "generateLine_minimal",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "left_extend_mem_Line",
+   "new": "left_extend_mem_Line",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "left_mem_Line",
+   "new": "left_mem_Line",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "length_mul_le_pathLength_add",
+   "new": "length_mul_le_pathLength_add",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "middle_extend_mem_Line",
+   "new": "middle_extend_mem_Line",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "notCollinear_iff",
+   "new": "notCollinear_iff",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "one_implies_two",
+   "new": "one_implies_two",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "right_extend_mem_Line",
+   "new": "right_extend_mem_Line",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "right_mem_Line",
+   "new": "right_mem_Line",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "simpleEdges",
+   "new": "simpleEdges",
+   "kind": "def",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "simpleEdges_adj",
+   "new": "simpleEdges_adj",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "subset_generateLine",
+   "new": "subset_generateLine",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "sylvester_chvatal",
+   "new": "sylvester_chvatal",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "thm_two",
+   "new": "thm_two",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "thm_two'",
+   "new": "thm_two'",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "two_implies_three",
+   "new": "two_implies_three",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "uniformly_bounded_of_chain_ne_of_pathLength_le",
+   "new": "uniformly_bounded_of_chain_ne_of_pathLength_le",
+   "kind": "theorem",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  },
+  {
+   "status": "same",
+   "old": "closed_convexHull_extremePoints_of_compact_of_convex",
+   "new": "closed_convexHull_extremePoints_of_compact_of_convex",
+   "kind": "theorem",
+   "module": "MiscYD.Convexity.MinkowskiCaratheodory"
+  },
+  {
+   "status": "same",
+   "old": "convexHull_extremePoints",
+   "new": "convexHull_extremePoints",
+   "kind": "theorem",
+   "module": "MiscYD.Convexity.MinkowskiCaratheodory"
+  },
+  {
+   "status": "same",
+   "old": "centerMass_congr",
+   "new": "centerMass_congr",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.Analysis.Convex.Combination"
+  },
+  {
+   "status": "same",
+   "old": "centerMass_sdiff_of_weight_eq_zero",
+   "new": "centerMass_sdiff_of_weight_eq_zero",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.Analysis.Convex.Combination"
+  },
+  {
+   "status": "same",
+   "old": "centerMass_union",
+   "new": "centerMass_union",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.Analysis.Convex.Combination"
+  },
+  {
+   "status": "same",
+   "old": "centerMass_union_of_ne_zero",
+   "new": "centerMass_union_of_ne_zero",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.Analysis.Convex.Combination"
+  },
+  {
+   "status": "same",
+   "old": "centerMass_union_of_nonneg",
+   "new": "centerMass_union_of_nonneg",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.Analysis.Convex.Combination"
+  },
+  {
+   "status": "same",
+   "old": "lineMap_centerMass_centerMass",
+   "new": "lineMap_centerMass_centerMass",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.Analysis.Convex.Combination"
+  },
+  {
+   "status": "same",
+   "old": "lineMap_centerMass_centerMass_of_ne_zero",
+   "new": "lineMap_centerMass_centerMass_of_ne_zero",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.Analysis.Convex.Combination"
+  },
+  {
+   "status": "same",
+   "old": "lineMap_centerMass_centerMass_of_nonneg",
+   "new": "lineMap_centerMass_centerMass_of_nonneg",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.Analysis.Convex.Combination"
+  },
+  {
+   "status": "same",
+   "old": "lineMap_centerMass_sdiff",
+   "new": "lineMap_centerMass_sdiff",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.Analysis.Convex.Combination"
+  },
+  {
+   "status": "same",
+   "old": "lineMap_centerMass_sdiff_singleton_of_ne_one",
+   "new": "lineMap_centerMass_sdiff_singleton_of_ne_one",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.Analysis.Convex.Combination"
+  },
+  {
+   "status": "same",
+   "old": "lineMap_centerMass_sdiff_singleton_of_nonneg",
+   "new": "lineMap_centerMass_sdiff_singleton_of_nonneg",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.Analysis.Convex.Combination"
+  },
+  {
+   "status": "same",
+   "old": "mem_convexHull_image",
+   "new": "mem_convexHull_image",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.Analysis.Convex.Combination"
+  },
+  {
+   "status": "same",
+   "old": "CharP.addOrderOf_natCast",
+   "new": "CharP.addOrderOf_natCast",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.GroupTheory.OrderOfElement"
+  },
+  {
+   "status": "same",
+   "old": "affineCombination_mem_affineSpan'",
+   "new": "affineCombination_mem_affineSpan'",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.LinearAlgebra.AffineSpace.Combination"
+  },
+  {
+   "status": "same",
+   "old": "mem_affineSpan_image",
+   "new": "mem_affineSpan_image",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.LinearAlgebra.AffineSpace.Combination"
+  },
+  {
+   "status": "same",
+   "old": "weightedVSub_mem_vectorSpan'",
+   "new": "weightedVSub_mem_vectorSpan'",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.LinearAlgebra.AffineSpace.Combination"
+  },
+  {
+   "status": "same",
+   "old": "AffineSubspace.mem_of_collinear",
+   "new": "AffineSubspace.mem_of_collinear",
+   "kind": "theorem",
+   "module": "MiscYD.Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional"
+  },
+  {
+   "status": "same",
+   "old": "MeasureTheory.termσ(_)",
+   "new": "MeasureTheory.termσ(_)",
+   "kind": "def",
+   "module": "MiscYD.Mathlib.MeasureTheory.MeasurableSpace.Basic"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_posDiffs_self_le",
+   "new": "Finset.card_posDiffs_self_le",
+   "kind": "theorem",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "same",
+   "old": "Finset.card_posSub_self_le",
+   "new": "Finset.card_posSub_self_le",
+   "kind": "theorem",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "same",
+   "old": "Finset.empty_posDiffs",
+   "new": "Finset.empty_posDiffs",
+   "kind": "theorem",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "same",
+   "old": "Finset.le_card_upper_inter_lower",
+   "new": "Finset.le_card_upper_inter_lower",
+   "kind": "theorem",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mem_posDiffs",
+   "new": "Finset.mem_posDiffs",
+   "kind": "theorem",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "same",
+   "old": "Finset.mem_posSub",
+   "new": "Finset.mem_posSub",
+   "kind": "theorem",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "same",
+   "old": "Finset.posDiffs",
+   "new": "Finset.posDiffs",
+   "kind": "def",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "same",
+   "old": "Finset.posDiffs_empty",
+   "new": "Finset.posDiffs_empty",
+   "kind": "theorem",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "same",
+   "old": "Finset.posDiffs_subset_diffs",
+   "new": "Finset.posDiffs_subset_diffs",
+   "kind": "theorem",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "same",
+   "old": "Finset.posSub",
+   "new": "Finset.posSub",
+   "kind": "def",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "same",
+   "old": "Finset.posSub_subset_sub",
+   "new": "Finset.posSub_subset_sub",
+   "kind": "theorem",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "same",
+   "old": "FinsetFamily.term_-₊_",
+   "new": "FinsetFamily.term_-₊_",
+   "kind": "def",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "same",
+   "old": "FinsetFamily.term_\\₊_",
+   "new": "FinsetFamily.term_\\₊_",
+   "kind": "def",
+   "module": "MiscYD.SetFamily.PosDiffs"
+  },
+  {
+   "status": "added",
+   "old": null,
+   "new": "IsGenerated",
+   "kind": "inductive",
+   "module": "MiscYD.Book.SylvesterChvatal"
+  }
+ ]
+}

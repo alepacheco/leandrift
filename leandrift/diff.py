@@ -1,6 +1,7 @@
 """Comparing two exports of the same project: which statements stayed, moved, changed, went or came."""
 
 import difflib
+import os
 from dataclasses import dataclass, field
 
 from . import trees
@@ -113,7 +114,7 @@ class Result:
 
 def _side(exp):
     h = exp.header
-    return {"file": exp.path, "lean": h.get("lean"), "prefixes": h.get("prefixes"),
+    return {"file": os.path.basename(exp.path), "lean": h.get("lean"), "prefixes": h.get("prefixes"),
             "modules": len(h.get("modules", [])), "declarations": len(exp.decls),
             "deprecation_aliases": len(exp.aliases)}
 
