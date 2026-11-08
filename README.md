@@ -139,8 +139,8 @@ docker run --rm -v leandrift-elan:/opt/elan leandrift \
   the project or in Mathlib) changes the meaning of statements that use it without showing here.
 - Renames without a deprecation alias are inferred only from identical statements, one to one.
   A renamed type's members (constructors, fields) are followed only for types of the project.
-- Declarations Lean generates (recursors, equation lemmas, structure projections, auxiliary
-  definitions) and private declarations are not exported.
+- Declarations Lean generates (recursors, equation lemmas, structure projections, `simp`'s
+  congruence lemmas, auxiliary definitions) and private declarations are not exported.
 - Every module under a prefix is imported together; a project whose modules cannot all be
   imported at once needs `--module`.
 

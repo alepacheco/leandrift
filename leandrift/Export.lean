@@ -113,7 +113,8 @@ def inductiveAux : List String :=
    "noConfusionType", "ctorIdx", "toCtorIdx", "ctorElim", "ctorElimType"]
 def ctorAux : List String := ["inj", "injEq", "sizeOf_spec", "elim", "noConfusion", "noConfusionType"]
 def defAux : List String :=
-  ["eq_def", "eq_unfold", "induct", "induct_unfolding", "mutual_induct", "fun_cases"]
+  ["eq_def", "eq_unfold", "induct", "induct_unfolding", "mutual_induct", "fun_cases", "congr_simp",
+   "splitter"]
 
 def numbered (s pre : String) : Bool :=
   s.startsWith pre && s.length > pre.length && (s.drop pre.length).all Char.isDigit
