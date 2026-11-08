@@ -20,6 +20,7 @@ class Decl:
     ctors: list = field(default_factory=list)  # [{"name", "tree", "pp"}] for inductive types
     deprecated: dict = None  # {"new", "alias", "since"} when the declaration is itself deprecated
     fields: list = field(default_factory=list)  # a structure's field names, in order
+    erased: bool = True  # False when the exporter could not erase the proofs in its statement
 
     @property
     def full_pp(self):
@@ -33,7 +34,7 @@ class Decl:
     def alias_of(self):
         """The declaration this one is a deprecated alias of (defined as that declaration), if any."""
         d = self.deprecated or {}
-        return d.get("new") if d.get("alias", True) else None
+        return d.get("new") if d.get("alias", False) else None
 
 
 @dataclass
@@ -70,11 +71,11 @@ def load(path):
                     d = Decl(name=rec["name"], kind=rec["kind"], module=rec.get("module", ""),
                              tree=rec["tree"], pp=rec.get("pp", ""), axioms=rec.get("axioms", []),
                              ctors=rec.get("ctors", []), deprecated=rec.get("deprecated"),
-                             fields=rec.get("fields", []))
+                             fields=rec.get("fields", []), erased=rec.get("erased", True))
                     decls[d.name] = d
                 elif t == "alias":
                     # only a true alias (defined as its replacement) renames inside statements
-                    if rec.get("alias", True):
+                    if rec.get("alias", False):
                         aliases[rec["old"]] = rec["new"]
             except json.JSONDecodeError as e:
                 raise ValueError(f"{path}:{lineno}: not JSON: {e}") from None

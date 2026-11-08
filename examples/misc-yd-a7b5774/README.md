@@ -20,7 +20,7 @@ sh examples/misc-yd-a7b5774/run.sh
 or compare the exports kept here, without Lean:
 
 ```sh
-leandrift diff examples/misc-yd-a7b5774/old.jsonl.gz examples/misc-yd-a7b5774/new.jsonl.gz
+bin/leandrift diff examples/misc-yd-a7b5774/old.jsonl.gz examples/misc-yd-a7b5774/new.jsonl.gz
 ```
 
 ## What the report found

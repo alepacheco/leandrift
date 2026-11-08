@@ -32,7 +32,7 @@ nor flag statements that use a Mathlib definition whose body changed. See [Limit
 2. **Diff** (`leandrift diff`, Python 3.9+, standard library only): matches each old declaration
    to a new one by name, through the deprecation aliases (of the new version, then the old), or,
    failing both, by an identical statement (one to one; for declarations that are not theorems,
-   only between near-identical names). Each is then:
+   only between names equal but for case and underscores). Each is then:
    - **same**: the same name and statement;
    - **same after renames**: equal once the constants it mentions (and its own name) are mapped
      through the deprecation aliases and the renames found;
@@ -128,10 +128,9 @@ with its report and one command that reproduces it in a container. See
 
 ## Tests
 
-From the repository's root:
+In the clone's top directory (after the install steps above, `cd leandrift`):
 
 ```sh
-cd leandrift
 python3 -m unittest discover -s tests -v
 ```
 
@@ -154,8 +153,14 @@ docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp -v leandrift-elan:/opt/e
   environment, or equivalent to it; release 0.0 does not check either.
 - Definitions are compared by their type, not their body: a definition whose body changed (in
   the project or in Mathlib) changes the meaning of statements that use it without showing here.
-- Renames without a deprecation alias are inferred only from identical statements, one to one.
-  A renamed type's members (constructors, fields) are followed only for types of the project.
+- Renames without a deprecation alias are inferred only from identical statements, one to one
+  (for declarations that are not theorems, only between names equal but for case and
+  underscores). A renamed type's members (constructors, fields) are followed only for types of
+  the project.
+- A declaration the upgrade moved out of the project (often a lemma now in Mathlib) is reported
+  as removed; release 0.0 does not look for it in the new dependencies.
+- `compare` takes both revisions from the one repository given (its branches and tags); for a
+  pull request from a fork, give the fork's URL.
 - Declarations Lean generates (recursors, equation lemmas, structure projections, `simp`'s
   congruence lemmas, auxiliary definitions) and private declarations are not exported.
 - Every module under a prefix is imported together; a project whose modules cannot all be

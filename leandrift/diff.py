@@ -1,6 +1,5 @@
 """Comparing two exports of the same project: which statements stayed, moved, changed, went or came."""
 
-import difflib
 import os
 from dataclasses import dataclass, field
 
@@ -119,35 +118,47 @@ def _side(exp):
             "deprecation_aliases": len(exp.aliases)}
 
 
-class Resolver:
-    """Maps an old constant name to its name in the new version: renames inferred from identical
-    statements, then deprecation aliases (of either version, the new one's first), then members of
-    a renamed type (`Old.mk`, `Old.field` -> `New.mk`, `New.field`); chains are followed."""
+def _follow(name, mapping):
+    """`name` mapped through `mapping` until it maps no further (a cycle stops it)."""
+    seen = {name}
+    cur = name
+    while cur in mapping:
+        nxt = mapping[cur]
+        if nxt in seen:
+            break
+        seen.add(nxt)
+        cur = nxt
+    return cur
 
-    def __init__(self, aliases):
-        self.aliases = aliases
+
+class Resolver:
+    """Names of both versions, in the new version's terms. A new statement's names go through the
+    new version's deprecation aliases. An old statement's names go through the old version's
+    aliases (to the names the old version itself used), then the renames found (inferred from
+    identical statements, and members of a renamed type: `Old.mk`, `Old.field` -> `New.mk`,
+    `New.field`), then the new version's aliases."""
+
+    def __init__(self, old_aliases, new_aliases):
+        self.old_aliases = old_aliases
+        self.new_aliases = new_aliases
         self.inferred = {}
         self.types = {}  # old type name -> new type name
 
-    def _step(self, name):
+    def renamed(self, name):
         if name in self.inferred:
             return self.inferred[name]
-        if name in self.aliases:
-            return self.aliases[name]
         parent, dot, last = name.rpartition(".")
         if dot and parent in self.types:
             return self.types[parent] + "." + last
         return name
 
-    def __call__(self, name):
-        seen = {name}
-        cur = name
-        while True:
-            nxt = self._step(cur)
-            if nxt == cur or nxt in seen:
-                return cur
-            seen.add(nxt)
-            cur = nxt
+    def old(self, name):
+        return _follow(self.renamed(_follow(name, self.old_aliases)), self.new_aliases)
+
+    def new(self, name):
+        return _follow(name, self.new_aliases)
+
+    __call__ = old
 
 
 def _statement(decl, resolve=None):
@@ -178,9 +189,9 @@ def _norm(name):
 
 
 def _similar(a, b):
-    """Names close enough that a non-theorem with an identical statement is taken as renamed."""
-    a, b = _norm(a), _norm(b)
-    return a == b or difflib.SequenceMatcher(None, a, b).ratio() >= 0.9
+    """Names close enough that a non-theorem with an identical statement is taken as renamed: the
+    same but for case and underscores (`fooBar`, `FooBar`, `foo_bar`; not `foo'`)."""
+    return _norm(a) == _norm(b)
 
 
 def _renames_used(decl, resolve):
@@ -198,18 +209,24 @@ def compare(old, new):
             warnings.append(f"an export was made without {what}: "
                             + ("new sorry and axioms are not reported" if flag == "axioms"
                                else "statements are not shown"))
+    unerased = sum(1 for exp in (old, new) for d in exp.decls.values() if not d.erased)
+    if unerased:
+        warnings.append(f"{unerased} statements kept their proofs (the exporter could not erase them): "
+                        "a change inside a proof shows as a changed statement")
     new_real = {n for n, d in new.decls.items() if not d.alias_of}
-    aliases = dict(old.aliases)
-    aliases.update(new.aliases)
-    resolve = Resolver(aliases)
+    resolve = Resolver(old.aliases, new.aliases)
 
     def counterpart(name):
         """The new declaration an old one corresponds to, by name or by renames known so far."""
         if name in new_real:
             return name, ""
-        target = resolve(name)
+        target = resolve.old(name)
         if target != name and target in new_real:
-            return target, ("identical statement" if name in resolve.inferred else "deprecation alias")
+            if name in resolve.inferred:
+                return target, "identical statement"
+            if name.rpartition(".")[0] in resolve.types:
+                return target, "renamed type"
+            return target, "deprecation alias"
         if name in new.decls:
             return name, ""
         return None, ""
@@ -239,10 +256,10 @@ def compare(old, new):
         free = [n for n in new_real if n not in claimed and n not in old.decls]
         new_by_key = {}
         for n in free:
-            new_by_key.setdefault(_statement(new.decls[n], resolve), []).append(n)
+            new_by_key.setdefault(_statement(new.decls[n], resolve.new), []).append(n)
         old_by_key = {}
         for o in unmatched:
-            old_by_key.setdefault(_statement(old.decls[o], resolve), []).append(o)
+            old_by_key.setdefault(_statement(old.decls[o], resolve.old), []).append(o)
         found = {}
         for k, olds in old_by_key.items():
             news = new_by_key.get(k, [])
@@ -252,6 +269,7 @@ def compare(old, new):
             od, nd = old.decls[o], new.decls[n]
             if (od.kind in PROP_KINDS and nd.kind in PROP_KINDS) or _similar(o, n):
                 found[o] = n
+        found = {o: n for o, n in found.items() if resolve.inferred.get(o) != n}
         if not found:
             break
         resolve.inferred.update(found)
@@ -280,7 +298,7 @@ def compare(old, new):
                   via=via, old_pp=od.full_pp, new_pp=nd.full_pp)
         if _statement(od) == _statement(nd) and target == name:
             e.status = SAME
-        elif _statement(od, resolve) == _statement(nd, resolve):
+        elif _statement(od, resolve.old) == _statement(nd, resolve.new):
             e.status = RENAMED
             e.renames = _renames_used(od, resolve)
             if target != name:
@@ -289,7 +307,8 @@ def compare(old, new):
             e.status = CHANGED
             e.detail = _describe(od, nd, resolve)
             e.renames = _renames_used(od, resolve)
-            d = trees.first_difference(trees.rename(od.tree, resolve), trees.rename(nd.tree, resolve))
+            d = trees.first_difference(trees.rename(od.tree, resolve.old),
+                                       trees.rename(nd.tree, resolve.new))
             if d is not None:
                 e.first_change = (trees.show(d[1], 80), trees.show(d[2], 80))
         gained = sorted(set(nd.axioms) - set(od.axioms))
@@ -312,10 +331,10 @@ def _describe(od, nd, resolve):
     if od.kind != nd.kind and (od.ctors or nd.ctors) and len(od.ctors) != len(nd.ctors):
         return (f"was {_article(od.kind)} with {len(od.ctors)} constructors, "
                 f"now {_article(nd.kind)} with {len(nd.ctors)}")
-    a, b = trees.rename(od.tree, resolve), trees.rename(nd.tree, resolve)
+    a, b = trees.rename(od.tree, resolve.old), trees.rename(nd.tree, resolve.new)
     if a != b:
         if trees.erase_binder_info(a) == trees.erase_binder_info(b) and \
-                _parts(od, resolve)[1] == _parts(nd, resolve)[1]:
+                _parts(od, resolve.old)[1] == _parts(nd, resolve.new)[1]:
             return "only binder info changed (explicit, implicit or instance arguments)"
         return _where(a, b)
     if od.fields != nd.fields:
@@ -331,7 +350,7 @@ def _describe(od, nd, resolve):
             parts.append("constructors added: " + ", ".join(came))
         return "; ".join(parts)
     for k in oc:
-        ta, tb = trees.rename(oc[k]["tree"], resolve), trees.rename(nc[k]["tree"], resolve)
+        ta, tb = trees.rename(oc[k]["tree"], resolve.old), trees.rename(nc[k]["tree"], resolve.new)
         if ta != tb:
             return f"constructor {k} changed: " + _where(ta, tb)
     return "constructors reordered"

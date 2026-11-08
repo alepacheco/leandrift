@@ -194,4 +194,4 @@ None.
 
 None.
 
-Statements are compared as Lean elaborated them (binder names ignored, binder kinds kept), after mapping names through the new version's deprecation aliases and the renames above. Definitional equality is not checked yet: a statement reported as changed may still be equivalent.
+Statements are compared as Lean elaborated them (binder names and proofs ignored, binder kinds kept), after mapping names through both versions' deprecation aliases, the renames above and the members of renamed types. Definitional equality is not checked yet: a statement reported as changed may still be equivalent.

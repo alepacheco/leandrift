@@ -117,7 +117,7 @@ class TestCompare(unittest.TestCase):
     def test_rename_through_deprecation_alias(self):
         # P.old became P.new; the new version keeps P.old as a deprecated alias
         _, e = run([decl("P.old", ADD_ZERO)],
-                   [decl("P.new", ADD_ZERO), decl("P.old", ADD_ZERO, deprecated={"new": "P.new"}),
+                   [decl("P.new", ADD_ZERO), decl("P.old", ADD_ZERO, deprecated={"new": "P.new", "alias": True}),
                     alias("P.old", "P.new")])
         self.assertEqual(e["P.old"].status, RENAMED)
         self.assertEqual(e["P.old"].new, "P.new")
@@ -207,6 +207,45 @@ class TestCompare(unittest.TestCase):
                     decl("P.foo_new", LT_SUCC), alias("P.foo", "P.foo_new", is_alias=False)])
         self.assertEqual(e["P.foo"].status, SAME)
         self.assertEqual(e["P.foo_new"].status, ADDED)
+
+    def test_reversed_rename(self):
+        # the old version had a -> b (b the real one), the new one b -> a
+        old_t = pi(NAT, app(const("b"), b(0)))
+        new_t = pi(NAT, app(const("a"), b(0)))
+        ex = Exports([decl("P.t", old_t), alias("a", "b")], [decl("P.t", new_t), alias("b", "a")])
+        try:
+            r = ex.result()
+        finally:
+            ex.close()
+        self.assertEqual(r.entries[0].status, RENAMED)
+
+    def test_old_alias_does_not_rename_new_statements(self):
+        # X was an alias of Y in the old version; the new one has a different X
+        old_t = pi(NAT, app(const("Y"), b(0)))
+        new_t = pi(NAT, app(const("X"), b(0)))
+        ex = Exports([decl("P.t", old_t), alias("X", "Y")], [decl("P.t", new_t)])
+        try:
+            r = ex.result()
+        finally:
+            ex.close()
+        self.assertEqual(r.entries[0].status, CHANGED)
+
+    def test_rename_onto_an_old_alias_name_terminates(self):
+        # the old version had Finset.foo as an alias of Finset.bar; the project renamed P.t to
+        # Finset.foo (no alias), which the new version no longer has as an alias
+        _, e = run([decl("P.t", LE_SUCC), alias("Finset.foo", "Finset.bar")], [decl("Finset.foo", LE_SUCC)])
+        self.assertIn(e["P.t"].status, (RENAMED, REMOVED))
+
+    def test_primed_variant_is_not_a_rename(self):
+        fn = pi(NAT, NAT)
+        _, e = run([decl("P.weight", fn, kind="def")], [decl("P.weight'", fn, kind="def")])
+        self.assertEqual(e["P.weight"].status, REMOVED)
+
+    def test_warning_when_proofs_were_kept(self):
+        d = decl("P.a", ADD_ZERO)
+        d["erased"] = False
+        r, _ = run([d], [decl("P.a", ADD_ZERO)])
+        self.assertTrue(any("kept their proofs" in w for w in r.warnings))
 
     def test_alias_of_the_old_version_only(self):
         # Foo.old was already an alias of Foo.new in the old version; the alias is gone since

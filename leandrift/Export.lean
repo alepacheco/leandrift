@@ -12,7 +12,8 @@ Each line is one JSON object with a `type`:
 * `decl`: one declaration of those modules: `name`, `kind`, `module`, `levels` (its number of universe
   parameters), `tree` (its type as a structural tree, see below), `pp` (its type pretty-printed),
   `axioms` (the axioms it depends on, `sorryAx` included), for an inductive type its `ctors`, for a
-  structure or class its `fields` (in order), and `deprecated` if it is deprecated;
+  structure or class its `fields` (in order), `deprecated` if it is deprecated, and `erased: false`
+  if its proofs could not be erased (they are then kept in the tree);
 * `alias`: a deprecation of the environment (`old` -> `new`), from the `deprecated` attribute,
   across every imported module, with `alias: true` when `old` is defined as `new` itself (so a
   statement may use either name and mean the same).
@@ -156,8 +157,9 @@ def aliasTarget? (ci : ConstantInfo) : Option Name :=
     | .thmInfo t => some t.value
     | .opaqueInfo o => some o.value
     | _ => none
+  -- the same constant at the declaration's own universe parameters, in order
   match v?.map Expr.eta with
-  | some (.const n _) => some n
+  | some (.const n us) => if us == ci.levelParams.map Level.param then some n else none
   | _ => none
 
 /-! ### Axioms, memoized over the whole run
@@ -257,9 +259,11 @@ def pp (env : Environment) (e : Expr) : IO String := do
     return s!"<could not pretty-print: {ex}>"
 
 /-- The statement's tree, its proofs erased (kept as they are if erasing fails). -/
-def statementTree (env : Environment) (ps : List Name) (e : Expr) : IO Json := do
-  let e' ← try runMeta env (eraseProofs e) catch _ => pure e
-  return tree ps e'
+def statementTree (env : Environment) (ps : List Name) (e : Expr) : IO (Json × Bool) := do
+  try
+    return (tree ps (← runMeta env (eraseProofs e)), true)
+  catch _ =>
+    return (tree ps e, false)
 
 /-! ### Module discovery -/
 
@@ -358,10 +362,11 @@ unsafe def main (argv : List String) : IO UInt32 := do
       let some ci := env.find? n | continue
       if skip env n ci then continue
       let ps := ci.levelParams
+      let (ty, erased) ← statementTree env ps ci.type
       let mut fields : List (String × Json) :=
         [("type", "decl"), ("name", Json.str (nameStr n)), ("kind", Json.str (kindOf env n ci)),
-         ("module", Json.str (nameStr modName)), ("levels", toJson ps.length),
-         ("tree", ← statementTree env ps ci.type)]
+         ("module", Json.str (nameStr modName)), ("levels", toJson ps.length), ("tree", ty)]
+      let mut allErased := erased
       unless args.noPP do fields := fields ++ [("pp", Json.str (← pp env ci.type))]
       unless args.noAxioms do
         let ax ← axiomsOf env memo n
@@ -370,8 +375,9 @@ unsafe def main (argv : List String) : IO UInt32 := do
         let mut ctors : Array Json := #[]
         for c in ii.ctors do
           if let some cc := env.find? c then
-            let mut cf : List (String × Json) :=
-              [("name", Json.str (nameStr c)), ("tree", ← statementTree env ps cc.type)]
+            let (ct, cErased) ← statementTree env ps cc.type
+            allErased := allErased && cErased
+            let mut cf : List (String × Json) := [("name", Json.str (nameStr c)), ("tree", ct)]
             unless args.noPP do cf := cf ++ [("pp", Json.str (← pp env cc.type))]
             ctors := ctors.push (Json.mkObj cf)
         fields := fields ++ [("ctors", Json.arr ctors)]
@@ -379,6 +385,8 @@ unsafe def main (argv : List String) : IO UInt32 := do
           fields := fields ++ [("fields", jsonNames (getStructureFields env n))]
       if let some d := Linter.deprecatedAttr.getParam? env n then
         fields := fields ++ [("deprecated", Json.mkObj (deprecation env n ci d))]
+      -- proofs could not be erased from this statement: they are compared as they are
+      unless allErased do fields := fields ++ [("erased", Json.bool false)]
       h.putStrLn (Json.mkObj fields).compress
       count := count + 1
   -- the deprecations of the whole environment: the rename map for the comparison

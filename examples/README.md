@@ -28,7 +28,8 @@ In both changes that come from Mathlib, the new statements are very likely defin
 the old ones; release 0.0 shows them, and a later release checks them.
 
 To reproduce one (needs Docker; the first run downloads two Lean toolchains and two versions of
-Mathlib's prebuilt cache, a few GB):
+Mathlib's prebuilt cache, a few GB, which then stay in two Docker volumes; every run clones the
+project and its dependencies' sources anew):
 
 ```sh
 sh examples/cam-combi-34a573b/run.sh

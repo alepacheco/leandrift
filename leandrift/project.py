@@ -98,9 +98,13 @@ def git_out(args, cwd):
 
 
 def resolve_rev(src, rev):
-    """The commit a revision names: a branch of origin as fetched, else as given (a hash, a tag,
-    `abc^`)."""
-    for cand in (f"origin/{rev}", rev):
+    """The commit a revision names: a tag, else a branch of origin as fetched, else as given (a
+    hash, `abc^`). `HEAD` means origin's default branch."""
+    if rev == "HEAD" or rev.startswith(("HEAD^", "HEAD~")):
+        cands = [f"origin/{rev}"]
+    else:
+        cands = [f"refs/tags/{rev}", f"origin/{rev}", rev]
+    for cand in cands:
         sha = git_out(["rev-parse", "--verify", "--quiet", f"{cand}^{{commit}}"], src)
         if sha:
             return sha
@@ -115,15 +119,20 @@ def compare_revisions(repo, old_rev, new_rev, prefixes, workdir, outdir, modules
     workdir.mkdir(parents=True, exist_ok=True)
     outdir.mkdir(parents=True, exist_ok=True)
     src = workdir / "src"
+    marker = workdir / ".leandrift-clone"
     repo_str = str(repo) if "://" in str(repo) or str(repo).startswith("git@") \
         else str(Path(repo).resolve())
+    if src.exists() and not marker.exists():
+        raise StepFailed(f"{src} exists and was not cloned by leandrift; give another --workdir")
     if (src / ".git").exists() and git_out(["remote", "get-url", "origin"], src) != repo_str:
         raise StepFailed(f"{src} is a clone of another repository; give another --workdir")
     if not (src / ".git").exists():
+        marker.write_text(repo_str + "\n", encoding="utf-8")
         run(["git", "clone", "--quiet", "--filter=blob:none", "--", repo_str, str(src)], cwd=workdir)
     else:
         run(["git", "fetch", "--quiet", "--tags", "--force", "origin",
              "+refs/heads/*:refs/remotes/origin/*"], cwd=src)
+        run(["git", "remote", "set-head", "origin", "--auto"], cwd=src)
     # both revisions are resolved before either is checked out (`HEAD~1` must not move)
     shas = {"old": resolve_rev(src, old_rev), "new": resolve_rev(src, new_rev)}
     paths = []

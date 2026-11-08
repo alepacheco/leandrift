@@ -102,7 +102,9 @@ def main(argv=None):
     c.add_argument("--out", default="leandrift-out",
                    help="directory for exports, logs and reports (default leandrift-out)")
     c.add_argument("--workdir", help="where the clone lives (default leandrift-work/<name>)")
-    c.add_argument("--no-cache", action="store_true", help="do not run `lake exe cache get`")
+    c.add_argument("--no-cache", action="store_true",
+                   help="do not run `lake exe cache get` (the dependencies, Mathlib included, are "
+                        "then built from source, for each revision)")
     c.add_argument("--title", help="the report's title")
     c.add_argument("--fail-on-change", action="store_true", help="as for diff")
     c.set_defaults(func=cmd_compare)
