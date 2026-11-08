@@ -16,21 +16,23 @@ nor flag statements that use a Mathlib definition whose body changed. See [Limit
 
 ## How it works
 
-1. **Export** (`exporter/Export.lean`): a Lean 4 program run inside the project's own Lake
+1. **Export** (`leandrift/Export.lean`): a Lean 4 program run inside the project's own Lake
    environment (`lake env lean --run`), with the project's toolchain and its built `.olean` files.
    For every declaration of the given module prefixes it writes, as JSON Lines:
    its name, kind (theorem, def, abbrev, instance, axiom, opaque, inductive, structure, class) and
    module; its type as a structural tree (constants with universe levels, bound variables by
-   de Bruijn index, binder names dropped, binder kinds kept, universe parameters by position);
-   its type pretty-printed; the axioms it depends on (as `#print axioms` lists them, `sorryAx`
-   included); for an inductive type, its constructors. It also writes the environment's
-   deprecation aliases (old name -> new name, from the `deprecated` attribute) for the rename map.
+   de Bruijn index, binder names dropped, binder kinds kept, universe parameters by position,
+   proofs inside the statement erased, as the kernel ignores them); its type pretty-printed; the
+   axioms it depends on (as `#print axioms` lists them, `sorryAx` included); for an inductive type,
+   its constructors, and for a structure its field names. It also writes the environment's
+   deprecations (old name -> new name, from the `deprecated` attribute), marking those where the
+   old name is defined as the new one: these aliases make the rename map.
    It keeps to a small part of Lean's meta API and runs unchanged on toolchains a year apart
    (tested on v4.24.0, v4.25.0, v4.31.0, v4.32.0, v4.35.0, v4.36.0-rc1 and v4.36.0-rc2).
 2. **Diff** (`leandrift diff`, Python 3.9+, standard library only): matches each old declaration
-   to a new one by name, through the new version's deprecation aliases, or, failing both, by an
-   identical statement (one to one; for declarations that are not theorems, only between similar
-   names). Each is then:
+   to a new one by name, through the deprecation aliases (of the new version, then the old), or,
+   failing both, by an identical statement (one to one; for declarations that are not theorems,
+   only between near-identical names). Each is then:
    - **same**: the same name and statement;
    - **same after renames**: equal once the constants it mentions (and its own name) are mapped
      through the deprecation aliases and the renames found;
@@ -55,41 +57,53 @@ export PATH="$PWD/leandrift/bin:$PATH"     # or: pip install ./leandrift
 leandrift --help
 ```
 
+`leandrift compare` builds the projects it compares, which runs their code (their Lake
+configuration, the toolchain their `lean-toolchain` names, and what their build elaborates), as
+`lake build` always does. Compare only projects you would build yourself, or run it in the
+container below.
+
 Or use the container image, which has all of them:
 
 ```sh
 docker build -t leandrift -f leandrift/docker/Dockerfile leandrift
-docker run --rm -it -v leandrift-elan:/opt/elan -v leandrift-cache:/root/.cache -v "$PWD/out:/out" \
-  leandrift leandrift --help
+docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
+  -v leandrift-elan:/opt/elan -v leandrift-cache:/cache -v "$PWD/out:/out" \
+  leandrift leandrift compare https://github.com/YaelDillies/cam-combi '34a573b79a^' 34a573b79a \
+  --prefix LeanCamCombi --out /out/cam-combi
 ```
 
-(The two volumes keep Lean toolchains and Mathlib's cache between runs.)
+The two volumes keep Lean toolchains and Mathlib's cache between runs (a toolchain a compared
+project fetched stays in the first one: give each project you do not trust volumes of its own);
+`out/` receives the reports, owned by you.
 
 ## Use
 
 Compare a project before and after an upgrade commit:
 
 ```sh
-leandrift compare https://github.com/YaelDillies/cam-combi 34a573b79a^ 34a573b79a \
+leandrift compare https://github.com/YaelDillies/cam-combi '34a573b79a^' 34a573b79a \
   --prefix LeanCamCombi --out out/cam-combi
 ```
 
 This writes `out/cam-combi/report.md` and `report.json`, the two exports (`old.jsonl`,
 `new.jsonl`) and each side's build log. `--prefix` names the module prefix whose declarations are
-compared (repeatable); `--fail-on-change` makes it exit with status 1 when a statement changed or a
-declaration newly depends on `sorry`.
+compared (repeatable); `--fail-on-change` makes it exit with status 1 when a statement changed or
+was removed, or a declaration newly depends on `sorry` or another non-standard axiom. A revision
+is a branch of the repository (as fetched), a tag, a commit, or an expression such as `abc123^`.
 
 Or run the two steps yourself, in projects you have built:
 
 ```sh
-cd my-project-before && lake build && leandrift export . --prefix MyProject -o ../old.jsonl
-cd my-project-after  && lake build && leandrift export . --prefix MyProject -o ../new.jsonl
+(cd my-project-before && lake build && leandrift export . --prefix MyProject -o ../old.jsonl)
+(cd my-project-after  && lake build && leandrift export . --prefix MyProject -o ../new.jsonl)
 leandrift diff old.jsonl new.jsonl --md report.md --json report.json
 ```
 
-`leandrift export` runs `lake env lean --run exporter/Export.lean --prefix MyProject -o ...` in the
-project; you can run that command directly too. By default it imports every built module under
-the prefixes; `--module M` imports only `M` and what it imports.
+`leandrift export` runs `lake env lean --run leandrift/Export.lean --prefix MyProject -o ...` in
+the project; you can run that command directly too. By default it imports every built module
+under the prefixes, so build each version in a clean checkout (or delete `.lake/build` first):
+the `.olean` of a module that no longer exists would otherwise still be read. `--module M`
+imports only `M` and what it imports.
 
 ## Examples
 
@@ -124,6 +138,7 @@ docker run --rm -v leandrift-elan:/opt/elan leandrift \
 - Definitions are compared by their type, not their body: a definition whose body changed (in
   the project or in Mathlib) changes the meaning of statements that use it without showing here.
 - Renames without a deprecation alias are inferred only from identical statements, one to one.
+  A renamed type's members (constructors, fields) are followed only for types of the project.
 - Declarations Lean generates (recursors, equation lemmas, structure projections, auxiliary
   definitions) and private declarations are not exported.
 - Every module under a prefix is imported together; a project whose modules cannot all be

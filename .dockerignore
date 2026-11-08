@@ -1,5 +1,5 @@
 .git
-out/
+**/out/
 leandrift-out/
 leandrift-work/
 **/.lake/
