@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "leandrift"
+version = "0.0.0"
+description = "Check that theorem statements survive Lean and Mathlib upgrades"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+leandrift = "leandrift.cli:main"
+
+[tool.setuptools]
+packages = ["leandrift"]
+
+[tool.setuptools.package-data]
+leandrift = []

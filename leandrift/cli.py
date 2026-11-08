@@ -1,0 +1,107 @@
+"""leandrift: check that a Lean project's statements survive an upgrade of Lean or its dependencies."""
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+from . import __version__, exports, project
+from .diff import CHANGED, compare
+from .report import markdown
+
+
+def write_reports(result, md_path=None, json_path=None, title="LeanDrift report"):
+    if md_path:
+        Path(md_path).write_text(markdown(result, title=title), encoding="utf-8")
+    if json_path:
+        Path(json_path).write_text(json.dumps(result.to_json(), indent=1, ensure_ascii=False) + "\n",
+                                   encoding="utf-8")
+
+
+def summary_line(result):
+    c = result.counts()
+    return (", ".join(f"{v} {k}" for k, v in c.items()) +
+            f"; {len(result.new_sorries())} newly using sorry, "
+            f"{len(result.new_nonstandard_axioms())} newly using another non-standard axiom")
+
+
+def cmd_export(a):
+    project.export(a.project, a.prefix, a.output, modules=a.module, pp=not a.no_pp,
+                   axioms=not a.no_axioms)
+    return 0
+
+
+def cmd_diff(a):
+    result = compare(exports.load(a.old), exports.load(a.new))
+    if a.markdown or a.json:
+        write_reports(result, a.markdown, a.json, title=a.title)
+    else:
+        sys.stdout.write(markdown(result, title=a.title))
+    print(summary_line(result), file=sys.stderr)
+    return 1 if a.fail_on_change and (result.by_status(CHANGED) or result.new_sorries()) else 0
+
+
+def cmd_compare(a):
+    out = Path(a.out)
+    name = Path(str(a.repo).rstrip("/")).name.removesuffix(".git")
+    workdir = Path(a.workdir) if a.workdir else Path("leandrift-work") / name
+    old_path, new_path = project.compare_revisions(
+        a.repo, a.old, a.new, a.prefix, workdir, out, modules=a.module, cache=not a.no_cache,
+        targets=a.target)
+    result = compare(exports.load(old_path), exports.load(new_path))
+    title = a.title or f"LeanDrift report: {name} {a.old} -> {a.new}"
+    write_reports(result, out / "report.md", out / "report.json", title=title)
+    print(summary_line(result), file=sys.stderr)
+    print(f"report: {out / 'report.md'}", file=sys.stderr)
+    return 1 if a.fail_on_change and (result.by_status(CHANGED) or result.new_sorries()) else 0
+
+
+def main(argv=None):
+    p = argparse.ArgumentParser(prog="leandrift", description=__doc__)
+    p.add_argument("--version", action="version", version=f"leandrift {__version__}")
+    sub = p.add_subparsers(dest="command", required=True)
+
+    e = sub.add_parser("export", help="export a built Lean project's declarations (JSON Lines)")
+    e.add_argument("project", help="the Lake project's directory (built with `lake build`)")
+    e.add_argument("--prefix", action="append", required=True,
+                   help="module prefix whose declarations are exported (repeatable)")
+    e.add_argument("--module", action="append", default=[],
+                   help="import only this module and its imports (repeatable)")
+    e.add_argument("-o", "--output", required=True, help="the export file to write")
+    e.add_argument("--no-pp", action="store_true", help="skip pretty-printing")
+    e.add_argument("--no-axioms", action="store_true", help="skip collecting axioms")
+    e.set_defaults(func=cmd_export)
+
+    d = sub.add_parser("diff", help="compare two exports")
+    d.add_argument("old")
+    d.add_argument("new")
+    d.add_argument("--markdown", "--md", help="write the Markdown report here")
+    d.add_argument("--json", help="write the JSON report here")
+    d.add_argument("--title", default="LeanDrift report")
+    d.add_argument("--fail-on-change", action="store_true",
+                   help="exit 1 if a statement changed or a declaration newly uses sorry")
+    d.set_defaults(func=cmd_diff)
+
+    c = sub.add_parser("compare", help="build, export and compare a project at two revisions")
+    c.add_argument("repo", help="a git URL or path of the Lake project")
+    c.add_argument("old", help="the revision before the upgrade (e.g. abc123^)")
+    c.add_argument("new", help="the revision after the upgrade")
+    c.add_argument("--prefix", action="append", required=True,
+                   help="module prefix whose declarations are compared (repeatable)")
+    c.add_argument("--module", action="append", default=[],
+                   help="import only this module and its imports (repeatable)")
+    c.add_argument("--target", action="append", default=[],
+                   help="Lake target to build instead of the default ones (repeatable)")
+    c.add_argument("--out", default="leandrift-out", help="directory for exports, logs and reports")
+    c.add_argument("--workdir", help="where the clone lives (default leandrift-work/<name>)")
+    c.add_argument("--no-cache", action="store_true", help="do not run `lake exe cache get`")
+    c.add_argument("--title")
+    c.add_argument("--fail-on-change", action="store_true")
+    c.set_defaults(func=cmd_compare)
+
+    a = p.parse_args(argv)
+    try:
+        return a.func(a)
+    except (project.StepFailed, ValueError, FileNotFoundError) as ex:
+        print(f"leandrift: error: {ex}", file=sys.stderr)
+        return 2
